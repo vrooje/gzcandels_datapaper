@@ -297,21 +297,111 @@ There are many morphological features of interest, including both broad question
 
 We employ a tree-based structure for collecting information on these morphological features, a strategy that has been used successfully in both Galaxy Zoo 2 {\notebsm (refs here)} and Galaxy Zoo: Hubble {\notebsm (and here)}. The decision tree, shown visually in Figure \ref{fig:tree}, first asks the classifier to choose between the broad categories of "smooth and rounded", "features or disk", and "star or artifact". The next question either exits the classification (if the classifier has indicated the image is of a star or artifact) or asks for further details about the galaxy. 
 
-When the classifier has indicated in the first question that the galaxy has features or a disk, a series of follow-up questions are asked about features such as clumps, spiral patterns, bulge strength, and the presence of a bar. When the classifier has indicated the galaxy is mostly smooth and rounded, the next question asks them to rate the overall roundedness, a question roughly corresponding to an axis ratio measurement. Finally, when the classifier has finished answering all follow-up questions about either the "smooth" or "featured" galaxy, they are then asked whether the galaxy is undergoing a merger, has tidal tails, or has both, or neither.
+If the classifier has indicated in the first question that the galaxy has features or a disk, a series of follow-up questions are asked about features such as clumps, spiral patterns, bulge strength, and the presence of a bar. If the classifier has instead indicated the galaxy is mostly smooth and rounded, the next question asks them to rate the overall roundedness, a question roughly corresponding to an axis ratio measurement. Finally, when the classifier has finished answering all follow-up questions about either the "smooth" or "featured" galaxy, they are then asked whether the galaxy is undergoing a merger, has tidal tails, or has both, or neither.
 
-The tree-based structure has a number of advantages. First, it focuses the classifier on a single feature at a time, highlighting each feature. This is a deliberate attempt to reset the attention of the classifier with each new question and avoid the biases that may result when a person is presented with a large number of decision tasks at once, including  {\notebsm (references for inattentional blindness and overchoice)}. 
+The tree-based structure has a number of advantages. First, it collects substantially more information on each galaxy than a single question would, and captures a more detailed classification of higher-order structures while minimising the effort required on the part of the classifier by only asking for relevant inputs based on the overall classification in the first question. 
 
-Second, the tree-based structure is especially optimal for an interface which may collect classifications from users who have never before seen an image of a galaxy. With each question, the classifier may display a series of "Help" images that show different examples of the feature the question is asking about. 
+Second, it focuses the classifier on a single feature at a time, highlighting each feature. This resets the attention of the classifier with each new question and avoids the issues that may result when a person is presented with a large number of decision tasks at once, including a decrease in optimal decision-making {\notebsm (references for overchoice)} and a reduced ability to recognise the unexpected {\notebsm (references for inattentional blindness)}. 
+
+Third, the tree-based structure is especially optimal for an interface which may collect classifications from users who have never before seen an image of a galaxy and may seek additional training. Within the interface, the classifier may optionally display training images in a ``Help'' section that shows different examples of the feature relevant to the current question. Asking single-topic questions in turn permits a full set of training images to be available throughout the classification without placing an unnecessary cognitive load on the classifier.
 
 {\notebsm Other advantages we should mention?}
 
 The disadvantage of a tree-based classification structure concerns the dependencies introduced into the vote fractions by such a structure. A classifier cannot, for example, answer that the same galaxy has both a mostly smooth appearance and also has a spiral feature. This is in some ways an advantage, as it prevents contradictory and unphysical classifications, but it also means that an analysis of  morphological vote fractions with the goal of examining spiral galaxies must account for the fact that whether a given classifier reached the spiral branch of the decision tree depends on their answer to the questions preceding it. 
 
-Accounting for dependencies of questions in deeper branches of the decision tree on higher-level questions is, however, a manageable task which has been undertaken successfully in many previous studies of specific galaxy structural features {\notebsm {for specific examples, see [citation bomb here]}}. 
+Accounting for dependencies of questions in deeper branches of the decision tree on higher-level questions is, however, a manageable task which has been undertaken successfully in many previous studies of specific galaxy structural features {\notebsm {(for specific examples, see [citation bomb here])}}. 
 
-The Galaxy Zoo CANDELS decision tree is shown in visual form in Figure \ref{fig:tree} and in text form in Table \ref{table:tree}. We note that this tree is most similar to the tree used in the Galaxy Zoo: Hubble project \citep[shown in ][]{melvin14} {\notebsm (note to self to check that the full tree is actually shown there}, which also has an additional branch identifying clumpy galaxies and focusing on the detailed structure of galaxy clumps. There are small differences, however: for example, Task 10, the question about a bulge in an edge-on disk, is a Yes/No question here, whereas in previous iterations of the decision tree this question also asked whether the bulge shape was rounded or boxy. Additionally, the final question in the tree (Task 16) is substantially different from previous versions and is here only concerned with galaxy mergers and tidal features. 
+The Galaxy Zoo CANDELS decision tree is shown in visual form in Figure \ref{fig:tree} and in text form in Table \ref{table:tree}. We note that this tree is most similar to the tree used in the Galaxy Zoo: Hubble project \citep[shown in ][]{melvin14} {\notebsm (note to self to check that the full tree is actually shown there)}, which also has an additional branch identifying clumpy galaxies and focusing on the detailed structure of galaxy clumps. There are small differences, however: for example, Task 10, the question about a bulge in an edge-on disk, is a Yes/No question here, whereas in previous iterations of the decision tree this question also asked whether the bulge shape was rounded or boxy. Additionally, the final question in the tree (Task 16) is substantially different from previous versions and is here only concerned with galaxy mergers and tidal features. 
 
 After the classification of each image is finished, the classifier is asked "{\notebsm Do you want to discuss this galaxy?}" If the classifier selects "No", a new image is shown for classification. If the classifier selects yes, a new window opens with a discussion page focused on the image they have just classified. Within this part of the Galaxy Zoo software, users may ask questions and make comments on specific images, or engage in more general discussions. Users may also "tag" images and discussions using a format identical to Twitter's hashtag system. Some of these tags were used in the pre-analysis of Galaxy Zoo CANDELS data, on which more details are given in Section \ref{sec:dunno} below.
+
+
+
+\begin{table}
+ \begin{tabular}{@{}cllr}
+ \hline
+\multicolumn{1}{l}{Task} &
+\multicolumn{1}{c}{Question} &
+\multicolumn{1}{c}{Responses} &
+\multicolumn{1}{c}{Next} 
+\\ 
+\hline
+\hline						
+00    & {\it Is the galaxy simply smooth   }  & smooth           & 01 \\
+      & {\it and rounded, with no sign of  }  & features or disk & 02 \\
+      & {\it a disk?                       }  & star or artifact & {\bf end} \\
+      \hline
+01    & {\it How rounded is it?            }  & completely round & 16 \\
+      & {\it                               }  & in between       & 16 \\
+      & {\it                               }  & cigar-shaped     & 16 \\
+      \hline
+02    & {\it Does the galaxy have a    }  & yes                  & 03 \\
+      & {\it mostly clumpy appearance? }  & no                   & 09 \\
+      \hline
+03    & {\it How many clumps           }  & 1                    & 07 \\
+      & {\it are there?                }  & 2                    & 05 \\
+      & {\it                           }  & 3                    & 04 \\
+      & {\it                           }  & 4                    & 04 \\
+      & {\it                           }  & more than four       & 04 \\
+      & {\it                           }  & can't tell           & 04 \\
+      \hline
+04    & {\it Do the clumps appear in   }  & cluster              & 05 \\
+      & {\it a straight line, a chain  }  & spiral               & 05 \\
+      & {\it or a cluster?             }  & straight line        & 05 \\
+      & {\it                           }  & chain                & 05 \\
+      \hline
+05    & {\it Is there one clump which is       }  & yes          & 06 \\
+      & {\it clearly brighter than the others? }  & no           & 07 \\
+      \hline
+06    & {\it Is the brightest clump    }  & yes                  & 07 \\
+      & {\it central to the galaxy?    }  & no                   & 16 \\
+      \hline
+07    & {\it Does the galaxy           }  & yes                  & 08 \\
+      & {\it appear symmetrical?       }  & no                   & 08 \\
+      \hline
+08    & {\it Do the clumps appear to be       }  & yes           & 16 \\
+      & {\it embedded within a larger object? }  & no            & 16 \\
+      \hline
+09    & {\it Could this be a disk viewed   }  & yes              & 10 \\
+      & {\it edge-on?                      }  & no               & 11 \\
+      \hline
+10    & {\it Does the galaxy have a        }  & yes              & 16 \\
+      & {\it bulge at its centre?          }  & no               & 16 \\
+      \hline
+11    & {\it Is there a sign of a bar      }  & bar              & 12 \\
+      & {\it feature through the centre    }  & no bar           & 12 \\
+      & {\it of the galaxy?                }                          \\
+      \hline
+12    & {\it Is there any sign of a        }  & spiral           & 13 \\
+      & {\it spiral arm pattern?           }  & no spiral        & 15 \\
+      \hline
+13    & {\it How tightly wound do the      }  & tight            & 14 \\
+      & {\it spiral arms appear?           }  & medium           & 14 \\
+      & {\it                               }  & loose            & 14 \\
+      \hline
+14    & {\it How many spiral arms          }  & 1                & 15 \\
+      & {\it are there?                    }  & 2                & 15 \\
+      & {\it                               }  & 3                & 15 \\
+      & {\it                               }  & 4                & 15 \\
+      & {\it                               }  & more than four   & 15 \\
+      & {\it                               }  & can't tell       & 15 \\
+      \hline
+15    & {\it How prominent is the          }  & no bulge         & 16 \\
+      & {\it central bulge, compared       }  & just noticeable  & 16 \\
+      & {\it with the rest of the galaxy?  }  & obvious          & 16 \\
+      & {\it                               }  & dominant         & 16 \\
+      \hline
+16    & {\it Is the galaxy currently       }  & merging          & {\bf end}  \\
+      & {\it merging or is there any       }  & tidal debris     & {\bf end}  \\
+      & {\it sign of tidal debris?         }  & both             & {\bf end}  \\
+      & {\it                               }  & neither          & {\bf end}  \\
+      \hline
+ \end{tabular}
+ \caption{The Galaxy Zoo CANDELS decision tree, comprising 16 tasks and 51 responses. Each task is comprised of a single question and up to 6 possible responses. The first question is Task 00, and a classification is completed by responding to all subsequent questions until the end of the tree is reached. The `Next' column indicates the subsequent task the classifier is directed to upon choosing a specific response. Although a classifier will flow through the tree from top to bottom, there is no path through the tree that includes all tasks. 
+%The texts in `Question' and `Responses' are displayed to volunteers during classification, along with the icons in Figure~\ref{fig-flowchart}.
+\label{table:tree}}
+\end{table}
+
 
 
 \subsection{Raw classifications}
@@ -319,7 +409,7 @@ After the classification of each image is finished, the classifier is asked "{\n
 % First classification 2012-09-10 18:41:25 UTC, last classification 2013-11-30 12:58:51 UTC
 % NOTE I've just discovered that people who put commas in their usernames can mess up my (admittedly simple and awk-based) system of separating classifications. SO THAT IS JUST TOTES AWESOME THEN
 % So I *think* the total number of classifications is 2,149,206 but I'm not completely sure yet. @#$^@^#T%&@*$O(LT*Ur
-The first classification on the Galaxy Zoo interface\footnote{zoo4.galaxyzoo.org} was registered on the 10th of September 2012. The final classification considered here, in the first phase of Galaxy Zoo CANDELS, was registered on the 30th of November 2013. Between these times, the site collected 2,149,206 classifications of 52,076 subjects from {\notebsm USERCOUNT} users.
+The first classification of an image from CANDELS was registered on the Galaxy Zoo interface\footnote{zoo4.galaxyzoo.org} on the 10th of September 2012. The final classification considered here, in the first phase of Galaxy Zoo CANDELS, was registered on the 30th of November 2013. Between these times, the site collected 2,149,206 classifications of 52,076 subjects from {\notebsm USERCOUNT} users.
 
 Subjects from within the full list of images were chosen randomly, with the initial goal of obtaining at least 40 independent classifications for each galaxy. 
 %However, as the subject list was chosen to be inclusive of relatively faint sources, we performed an interim analysis all detected galaxies with WFC3 magnitudes $H < 25.5$, which is relatively faint for extended sources
@@ -378,7 +468,7 @@ Hubble Sequence, maybe?
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-Galaxies! We have so many galaxies!
+Galaxies! We have galaxies!
 
   
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
