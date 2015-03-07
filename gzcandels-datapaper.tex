@@ -285,7 +285,7 @@ Mention the duplicated images in GDS, which were put in both identically (this w
 \begin{figure*}
 \includegraphics[scale=0.45]{candels_classification_tree_withlabels_new.eps}
 \caption{
-The Decision Tree for Galaxy Zoo: CANDELS
+The Decision Tree for Galaxy Zoo: CANDELS in visual format. There are 16 tasks, with one question per task and up to 6 answers per question. Questions are coloured according to the minimum number of branches prior to that question. All users are asked the first question (task T00), and there are 4 subsequent levels of branching. The tree is also shown in text in Table \ref{table:tree}.
 }
 \label{fig:tree}
 \end{figure*}
@@ -295,7 +295,7 @@ The goal of Galaxy Zoo CANDELS is to provide detailed quantitative visual morpho
 %The classification interface was designed first and foremost with this goal in mind. 
 There are many morphological features of interest, including both broad questions about a galaxy's overall appearance and more detailed questions about specific features. 
 
-We employ a tree-based structure for collecting information on these morphological features, a strategy that has been used successfully in both Galaxy Zoo 2 {\notebsm (refs here)} and Galaxy Zoo: Hubble {\notebsm (and here)}. The decision tree, shown visually in Figure \ref{fig:tree}, first asks the classifier to choose between the broad categories of "smooth and rounded", "features or disk", and "star or artifact". The next question either exits the classification (if the classifier has indicated the image is of a star or artifact) or asks for further details about the galaxy. 
+We employ a tree-based structure for collecting information on these morphological features, a strategy that has been used successfully in both Galaxy Zoo 2 {\notebsm (refs here)} and Galaxy Zoo: Hubble {\notebsm (and here)}. The decision tree, shown visually in Figure \ref{fig:tree} and in text in Table \ref{table:tree}, first asks the classifier to choose between the broad categories of "smooth and rounded", "features or disk", and "star or artifact". The next question either exits the classification (if the classifier has indicated the image is of a star or artifact) or asks for further details about the galaxy. 
 
 If the classifier has indicated in the first question that the galaxy has features or a disk, a series of follow-up questions are asked about features such as clumps, spiral patterns, bulge strength, and the presence of a bar. If the classifier has instead indicated the galaxy is mostly smooth and rounded, the next question asks them to rate the overall roundedness, a question roughly corresponding to an axis ratio measurement. Finally, when the classifier has finished answering all follow-up questions about either the "smooth" or "featured" galaxy, they are then asked whether the galaxy is undergoing a merger, has tidal tails, or has both, or neither.
 
@@ -313,7 +313,7 @@ Accounting for dependencies of questions in deeper branches of the decision tree
 
 The Galaxy Zoo CANDELS decision tree is shown in visual form in Figure \ref{fig:tree} and in text form in Table \ref{table:tree}. We note that this tree is most similar to the tree used in the Galaxy Zoo: Hubble project \citep[shown in ][]{melvin14} {\notebsm (note to self to check that the full tree is actually shown there)}, which also has an additional branch identifying clumpy galaxies and focusing on the detailed structure of galaxy clumps. There are small differences, however: for example, Task 10, the question about a bulge in an edge-on disk, is a Yes/No question here, whereas in previous iterations of the decision tree this question also asked whether the bulge shape was rounded or boxy. Additionally, the final question in the tree (Task 16) is substantially different from previous versions and is here only concerned with galaxy mergers and tidal features. 
 
-After the classification of each image is finished, the classifier is asked "{\notebsm Do you want to discuss this galaxy?}" If the classifier selects "No", a new image is shown for classification. If the classifier selects yes, a new window opens with a discussion page focused on the image they have just classified. Within this part of the Galaxy Zoo software, users may ask questions and make comments on specific images, or engage in more general discussions. Users may also "tag" images and discussions using a format identical to Twitter's hashtag system. Some of these tags were used in the pre-analysis of Galaxy Zoo CANDELS data, on which more details are given in Section \ref{sec:dunno} below.
+After the classification of each image is finished, the classifier is asked "{\notebsm Do you want to discuss this galaxy?}" If the classifier selects "No", a new image is shown for classification. If the classifier selects yes, a new window opens with a discussion page focused on the image they have just classified. Within this part of the Galaxy Zoo software, called Talk, users may ask questions and make comments on specific images, or engage in more general discussions. Users may also "tag" images and discussions using a format identical to Twitter's hashtag system. Some of these tags were used in the pre-analysis of Galaxy Zoo CANDELS data, on which more details are given in Section \ref{sec:dunno} below.
 
 
 
@@ -409,14 +409,17 @@ After the classification of each image is finished, the classifier is asked "{\n
 % First classification 2012-09-10 18:41:25 UTC, last classification 2013-11-30 12:58:51 UTC
 % NOTE I've just discovered that people who put commas in their usernames can mess up my (admittedly simple and awk-based) system of separating classifications. 
 % So I *think* the total number of classifications is 2,149,206 but I'm not 100% sure yet.
-The first classification of an image from CANDELS was registered on the Galaxy Zoo interface\footnote{zoo4.galaxyzoo.org} on the 10th of September 2012. The final classification considered here, in the first phase of Galaxy Zoo CANDELS, was registered on the 30th of November 2013. Between these times, the site collected 2,149,206 classifications of 52,076 subjects from 41,552 registered volunteers and 53,714 web browser sessions where the user did not log in.
+The first classification of an image from CANDELS was registered on the Galaxy Zoo interface\footnote{zoo4.galaxyzoo.org} on the 10th of September 2012. The final classification considered here, in the first phase of Galaxy Zoo CANDELS, was registered on the 30th of November 2013. Between these times, the site collected 2,149,206 classifications of 52,076 CANDELS subjects from 41,552 registered volunteers and 53,714 web browser sessions where the user did not log in. For all analysis presented here we have assumed that each unregistered browser session contains classifications from a single, unique volunteer. 
 
-Subjects from within the full list of images were chosen randomly, with the initial goal of obtaining at least 40 independent classifications for each galaxy. 
-%However, as the subject list was chosen to be inclusive of relatively faint sources, we performed an interim analysis all detected galaxies with WFC3 magnitudes $H < 25.5$, which is relatively faint for extended sources
+Subjects within a given Galaxy Zoo sample are chosen randomly for classification, so that the number of independent classifications per galaxy builds up uniformly through the full sample. Once a pre-set classification limit has been reached, the subject is retired from the active classification pool. The initial goal for Galaxy Zoo CANDELS was to obtain at least 40 independent classifications for each galaxy. 
+
+This uniform retirement limit was modified twice during the project. In the first instance, a pre-analysis of the dataset performed when the average number of classifications per galaxy had reached approximately 20 revealed 11,837 subjects where further classification was unlikely to provide any additional information. These subjects were identified using a set of subjects tagged in the Galaxy Zoo Talk software as ``\#toofainttoclassify'' and ``\#FHB'' (which stands for ``Faint Hubble Blob''). Tags in Galaxy Zoo Talk are generally highly incomplete; thus the 204 tagged subjects were used as tracers during a further examination of all subjects in magnitude-surface brightness parameter space. The selection, made from initial photometry, was deliberately conservative, retiring only those subjects where it was clear that the classification vote fractions had converged at all tiers of the classification tree. During this analysis, an additional 1,555 subjects were identified as highly likely to be stars or artifacts and were also retired.
+
+The second modification of the retirement limit was implemented 1 year after the project start. At this time, the retirement limit was raised to 80 classifications for all galaxies where at least 20\% of volunteers had answered ``Features or disk'' to the first question (task T00 in Figure \ref{fig:tree} and Table \ref{table:tree}. This is a higher retirement limit than in previous Galaxy Zoo projects, and it is justified by the increased complexity of the question tree compared to, e.g., Galaxy Zoo 2 \citep{willett13}. The Galaxy Zoo CANDELS question tree has an additional branch level, and the number of volunteers answering a question is typically reduced at each branch point. Thus, 40 classifications at the first question may not be enough to ensure convergence in, for example, task 14, ``How many spiral arms are there?'', a 5th-tier question with 6 possible answers. The increased retirement limit affected 7,402 subjects.
+
+Figure \ref{fig:nclass_subject_hist} shows the distribution of total classification counts within the sample. There are peaks at $\sim 20$, $40$, and $80$, consistent with the description above. 
 
 
-
-Basic details on raw classifications, including the start and end dates considered in this paper, how many classifications which galaxies have, why some have less than others and some more. 
 
 How many users participated, and the distribution of classifications (typical number per person, number signed in and not, maybe that square diagram Old Weather uses). 
 
@@ -443,7 +446,7 @@ Note: we may discuss other weighting if that proves useful.
   
 Kartaltepe et al. 2014
 
-CAS? Gini? M20?
+Distribution of Sersic indices for different galaxy types
 
 
 
@@ -455,8 +458,8 @@ CAS? Gini? M20?
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-Hubble Sequence, maybe?
 
+Clumpy galaxies as a function of redshift? Not too difficult to show this.
 
 
 
