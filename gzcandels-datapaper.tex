@@ -408,7 +408,19 @@ After the classification of each image is finished, the classifier is asked "{\n
 
 % First classification 2012-09-10 18:41:25 UTC, last classification 2013-11-30 12:58:51 UTC
 % NOTE I've just discovered that people who put commas in their usernames can mess up my (admittedly simple and awk-based) system of separating classifications. 
-% So I *think* the total number of classifications is 2,149,206 but I'm not 100% sure yet.
+% So I am 99% sure the total number of classifications is 2,149,206 but I'm not 100% sure yet.
+
+%%%%% [FIGURE: Example images] %%%%%
+\begin{figure*}
+\includegraphics[scale=0.67]{classifications_users_basicinfo.eps}
+\caption{
+Basic information on classifications and volunteers. \emph{Left}: Distribution of number of classifications per subject in Galaxy Zoo CANDELS. The majority of images have 40 independent classifications each; a subset of 13,392 were retired early after being identified as too faint and low-surface-brightness for additional classifications to be useful (11,837) or as stars or artifacts (1,555). Subsequently, 7,402 subjects where at least 20\% of classifiers registered a vote for ``Features or Disk'' in the first task were re-activated with a retirement limit of 80 classifications, in order to ensure a complete sampling of the deepest branches of the question tree. \emph{Right}: Cumulative distribution of classifications by volunteers, where the volunteers are sorted in order of least to most classifications contributed (Lorenz curve for classifiers). The dashed line indicates the even line, i.e., what the curve would look like if every volunteer had contributed the same number of classifications. The top 9\% of users contributed 80\% of the classifications (Gini coefficient = 0.86). 
+}
+\label{fig:classification_basic_info}
+\end{figure*}
+%%%%% END FIGURE %%%%%
+
+
 The first classification of an image from CANDELS was registered on the Galaxy Zoo interface\footnote{zoo4.galaxyzoo.org} on the 10th of September 2012. The final classification considered here, in the first phase of Galaxy Zoo CANDELS, was registered on the 30th of November 2013. Between these times, the site collected 2,149,206 classifications of 52,076 CANDELS subjects from 41,552 registered volunteers and 53,714 web browser sessions where the user did not log in. For all analysis presented here we have assumed that each unregistered browser session contains classifications from a single, unique volunteer. 
 
 Subjects within a given Galaxy Zoo sample are chosen randomly for classification, so that the number of independent classifications per galaxy builds up uniformly through the full sample. Once a pre-set classification limit has been reached, the subject is retired from the active classification pool. The initial goal for Galaxy Zoo CANDELS was to obtain at least 40 independent classifications for each galaxy. 
@@ -417,8 +429,7 @@ This uniform retirement limit was modified twice during the project. In the firs
 
 The second modification of the retirement limit was implemented 1 year after the project start. At this time, the retirement limit was raised to 80 classifications for all galaxies where at least 20\% of volunteers had answered ``Features or disk'' to the first question (task T00 in Figure \ref{fig:tree} and Table \ref{table:tree}. This is a higher retirement limit than in previous Galaxy Zoo projects, and it is justified by the increased complexity of the question tree compared to, e.g., Galaxy Zoo 2 \citep{willett13}. The Galaxy Zoo CANDELS question tree has an additional branch level, and the number of volunteers answering a question is typically reduced at each branch point. Thus, 40 classifications at the first question may not be enough to ensure convergence in, for example, task 14, ``How many spiral arms are there?'', a 5th-tier question with 6 possible answers. The increased retirement limit affected 7,402 subjects.
 
-Figure \ref{fig:nclass_subject_hist} shows the distribution of total classification counts within the sample. There are peaks at $\sim 20$, $40$, and $80$, consistent with the description above. 
-
+Figure \ref{fig:classification_basic_info} shows the distribution of total classification counts within the sample. There are peaks at $\sim 20$, $40$, and $80$, consistent with the description above. 
 
 
 How many users participated, and the distribution of classifications (typical number per person, number signed in and not, maybe that square diagram Old Weather uses). 
