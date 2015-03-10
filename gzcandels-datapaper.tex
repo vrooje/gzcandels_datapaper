@@ -50,6 +50,9 @@
 \def\fcnobulge    {$f_{\rm confirmed~no~bulge}$}
 \def\mfcnobulge {f_{\rm confirmed~no~bulge}}
 
+\def\kappamean {$\overline{\kappa}$}
+\def\mkappamean {\overline{\kappa}}
+
 
 %\def\lesssim{\mathrel{\hbox{\rlap{\hbox{\lower5pt\hbox{$\sim$}}}\hbox{$<$}}}}
 %\def\gtrsim{\mathrel{\hbox{\rlap{\hbox{\lower5pt\hbox{$\sim$}}}\hbox{$>$}}}}
@@ -279,6 +282,9 @@ Mention the duplicated images in GDS, which were put in both identically (this w
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+%\subsection{Definition of Terms}
+% define e.g. Subject, User, etc.
+
 \subsection{Decision Tree}
 
 %%%%% [FIGURE: Example images] %%%%%
@@ -317,7 +323,7 @@ After the classification of each image is finished, the classifier is asked "Wou
 
 
 
-\begin{table}
+\begin{table*}
  \begin{tabular}{@{}cllr}
  \hline
 \multicolumn{1}{l}{Task} &
@@ -397,10 +403,10 @@ T16    & {\it Is the galaxy currently       }  & merging          & {\bf end}  \
       & {\it                               }  & neither          & {\bf end}  \\
       \hline
  \end{tabular}
- \caption{The Galaxy Zoo CANDELS decision tree, comprising 16 tasks and 51 responses. Each task is comprised of a single question and up to 6 possible responses. The first question is Task 00, and a classification is completed by responding to all subsequent questions until the end of the tree is reached. The `Next' column indicates the subsequent task the classifier is directed to upon choosing a specific response. Although a classifier will flow through the tree from top to bottom, there is no path through the tree that includes all tasks. 
+ \caption{{\notebsm [I'd like to make this a 2-column type table, split after T08, but I don't really have the energy...]} The Galaxy Zoo CANDELS decision tree, comprising 16 tasks and 51 responses. Each task is comprised of a single question and up to 6 possible responses. The first question is Task 00, and a classification is completed by responding to all subsequent questions until the end of the tree is reached. The `Next' column indicates the subsequent task the classifier is directed to upon choosing a specific response. Although a classifier will flow through the tree from top to bottom, there is no path through the tree that includes all tasks. 
 %The texts in `Question' and `Responses' are displayed to volunteers during classification, along with the icons in Figure~\ref{fig-flowchart}.
 \label{table:tree}}
-\end{table}
+\end{table*}
 
 
 
@@ -435,7 +441,7 @@ The values in Figure \ref{fig:classification_basic_info} are raw classification 
 
 
 
-\subsection{User Weighting}
+\subsection{User Weighting} \label{sec:weighting}
 
 % If we're not talking about IBCC then we don't need to distinguish this.
 %\subsubsection{Consensus Weighting}
@@ -444,7 +450,7 @@ Multiple methods of user weighting have been successfully employed by many diffe
 
 For these reasons, we adopt an iterative consensus-based weighting method, following previous Galaxy Zoo projects. This weighting scheme effectively identifies the small proportion of classifiers whose contributions are routinely errant compared to other classfiiers (or consistent with random inputs) and downweights their contributions, while preserving the inputs from the vast majority of users.
 
-Weights for each user are computed based on a mean consistency factor, $\left< \kappa \right>$, which is the average of consistencies for each of that user's classifications. For a given classification $i$ composed of a series of completed tasks $t$ answered about a specific subject, we compare the user's answer to each task with the aggregated classifications of other users of the same subject. Each task has $a_t$ answers from all users, each of which is assigned to one of $N_{r,t}$ possible responses to the task. We define the vote fraction for a particular response $r$ as $f_r \equiv a_r/a_t$, where $a_r$ is the number of positive answers for that response (i.e., the number of classifiers who selected that response out of all possible responses to the task).
+Weights for each user are computed based on a mean consistency factor, \kappamean , which is the average of consistencies for each of that user's classifications. For a given classification $i$ composed of a series of completed tasks $t$ answered about a specific subject, we compare the user's answer to each task with the aggregated classifications of other users of the same subject. Each task has $a_t$ answers from all users, each of which is assigned to one of $N_{r,t}$ possible responses to the task. We define the vote fraction for a particular response $r$ as $f_r \equiv a_r/a_t$, where $a_r$ is the number of positive answers for that response (i.e., the number of classifiers who selected that response out of all possible responses to the task).
 
 For each task that was completed by the classifier in classification $i$, the consistency index $\kappa_r$ for each response $r$ to that task $t$ is 
 \begin{equation}
@@ -460,7 +466,7 @@ The consistency for that task, $\kappa_t$, is the average of these indices over 
 $$
 \kappa_t = \left[\left(1 - 0.1\right) + \left(1 - 0.6\right) + 0.3\right]/3 = 0.5\overline{3}.
 $$
-In the above example, the user's answer to Task T00 leads to the end of the workflow (Table \ref{table:tree}), so this $\kappa_t$ is also equal to the consistency for the overall classification, $\kappa_i$. More generally, the classification consistency is the answer-weighted average of the task consistencies:
+In the above example, the user's answer to Task T00 leads to the end of the workflow (Table \ref{table:tree}), so this $\kappa_t$ is also equal to the user's consistency for the overall classification, $\kappa_i$. More generally, the classification consistency is the answer-weighted average of the task consistencies:
 \begin{equation}
 \kappa_i = \frac{\sum_t \kappa_t a_t}{\sum_t a_t} ,
 \label{eqn-consistency-i}
@@ -469,16 +475,33 @@ where each sum is over the number of tasks the user completed during the classif
 
 Following this calculation for the entire classification database, each user's average consistency is calculated as
 \begin{equation}
-\left< \kappa \right> = \frac{1}{N_i} \sum_i \kappa_i .
+\mkappamean = \frac{1}{N_i} \sum_i \kappa_i .
 \label{eqn-consistency-avg}
 \end{equation}
 
+Averaging over a user's individual consistency values for all classifications effectively downweights those contributions from users whose classifications regularly diverge from the consensus whilst preserving the diversity of classifications from volunteers who are \emph{on average} consistent with each other. It also allows for the classifications of skilled volunteers to remain highly weighted even on difficult subjects where the individual consensus is skewed (e.g., if an image is very noisy or if a nearby artifact is distracting to less experienced volunteers). 
+
 The user weight is then calculated as 
 \begin{equation}
-w = \min \left(1.0,(\left< \kappa \right> / 0.6)^{8.5} \right) ,
+w = \min \left(1.0,(\mkappamean / 0.6)^{8.5} \right) ,
 \label{eqn-weight}
 \end{equation}
-a formulation that preserves a uniform weighting for any classifier with $\left< \kappa \right> \geq 0.6$ and downweights those with a lower consistency rating.
+a formulation that preserves a uniform weighting for any classifier with $\mkappamean \geq 0.6$ and downweights those with a lower consistency rating.
+
+The weighted consensus classifications are then calculated for each subject by summing the weighted votes for each task and response, and reporting the vote fractions $f$ for each. As the user weights are calculated via comparison with the consensus, which leads to a new consensus, this method can be iterated until the user weights converge to a stable value. 
+
+In practice, the number of iterations required to reach this goal is low \citep[e.g., 3 or less;][]{bamford09,willett13}. In Figure \ref{fig:consistencies} we show the distribution of user consistencies after 1, 2 and 3 iterations of the above method. Approximately 3 per cent of users have consistency $\mkappamean < 0.5$ (corresponding to a weight $w \approx 0.2$), whereas 85 percent of users have an end weight of $w = 1$. The vast majority of Galaxy Zoo volunteers contribute highly valuable information to the project.
+
+%%%%% [FIGURE: Example images] %%%%%
+\begin{figure}
+\includegraphics[scale=0.465]{consistencies_iterations.eps}
+\caption{
+Distribution of user consistencies \kappamean\ after 1 (dashed), 2 (dotted), and 3 (solid) iterations of the consistency-based weighting method  (described in Section \ref{sec:weighting}). Convergence of this method requires relatively few iterations: further iterations do not change significantly from the solid curve. Approximately 85 per cent of users have $\mkappamean \geq 0.6$ and weights $w = 1$. 
+}
+\label{fig:consistencies}
+\end{figure}
+%%%%% END FIGURE %%%%%
+
 
 % Postponing this as the IBCC classifications are a little weird - we need a bigger training set.
 %\subsubsection{IBCC}
