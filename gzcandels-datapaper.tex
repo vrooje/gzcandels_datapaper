@@ -68,7 +68,7 @@
 
 \begin{document}
 
-\title[Galaxy Zoo: CANDELS Data Release]{Galaxy Zoo: Detailed Morphological Classifications for 48,000 galaxies from CANDELS\thanks{This publication has been made possible by the participation of more than {\notebsm COUNT} volunteers in the Galaxy Zoo project. Their contributions are
+\title[Galaxy Zoo: CANDELS Data Release]{Galaxy Zoo: Detailed Morphological Classifications for 48,000 galaxies from CANDELS\thanks{This publication has been made possible by the participation of more than 95,000 volunteers in the Galaxy Zoo project. The contributions of the more than $40,000$ of those who registered a username with Galaxy Zoo are
 individually acknowledged at http://authors.galaxyzoo.org/ .} } 
 
 \author[Simmons et al.]{\parbox[t]{16cm}{B. D. Simmons$^{1}\thanks{E-mail: brooke.simmons@astro.ox.ac.uk}$, {\notebsm and a \emph{lot} of other people to be named later}
@@ -177,19 +177,21 @@ Galaxies are sometimes really far away. The distant ones are pretty cool, becaus
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 {\notebsm Outline:}\\
-Galaxy morphologies trace physics \& dynamics and are therefore important.
 
-They have a long history and there are many types, including those that use proxies [which are useful but not without problems] and those that reduce a galaxy and its billions of stars to a single number [same]. Visual morphologies are in many ways still ideal as they are able to provide incredibly detailed information about galaxies.
+This paper presents morphological classifications of nearly $50,000$ galaxies imaged in the Cosmic And Near-infrared Deep Extragalactic Legacy Survey \citep[CANDELS;][]{grogin11,koekemoer11} measured by the Galaxy Zoo{\footnote{zoo4.galaxyzoo.org}} project \citep{lintott08}. Over 95,000 volunteers have contributed over 2,000,000 detailed galaxy classifications to this effort. We combine, on average, 43 independent classifications of each galaxy to produce detailed, quantitative morphological descriptions of these distant galaxies along many physical axes of interest. 
 
-Visual morphologies have a scale problem without many eyes, and they're often not quantified. Galaxy Zoo to the rescue.
+% for each of the morphology citation bombs below it would be good to have some non-GZ papers in there.
+The shape and appearance of a galaxy traces the underlying physical processes that have formed it and continue to influence its evolution. For example, the signatures of past merger events \citep[from $z \sim 2$ onwards;][]{martig12} are visible even at $z = 0$ in the form of a galactic bulge; the strength of the bulge is tied to the strength of the merger, as indeed the lack of a bulge indicates a lack of significant mergers \citep[e.g.,][]{kormendy10}. Likewise, other morphological features are tied to disk instabilities and resonances \citep[e.g., warps, bars, rings][]{dunno, dunno}, and orbital changes from the disruptive \citep[mergers; e.g.,][]{darg10a,darg10b,lotz_unsureofyear,others} to the relatively subtle \citep[e.g., bars,][]{sometheorypapershere,wouldbegood}. Furthermore, combination of morphological parameters with other measures, such as environment, color, mass and star formation histories \citep[e.g.][]{bamford09,tojiero_yearpls,schawinski14,smethurst15}, can provide more insight than either alone.
 
-Galaxy Zoo started in 2007 and has provided robust, quantified visual classifications for more than 1,000,000 galaxies to $z \sim 1$. 
+Morphological measures have a long history in astronomy \citep[e.g.,][]{hubble26,a,few,more,pls}. The computerized era of astrophysics has brought with it a number of automated morphological classification techniques. Some use multiple parameters to characterise a galaxy's distribution of light \citep{sersic68,oneofthefouriermodepapers,etc}, while others adopt a non-parametric approach, each reducing a galaxy to one number \citep[and often used in combination; e.g.][]{gini,m20,abrahamCA,conseliceCAS,zestmaybe}. These lend themselves relatively well to large-scale processing of images from galaxy surveys \citep[e.g.][]{simard,griffith,lackner,zest} and provide a uniform quantitative set of measures. Modern machine learning techniques are also well-tested and applicable to large data sets \citep{huertascompany,kagglepaperifwecan}.
 
-Much use has been made of these, including [summarize and include non-GZ papers].
+However, no computer has yet exceeded the human brain's capacity for pattern detection and serendipitous discovery. Visual morphologies remain among the most nuanced and powerful measures of galaxy structure. Galaxy Zoo combines the strengths of both visual and computer-driven approaches, using the Internet to collect more independent and complete visual classifications than any group of astronomers is realistically capable of and combining these classifications via tested and proven techniques.
 
-Here we present the visual morphologies of galaxies imaged by the $HST$ treasury survey CANDELS.
+Since 2007, Galaxy Zoo has been a unique resource of quantitative and statistically robust visual galaxy morphologies. Prior to Galaxy Zoo CANDELS, three Galaxy Zoo projects have collected morphologies for over $1,000,000$ galaxies using the largest surveys to date to $z \sim 1$. These projects have been and continue to be extremely scientifically productive, both for the project team \citep{citation,love,come,on,group,hug} and for the larger scientific community \citep{because,that,self,cite,thing,just,now,was,alittlecheeky}.
 
-Section summary and cosmology.
+Here we present the Galaxy Zoo visual morphologies of $49,555$ galaxies imaged by the largest near-infrared \emph{Hubble Space Telescope (HST)} survey to date, CANDELS, which images galaxies at rest-frame optical wavelengths to $z \approx 2.7$. 
+
+{\notebsm Section summary and cosmology.}
 
 
 
@@ -204,10 +206,10 @@ Section summary and cosmology.
 
 \subsection{Images}\label{sec:images}
 
-% Note this is lifted directly from the bar paper so I should probably mix it up a bit later
+% Note this paragraph is lifted directly from the bar paper so I should probably mix it up a bit later
 The Cosmic Assembly Near-infrared Extragalactic Legacy Survey \citep[CANDELS;][]{grogin11,koekemoer11} is an \emph{HST} Treasury programme combining optical and near-infrared imaging from the Advanced Camera for Surveys (ACS) and Wide Field Camera 3 (infrared channel; WFC3/IR) across five well-studied survey fields {(GOODS-North and -South, \citeauthor{giavalisco04} \citeyear{giavalisco04}; EGS, \citeauthor{davis07} \citeyear{davis07}; UDS, \citeauthor{lawrence07} \citeyear{lawrence07}, \citeauthor{cirasuolo07} \citeyear{cirasuolo07}; and COSMOS, \citeauthor{scoville07} \citeyear{scoville07}) using a two-tiered ``deep'' and ``wide'' approach. Each of the wide fields (UDS, COSMOS, EGS and flanking fields to the GOODS-S and GOODS-N deep fields) are imaged over 2 orbits in WFC3/IR, split in a 2:1 ratio between filters F160W and F125W, respectively, with parallel exposures in F606W and F814W using ACS. Each of the deep fields (GOODS-S and GOODS-N) are imaged over at least 4 orbits each in both the F160W and F125W filters and 3 orbits in the F105W filter, with ACS exposures in F606W and F814W in parallel. These are reduced and combined to produce a single mosaic for each field in each band, with drizzled resolutions of $0.03^{\prime\prime}$ and $0.06^{\prime\prime}$ per pixel for ACS and WFC3/IR, respectively \citep[a process described in detail by][]{koekemoer11}.
 
-Here we use the CANDELS ACS and WFC3/IR images from within the first set of data to be classified within the Galaxy Zoo interface. Those data cover the COSMOS, GOODS-South, and UDS fields. The 4th release of Galaxy Zoo included all detections with $H \leq 25.5$ from these 3 combined fields, comprising 49,555 unique images. These were shown to visitors to the website galaxyzoo.org{\footnote{Archived at zoo4.galaxyzoo.org}} starting on the 10th of September, 2012.  
+Here we use the CANDELS ACS and WFC3/IR images from within the first set of data to be classified within the Galaxy Zoo interface. Those data cover the COSMOS, GOODS-South, and UDS fields. The 4th release of Galaxy Zoo included all detections with $H \leq 25.5$ from these 3 combined fields, comprising 49,555 unique images. These were shown to visitors to the website galaxyzoo.org starting on the 10th of September, 2012.  
 
 The images shown to the public are colour composites of ACS $I$ ($F814W$), WFC3 $J$ ($F125W$), and WFC3 $H$ ($F160W$) filters for the blue, green and red channels, respectively. The angular sizes of the images in different filters are matched, and the native point-spread functions (PSFs) are used. The images are combined with an asinh stretch \citep[described in detail in][]{luptonasinh} with a non-linearity value of {\notebsm 3.0}. 
 
