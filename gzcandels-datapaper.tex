@@ -269,12 +269,28 @@ What do we do about those without redshifts? We use them with caution?
 %\end{figure*}
 %%%%% END FIGURE %%%%%
 
-
+{\notebsm 
 \subsection{Calibration and Simulated Images}
 
-Mention the duplicated images in GDS, which were put in both identically (this was by accident - so we got double each of these and can theoretically check the variance in classifications, but that's kind of a stupid justification and I'm not quite sure how to mention these without saying "oopsies") and at 2-epoch depth (though this has not actually happened yet so I may need to just leave it out). Also it'd be nice to mention the FERENGIfied images, but ... those aren't in yet either. Basically, the only reason to have this section at the moment is to say "oops".
+Mention the duplicated images in GDS, which were put in both identically (this was by accident - so we got double each of these and can theoretically check the variance in classifications, but that's kind of a stupid justification and I'm not quite sure how to mention these without saying "oopsies") and at 2-epoch depth (though this has not actually happened yet so I may need to just leave it out). Also it'd be nice to mention the FERENGIfied images, but ... those aren't in yet either. Basically, the only reason to have this section at the moment is to say "oops".}
 
+\subsection{Definition of Terms}
 
+Throughout this paper we follow \citet{willett13} and \citet{rsimpson14} in adopting the following terms to describe different parts of the Galaxy Zoo software and data:
+
+\begin{itemize}
+\item \textbf{User} or \textbf{Volunteer}. Those classifying galaxies within the Galaxy Zoo software\footnote{All classifications discussed here were collected via web software.} are essential to the success of the project. While it is true that the software is written so that a user could in principle be a machine, during this project we have not included machine classifications, and thus we use the terms ``user'' and ``volunteer'' interchangeably here.
+
+\item \textbf{Subject} or \textbf{Image}. Within the Zooniverse software, a subject is a unit of data to be classified. For other projects this may include light curves, groups of images, video or audio files. 
+%could cite PH/SS/WhaleFM? No video projects with citations though.
+In Galaxy Zoo CANDELS, each subject consists of a single image, with the goal of classifying 1 galaxy per image. We therefore use the term ``subject'' interchangeably with ``image'' here.
+{\notebsm I'm not as comfortable with this one as I am with User/Volunteer. Maybe I should be stricter about Subjects.}
+
+\item \textbf{Classification}. Galaxy Zoo CANDELS asks the user to complete several tasks to classify each subject. A classification is a unit of data that consists of 1 complete flow through the decision tree described in Section \ref{sec:tree}.
+
+\item \textbf{Task} and \textbf{Question}; \textbf{Response} and \textbf{Answer}. Each task in Galaxy Zoo CANDELS consists of a single question, with 2 or more possible responses, 1 of which the user selects as their answer in order to move on to the next task.
+
+\end{itemize}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
@@ -287,7 +303,7 @@ Mention the duplicated images in GDS, which were put in both identically (this w
 %\subsection{Definition of Terms}
 % define e.g. Subject, User, etc.
 
-\subsection{Decision Tree}
+\subsection{Decision Tree}\label{sec:tree}
 
 %%%%% [FIGURE: Example images] %%%%%
 \begin{figure*}
