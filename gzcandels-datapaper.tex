@@ -189,7 +189,9 @@ Since 2007, Galaxy Zoo has been a unique resource of quantitative and statistica
 
 Here we present the Galaxy Zoo visual morphologies of $49,555$ galaxies imaged by the largest near-infrared \emph{Hubble Space Telescope (HST)} survey to date, CANDELS, which images galaxies at rest-frame optical wavelengths to $z \approx 2.7$. 
 
-{\notebsm Section summary and cosmology.}
+In Section \ref{sec:data} we describe the observational data and the preparation of CANDELS images for use in Galaxy Zoo. In Section \ref{sec:classifications} we detail the collection of morphological classifications and the method of weighting and combining independent classifications for each galaxy. Section \ref{sec:comparison} compares Galaxy Zoo classifications to other morphological measurements. In Section \ref{sec:result} we show an example result using the classifications, and in Section \ref{sec:summary} we summarize. Throughout
+this paper we use the AB magnitude system, and where necessary we adopt a cosmology consistent with $\Lambda$CDM, with $H_{\rm 0}=70~{\rm
+km~s^{-1}}$Mpc$^{\rm -1}$, $\Omega_{\rm m}=0.3$ and $\Omega_{\rm \Lambda}=0.7$ \citep{bennett13}.
 
 
 
@@ -272,7 +274,20 @@ What do we do about those without redshifts? We use them with caution?
 
 Mention the duplicated images in GDS, which were put in both identically (this was by accident - so we got double each of these and can theoretically check the variance in classifications, but that's kind of a stupid justification and I'm not quite sure how to mention these without saying "oopsies") and at 2-epoch depth (though this has not actually happened yet so I may need to just leave it out). Also it'd be nice to mention the FERENGIfied images, but ... those aren't in yet either. Basically, the only reason to have this section at the moment is to say "oops".}
 
-\subsection{Definition of Terms}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%
+\section{Classification Data}\label{sec:classifications}
+%
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%\subsection{Definition of Terms}
+% define e.g. Subject, User, etc.
+
+\subsection{Definition of Terms}\label{sec:terms}
 
 Throughout this paper we follow \citet{willett13} and \citet{rsimpson14} in adopting the following terms to describe different parts of the Galaxy Zoo software and data:
 
@@ -290,16 +305,7 @@ In Galaxy Zoo CANDELS, each subject consists of a single image, with the goal of
 
 \end{itemize}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%
-%
-\section{Classification Data}\label{sec:classifications}
-%
-%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%\subsection{Definition of Terms}
-% define e.g. Subject, User, etc.
 
 \subsection{Decision Tree}\label{sec:tree}
 
@@ -527,35 +533,45 @@ Distribution of user consistencies \kappamean\ after 1 (dashed), 2 (dotted), and
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  
-\section{Comparison to other classifications}
+\section{Comparison to other visual classifications}\label{sec:comparison}
 %
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
   
-Kartaltepe et al. 2014
+Kartaltepe et al. 2014:
+
+Spheroid vs smooth? Our first questions aren't exactly the same.\\
+Irregular (?)\\
+Clumpy\\
+Bars\\
+Spiral\\
+Merger
+
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%  
+\section{Visual Classifications and Sersic Indices}\label{sec:result}
+%
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 
 Distribution of Sersic indices for different galaxy types
+- I'm thinking of this as a result rather than a comparison, as they measure different things.\\
+e.g. we can use this to talk about how many smooth galaxies are actually disks *assuming* n=1 is a disk
 
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  
-\section{Some kind of initial result}
-%
-%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
-Clumpy galaxies as a function of redshift? Not too difficult to show this.
-
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%
-%  
-\section{Summary}
+\section{Summary}\label{sec:summary}
 %
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
