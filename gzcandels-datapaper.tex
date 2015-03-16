@@ -226,17 +226,13 @@ Brief description of photometric catalogs. Focus on $IJH$ because that's all the
 %The debiasing will, though, because the photometric redshifts do.
 
 
-
+}
 \subsection{Redshifts}\label{sec:z}
 
-Some of them have speczs. Lots of them have photzs, including CANDELS, 3D-HST and several previous surveys.
-%I'm thinking the first thing to do is pick a redshift for all the sources, and settle on it, before any other analysis proceeds.
-%Also it would be helpful to match each ID we use to the CANDELS unique ID that the team uses. Even if we don't publish it.
+% placeholder: this is currently pretty much exactly duplicated from Simmons et al. (2014)
+Each of the fields covered by CANDELS data has considerable ancillary data from previous and ongoing work. In addition to newly-calculated photometric redshifts in CANDELS \citep[based on a Bayesian approach combining results from multiple different analyses;][]{dahlen13}, we assemble additional photometric and spectroscopic redshifts from the available literature. For galaxies in the COSMOS field, we combine spectroscopic redshifts from the zCOSMOS project \citep{lilly07} with photometric redshifts from COSMOS \citep{ilbert09} and from the NEWFIRM medium-band survey \citep{whitaker11}. In the GOODS-South field, we use the catalog of \citet{cardamone10b}, who added photometric redshifts based on deep broad- and medium-band data from MuSYC \citep{gawiser06} to available spectroscopic redshifts compiled from multiple sources \citep{balestra10,vanzella08,lefevre04,cimatti02}. In the UDS field, we use available spectroscopic \citep{simpson12} and photometric redshifts \citep{hartley13}, the latter of which make use of deep multi-wavelength coverage from UKIDSS as well as $J$ and $H$-band magnitudes from CANDELS. Of the 49,555 galaxies originally included in Galaxy Zoo: CANDELS, 46,234 currently have spectroscopic (2,886) or photometric (43,348) redshifts. Where available, agreement between spectroscopic and photometric redshift is generally very good, with $\Delta z \equiv \sigma_z/(1+z_{spec}) = 0.02$ and $\sim 8\%$ of sources having $\Delta z > 0.2$. The use of photometric redshifts introduces an uncertainty of less than $1\%$ into the analysis described here \citep{simmons14}.
 
-Comparison of photozs and speczs; might be able to just reference the other papers.
-
-What do we do about those without redshifts? We use them with caution?
-}
+% end egregious self-plagiarism
 
 %%% I'm taking this out because at the moment we aren't using these
 %\subsection{Simulated Images}\label{sec:ferengi}
@@ -717,7 +713,7 @@ As in all other morphological parameters shown in Figure \ref{fig:candels_compar
 
 
 
-
+{\notebsm
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  
@@ -731,7 +727,9 @@ Distribution of Sersic indices for different galaxy types
 - I'm thinking of this as a result rather than a comparison, as they measure different things.\\
 e.g. we can use this to talk about how many smooth galaxies are actually disks *assuming* n=1 is a disk
 
+% want to compare to GZ2 / lackner & gunn sersic comparison, plus possibly GZ3 as well?
 
+}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
@@ -741,8 +739,9 @@ e.g. we can use this to talk about how many smooth galaxies are actually disks *
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-Galaxies! We have galaxies!
+The Galaxy Zoo project has collected typically 40 or more independent visual classifications to date from colour images of 3 CANDELS fields: GOODS-South, COSMOS, and the UDS. Here we present the public release of these classifications, after applying an iterative consensus-based user weighting scheme that has been successfully applied to multiple previous Galaxy Zoo projects. We provide an analysis of changes in classifications with observed surface brightness and offer caveats and advice for usage of these morphological measurements for different science goals. Comparison of the Galaxy Zoo morphologies with existing visual morphologies of a subset of the sample are in excellent agreement across a wide range of morphological features. 
 
+The public catalog of Galaxy Zoo CANDELS morphologies may be obtained from {\tt data.galaxyzoo.org}.
   
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
