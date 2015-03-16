@@ -699,14 +699,20 @@ Indeed, among this sample the CANDELS team vote fraction for ``Non-Interacting C
 
 \subsection{Edge-On Galaxies}
 
-The branched nature of the Galaxy Zoo decision tree (Figure \ref{fig:tree}) means that, in general, a smaller number of people answer the question ``Could this be a disk viewed edge-on?'' than complete a classification
+As described in Section \ref{sec:usage}, the branched nature of the Galaxy Zoo decision tree means that selecting a sample for comparison of edge-on vote fraction requires care. We thus consider, in addition to the previous sample requirements, that a galaxy must also have a featured vote fraction $f_{\rm features} \geq 0.3$ and a not-clumpy vote fraction $f_{\rm not\ clumpy} \geq 0.3$. This selection favours completeness over purity, and is thus appropriate for a comparison of different visual classification methods. The selection results in a sample of 1,273 galaxies.
+
+Both the CANDELS team and Galaxy Zoo volunteer classifications allow for the flagging of a galaxy as edge-on with a single selection, allowing for direct comparison. Figure \ref{fig:candels_compare}c shows the CANDELS team versus the Galaxy Zoo volunteer classification vote fractions. The two agree very well, with the median Galaxy Zoo vote fraction in bins of CANDELS team vote fraction generally consistent with a 1:1 line. 
+
+% correlation coefficient 0.8069
 
 \subsection{Spiral Galaxies}
 
+The spiral galaxy tasks in Galaxy Zoo are 1 branch below the edge-on disk galaxy task (T09), introducing another dependency on the sample selection, as described in Section \ref{sec:usage}. From within the sample used to construct Figure \ref{fig:candels_compare}c, we further require a vote of $f_{\rm not\ edge-on} \geq 0.5$, a selection chosen to balance the desire for completeness with the need to be able to see spiral arms if they are present. This selects 941 galaxies, whose positions in Figure \ref{fig:candels_compare}d are shown in the 2-D shaded histograms. 
+
+As in all other morphological parameters shown in Figure \ref{fig:candels_compare}, the visual classifications from both projects agree very well. Outliers in this figure include some examples that are best explained by distraction bias in the absence of a decision tree in CANDELS, and also include a few examples of distraction bias of a different sort in Galaxy Zoo: a handful of subjects that include a spiral galaxy very near the central, much fainter, galaxy. Such examples are a very small part of the overall sample, and are relatively easily rejected from a sample selection in any case. In general the classifications agree very well along this and other morphological axes which are directly comparable between the CANDELS team and Galaxy Zoo visual classifiations.
 
 
-
-
+% correlation coefficient 0.5676
 
 
 
