@@ -342,84 +342,53 @@ After the classification of each image is finished, the classifier is asked "Wou
 
 
 \begin{table*}
- \begin{tabular}{@{}cllr}
+ \begin{tabular}{@{}cllr|cllr}
  \hline
 \multicolumn{1}{l}{Task} &
+\multicolumn{1}{c}{Question} &
+\multicolumn{1}{c}{Responses} &
+\multicolumn{1}{c}{Next} &
+\multicolumn{1}{l|}{Task} &
 \multicolumn{1}{c}{Question} &
 \multicolumn{1}{c}{Responses} &
 \multicolumn{1}{c}{Next} 
 \\ 
 \hline
 \hline						
-T00    & {\it Is the galaxy simply smooth   }  & smooth           & 01 \\
-      & {\it and rounded, with no sign of  }  & features or disk & 02 \\
-      & {\it a disk?                       }  & star or artifact & {\bf end} \\
-      \hline
-T01    & {\it How rounded is it?            }  & completely round & 16 \\
-      & {\it                               }  & in between       & 16 \\
-      & {\it                               }  & cigar-shaped     & 16 \\
-      \hline
-T02    & {\it Does the galaxy have a    }  & yes                  & 03 \\
-      & {\it mostly clumpy appearance? }  & no                   & 09 \\
-      \hline
-T03    & {\it How many clumps           }  & 1                    & 07 \\
-      & {\it are there?                }  & 2                    & 05 \\
-      & {\it                           }  & 3                    & 04 \\
-      & {\it                           }  & 4                    & 04 \\
-      & {\it                           }  & more than four       & 04 \\
-      & {\it                           }  & can't tell           & 04 \\
-      \hline
-T04    & {\it Do the clumps appear in   }  & cluster              & 05 \\
-      & {\it a straight line, a chain  }  & spiral               & 05 \\
-      & {\it or a cluster?             }  & straight line        & 05 \\
-      & {\it                           }  & chain                & 05 \\
-      \hline
-T05    & {\it Is there one clump which is       }  & yes          & 06 \\
-      & {\it clearly brighter than the others? }  & no           & 07 \\
-      \hline
-T06    & {\it Is the brightest clump    }  & yes                  & 07 \\
-      & {\it central to the galaxy?    }  & no                   & 16 \\
-      \hline
-T07    & {\it Does the galaxy           }  & yes                  & 08 \\
-      & {\it appear symmetrical?       }  & no                   & 08 \\
-      \hline
-T08    & {\it Do the clumps appear to be       }  & yes           & 16 \\
-      & {\it embedded within a larger object? }  & no            & 16 \\
-      \hline
-T09    & {\it Could this be a disk viewed   }  & yes              & 10 \\
-      & {\it edge-on?                      }  & no               & 11 \\
-      \hline
-T10    & {\it Does the galaxy have a        }  & yes              & 16 \\
-      & {\it bulge at its centre?          }  & no               & 16 \\
-      \hline
-T11    & {\it Is there a sign of a bar      }  & bar              & 12 \\
-      & {\it feature through the centre    }  & no bar           & 12 \\
-      & {\it of the galaxy?                }                          \\
-      \hline
-T12    & {\it Is there any sign of a        }  & spiral           & 13 \\
-      & {\it spiral arm pattern?           }  & no spiral        & 15 \\
-      \hline
-T13    & {\it How tightly wound do the      }  & tight            & 14 \\
-      & {\it spiral arms appear?           }  & medium           & 14 \\
-      & {\it                               }  & loose            & 14 \\
-      \hline
-T14    & {\it How many spiral arms          }  & 1                & 15 \\
-      & {\it are there?                    }  & 2                & 15 \\
-      & {\it                               }  & 3                & 15 \\
-      & {\it                               }  & 4                & 15 \\
-      & {\it                               }  & more than four   & 15 \\
-      & {\it                               }  & can't tell       & 15 \\
-      \hline
-T15    & {\it How prominent is the          }  & no bulge         & 16 \\
-      & {\it central bulge, compared       }  & just noticeable  & 16 \\
-      & {\it with the rest of the galaxy?  }  & obvious          & 16 \\
-      & {\it                               }  & dominant         & 16 \\
-      \hline
-T16    & {\it Is the galaxy currently       }  & merging          & {\bf end}  \\
-      & {\it merging or is there any       }  & tidal debris     & {\bf end}  \\
-      & {\it sign of tidal debris?         }  & both             & {\bf end}  \\
-      & {\it                               }  & neither          & {\bf end}  \\
-      \hline
+T00  & {\it Is the galaxy simply smooth       } & smooth            & 01         &  T09  & {\it Could this be a disk viewed   }  & yes              & 10 \\
+     & {\it and rounded, with no sign of      } & features or disk  & 02         &       & {\it edge-on?                      }  & no               & 11 \\
+     & {\it a disk?                           } & star or artifact  & {\bf end}  &       &                                       &                  &    \\
+     &                                          &                   &            &  T10  & {\it Does the galaxy have a        }  & yes              & 16 \\
+T01  & {\it How rounded is it?                } & completely round  & 16         &       & {\it bulge at its centre?          }  & no               & 16 \\
+     & {\it                                   } & in between        & 16         &       &                                       &                  &    \\
+     & {\it                                   } & cigar-shaped      & 16         &  T11  & {\it Is there a sign of a bar      }  & bar              & 12 \\
+     &                                          &                   &            &       & {\it feature through the centre    }  & no bar           & 12 \\
+T02  & {\it Does the galaxy have a            } & yes               & 03         &       & {\it of the galaxy?                }  &                  &    \\
+     & {\it mostly clumpy appearance?         } & no                & 09         &       &                                       &                  &    \\
+     &                                          &                   &            &  T12  & {\it Is there any sign of a        }  & spiral           & 13 \\
+T03  & {\it How many clumps                   } & 1                 & 07         &       & {\it spiral arm pattern?           }  & no spiral        & 15 \\
+     & {\it are there?                        } & 2                 & 05         &       &                                       &                  &    \\
+     & {\it                                   } & 3                 & 04         &  T13  & {\it How tightly wound do the      }  & tight            & 14 \\
+     & {\it                                   } & 4                 & 04         &       & {\it spiral arms appear?           }  & medium           & 14 \\
+     & {\it                                   } & more than four    & 04         &       & {\it                               }  & loose            & 14 \\
+     & {\it                                   } & can't tell        & 04         &       &                                       &                  &    \\
+     &                                          &                   &            &  T14  & {\it How many spiral arms          }  & 1                & 15 \\
+T04  & {\it Do the clumps appear in           } & cluster           & 05         &       & {\it are there?                    }  & 2                & 15 \\
+     & {\it a straight line, a chain          } & spiral            & 05         &       & {\it                               }  & 3                & 15 \\
+     & {\it or a cluster?                     } & straight line     & 05         &       & {\it                               }  & 4                & 15 \\
+     & {\it                                   } & chain             & 05         &       & {\it                               }  & more than four   & 15 \\
+     &                                          &                   &            &       & {\it                               }  & can't tell       & 15 \\
+T05  & {\it Is there one clump which is       } & yes               & 06         &       &                                       &                  &    \\
+     & {\it clearly brighter than the others? } & no                & 07         &  T15  & {\it How prominent is the          }  & no bulge         & 16 \\
+     &                                          &                   &            &       & {\it central bulge, compared       }  & just noticeable  & 16 \\
+T06  & {\it Is the brightest clump            } & yes               & 07         &       & {\it with the rest of the galaxy?  }  & obvious          & 16 \\
+     & {\it central to the galaxy?            } & no                & 16         &       & {\it                               }  & dominant         & 16 \\
+     &                                          &                   &            &       &                                       &                  &    \\ 
+T07  & {\it Does the galaxy                   } & yes               & 08         &  T16  & {\it Is the galaxy currently       }  & merging          & {\bf end}  \\
+     & {\it appear symmetrical?               } & no                & 08         &       & {\it merging or is there any       }  & tidal debris     & {\bf end}  \\
+     &                                          &                   &            &       & {\it sign of tidal debris?         }  & both             & {\bf end}  \\
+T08  & {\it Do the clumps appear to be        } & yes               & 16         &       & {\it                               }  & neither          & {\bf end}  \\
+     & {\it embedded within a larger object?  } & no                & 16         &       &                                       &                  &    \\
  \end{tabular}
  \caption{{\notebsm [I'd like to make this a 2-column type table, split after T08, but I don't really have the energy...]} The Galaxy Zoo CANDELS decision tree, comprising 16 tasks and 51 responses. Each task is comprised of a single question and up to 6 possible responses. The first question is Task 00, and a classification is completed by responding to all subsequent questions until the end of the tree is reached. The `Next' column indicates the subsequent task the classifier is directed to upon choosing a specific response. Although a classifier will flow through the tree from top to bottom, there is no path through the tree that includes all tasks. 
 %The texts in `Question' and `Responses' are displayed to volunteers during classification, along with the icons in Figure~\ref{fig-flowchart}.
