@@ -52,6 +52,7 @@
 
 \def\kappamean {$\overline{\kappa}$}
 \def\mkappamean {\overline{\kappa}}
+\def\stellarity   {{\tt CLASS\_STAR}}
 
 
 %\def\lesssim{\mathrel{\hbox{\rlap{\hbox{\lower5pt\hbox{$\sim$}}}\hbox{$<$}}}}
@@ -421,18 +422,50 @@ The second modification of the retirement limit was implemented 1 year after the
 
 Figure \ref{fig:classification_basic_info}a shows the distribution of total classification counts within the sample. The majority of subjects received 40 classifications, but the distribution is asymmetric: there are peaks at $\sim 20$, $40$, and $80$ classifications, consistent with the description above. The Lorenz curve of classifications by volunteers is shown in Figure \ref{fig:classification_basic_info}b. The curve is highly skewed from the $1:1$ line that would be seen if all volunteers contributed the same number of classifications; the top 9\% volunteers contributed 80\% of total classifications. The Gini coefficient for classfications, i.e., the fractional difference in area under the Lorenz curve versus the dashed line, is 0.86. This is typical of past Galaxy Zoo projects and Zooniverse citizen research projects in general \citep{cox15}. 
 
-The values in Figure \ref{fig:classification_basic_info} are raw classification counts; while raw classification counts and vote fractions are certainly useful, we additionally apply a classifier weighting scheme to classifications to produce a cleaner set of vote fractions for each subject. The classifier weighting is described in further detail below.
+The values in Figure \ref{fig:classification_basic_info} are raw classification counts; while raw classification counts and vote fractions are certainly useful, we additionally ``clean'' the data with a simple method to identify seriously errant classifiers (most likely from bots), and then apply a classifier weighting scheme to classifications to produce a cleaner set of vote fractions for each subject. Both steps are described in further detail below.
 
+\subsection{Identification and removal of single-answer prolific classifiers}
 
+Only a small number of unresolved sources or sources dominated by an unresolved element (i.e., stars and quasars) are included in the full Galaxy Zoo CANDELS subject sample. Examination of the CANDELS photometric catalogs \citep{goodssphot,udsphot,cosmosphot} shows that less than 12 per cent of subjects have \stellarity $> 0.25$ (a very inclusive cut; a more typical cut on stellarity estimates the number of unresolved sources at less than 3 per cent). If the subjects assigned to a classifier are drawn at random from the subject set, then for any classifier who submits a substantial number of classifications, the chances they will be shown a large fraction of stars is very small. 
+
+Even for more common answers to the first task, the chances of a classifier being randomly assigned a highly uniform set of $N$ subjects becomes very small as $N$ becomes large. For example, if the probability of being assigned a ``smooth'' galaxy is $p = 0.9$, the chance of being assigned a subject set of 98 per cent smooth galaxies out of $N > 200$ total is so small that it would likely happen approximately once per billion classifiers, \emph{i.e.}, it is highly unlikely in a project with $\sim 100,000$ classifiers.
+
+% "small group" below = 86 classifiers
+Within the raw classifications, a small group of classifiers (86, or less than 0.1 per cent) classified at least 200 subjects \emph{and} gave the same answer to the first question at least 98 per cent of the time. Within this group, 99.6 per cent of classifications were for ``star or artifact'' (from 84 classifiers) and 0.4 per cent were for ``smooth'' (from 2 classifiers). As the chances of any classifier being actually served $> 98$ per cent of subjects with the same intrinsic classification in more than 200 classifications is vanishingly small, these classifiers are most likely bots or are otherwise not actually engaging in the classification task. While these classifications ($6.8$ per cent of the total classifications) would be substantially down-weighted during the classifier weighting process described below, we formally omit them from further analysis and do not include them in the weighting and consensus calculations. 
 
 \subsection{Classifier Weighting} \label{sec:weighting}
 
-% If we're not talking about IBCC then we don't need to distinguish this.
-%\subsubsection{Consensus Weighting}
-
 Multiple methods of classifier weighting have been successfully employed by many different Zooniverse projects {\notebsm \citep{lintott08, bamford09, lintott11, esimpson12, rsimpson12, johnson15, marshall15}}. In general, the optimal choice of classifier weighting depends on the amount of information available per subject and the goal of the project. In Galaxy Zoo CANDELS the goal is to converge to a classification for each galaxy whilst still allowing for unexpected discoveries, and there is ample information from classifiers but little information on the ``ground truth'', i.e., we do not know what the true intrinsic classification is for even a modest fraction of the sample.
 
-For these reasons, we adopt an iterative consensus-based weighting method, following previous Galaxy Zoo projects. This weighting scheme effectively identifies the small proportion of classifiers whose contributions are routinely errant compared to other classfiiers (or consistent with random inputs) and downweights their contributions, while preserving the inputs from the vast majority of classifiers.
+For these reasons, we apply a consensus-based weighting method for the majority of the tasks in the decision tree, informed first by the application of initial weights based on comparison of the classifications in the first question to the stellarity (\stellarity ) parameter from the CANDELS photometric catalogs. Both are described below, in the order in which they are applied.
+
+\subsubsection{Initial weighting based on ``Star'' versus ``Galaxy'' classifications}
+
+In the initial classification task (T00), we ask classifiers to separate stars from galaxies and identify a galaxy as ``smooth'' or ``featured''. Although we have no ``ground truth'' information on the overall morphology of a galaxy, we do have very reliable information on whether the source detected in each image is extended, from the \stellarity\ parameter. We can therefore apply classifier weightings to this task based on whether classifiers typically classify bright stars as ``star or artifact'', and whether they classify extended objects as galaxies (i.e., whether they answer \emph{either} ``smooth'' or ``featured'').
+
+We select a sample of bright stars having $F160W < 18.5$ and $\stellarity  > 0.8$ from within the Galaxy Zoo-CANDELS subject set. After manually rejecting 2 subjects which contain a galaxy in the central image position with a bright star nearby or overlapping, the bright-star gold-standard sample contains 263 subjects.
+
+We select a sample of extended sources having $F160W < 25$ and $\stellarity < 0.03$, with further manual removal of images with artifacts and other ``unclassifiable'' sources. We first cleaned this sample by rejecting remaining sources where more than 65 per cent of classifiers had selected the ``star or artifact'' response to task T00, a choice made to favour purity of the extended-source sample over completeness. We additionally rejected 398 artifacts falling below this threshold, leaving a total of 29,996 subjects in the extended-source gold-standard sample. 
+
+Having selected these samples, we then assigned an index $n_s$ to each classification of a subject from within either gold-standard subject set. For subjects within the bright-star gold-standard set, the classification index was set to $n_s = -1$ if the classifier had \emph{not} marked the subject as ``star or artifact'', and was $n_s = 0$ otherwise. For subjects within the extended-source gold-standard set, the classification index was set to $n_s = -1$ if the classifier had marked the subject as ``star or artifact'', and was set to $n_s = +1$ otherwise.
+
+We then define the index $n$ for each classifier as the sum of all their classification indices $n_s$, and the weight for task T00 is assigned based on the classifier index as
+\begin{equation}
+   w_{00}= \left\{
+    \begin{array}{l l}
+      \max \left(1.1^n, 0.01\right)       & \text{ if } n < 0 \\
+      \min \left(1.05^n, 3 \right) & \text{ if } n \geq 0.\\
+    \end{array} \right.
+    \label{eqn-seedweight}
+ \end{equation}
+
+This weighting results in a set of classifier weights between $0.01 < w_{00} < 3$, with classifiers whose classifications are generally ``correct'' being up-weighted and classifiers who are more often ``incorrect'' being down-weighted.  79 per cent of classifiers classified at least 1 subject within either gold-standard subject set; classifiers who did not classify any subjects in the gold-standard subject set have $w_{00} = 1$. Of the classifiers who were included in the weighting, 56 per cent have $w_{00} > 1$, with a mean of $\left< w_{00} \right> = 1.11$. As a last step, the weights are re-normalised so that the sum of weights is equal to the total number of classifications.
+
+Following this initial weighting, we create an initial set of vote fractions for each subject by summing the weighted votes for each task and response, and reporting the vote fractions $f$ for each. We use this as an initial consensus classification catalog in the consensus-based weighting applied to the remaining tasks, described in further detail below.
+
+\subsubsection{Consensus-based classifier weighting}
+
+Following the weighting of task T00 described above, we adopt an iterative consensus-based weighting method for classification tasks T01 through T16. This weighting scheme follows previous Galaxy Zoo projects and effectively identifies the small proportion of classifiers whose contributions are routinely errant compared to other classfiers (or consistent with random inputs) and downweights their contributions, while preserving the inputs from the vast majority of classifiers.
 
 Weights for each classifier are computed based on a mean consistency factor, \kappamean , which is the average of consistencies for each of that classifier's classifications. For a given classification $i$ composed of a series of completed tasks $t$ answered about a specific subject, we compare the classifier's answer to each task with the aggregated classifications of other classifiers of the same subject. Each task has $a_t$ answers from all classifiers, each of which is assigned to one of $N_{r,t}$ possible responses to the task. We define the vote fraction for a particular response $r$ as $f_r \equiv a_r/a_t$, where $a_r$ is the number of positive answers for that response (i.e., the number of classifiers who selected that response out of all possible responses to the task).
 
@@ -472,13 +505,13 @@ w = \min \left(1.0,(\mkappamean / 0.6)^{8.5} \right) ,
 \end{equation}
 a formulation that preserves a uniform weighting for any classifier with $\mkappamean \geq 0.6$ and downweights those with a lower consistency rating.
 
-The weighted consensus classifications are then calculated for each subject by summing the weighted votes for each task and response, and reporting the vote fractions $f$ for each. As the classifier weights are calculated via comparison with the consensus, which leads to a new consensus, this method can be iterated until the classifier weights converge to a stable value. 
+The weighted consensus classifications are then calculated for each subject by summing the weighted votes for each task and response between task T01 and T16, and reporting the vote fractions $f$ for each. (Although the classifications for task T00 are used to compute the consensus-based weights, the vote fractions for task T00 are not re-computed using the consensus-based weights.) As the classifier weights are calculated via comparison with the consensus, which leads to a new consensus, this method can be iterated until the classifier weights converge to a stable value. 
 
 In practice, the number of iterations required to reach this goal is low \citep[e.g., 3 or less in previous projects;][]{bamford09,willett13}. In Figure \ref{fig:consistencies} we show the distribution of classifier consistencies after 1-5 iterations of the above method. Between the 4th and 5th iterations, 99 per cent of consistency values varied by less than 0.6 per cent. After 5 iterations, approximately 3 per cent of classifiers have consistency $\mkappamean < 0.5$ (corresponding to a weight $w \lesssim 0.2$), whereas 85 per cent of classifiers have an end weight of $w = 1$. The vast majority of Galaxy Zoo volunteers contribute highly valuable information to the project.
 
 Figure \ref{fig:exampleclass} shows examples of galaxies with different weighted consensus classifications for several of the tasks described in Table \ref{table:tree} and Figure \ref{fig:tree}. 
 
-%%%%% [FIGURE: User Consistencies] %%%%%
+%%%%% [FIGURE: classifier Consistencies] %%%%%
 \begin{figure}
 \includegraphics[scale=0.64]{consistencies_iterations2.eps}
 \caption{
@@ -504,13 +537,17 @@ Example (inverted) galaxy images for different consensus classifications of diff
 %\subsubsection{IBCC}
 
 
-\subsection{Depth, Surface Brightness, and Classification Bias}\label{sec:biases}
+\subsection{Depth Corrections}
+
+
+
+\subsection{Surface Brightness and Classification Bias}\label{sec:biases}
 
 The consistency-based weighting described above ensures the preservation of the way in which the variety of volunteer classifications echoes the confidence level in any individual response, while ensuring expert classifiers remain highly weighted and the very small fraction of errant classifiers are down-weighted.
 
 However, the amount of information available per subject varies: the CANDELS survey takes images at multiple depths, and the galaxies themselves have a wide range of intrinsic brightnesses and distances. Even at a given redshift, the classification of a galaxy depends on both its luminosity and size (i.e., its surface brightness). In particular, as the observed surface brightness of a galaxy decreases it tends to appear more smooth compared to the image noise, decreasing the detection of features \citep{bamford09,willett13}.
 
-Previous Galaxy Zoo projects examining galaxies in the more local Universe have accounted for this bias by using less distant galaxies to determine how to debias the classifications of more distant galaxies as a function of redshift. This is effective under the assumption that the underlying distribution of classifications is invariant with redshift. Clearly this is an inappropriate assumption in the case of a deep \emph{HST} survey such as CANDELS, where 80 per cent of subjects fall within the redshift range $0.25 < z < 3.5$, over which galaxy shapes most certainly evolve.
+Previous Galaxy Zoo projects examining galaxies in the more local Universe have accounted for this bias by using less distant galaxies to determine how to debias the classifications of more distant galaxies as a function of redshift. This is effective under the assumption that the underlying distribution of classifications is invariant with redshift. This is clearly an inappropriate assumption in the case of a deep \emph{HST} survey such as CANDELS, where 80 per cent of subjects fall within the redshift range $0.25 < z < 3.5$, over which galaxy shapes most certainly evolve.
 
 Despite these challenges, Galaxy Zoo volunteers have proven extremely reliable at classifying features which are visible above some surface brightness detection limit. When the overall surface brightness of a galaxy falls below that limit, the detection of locally more bright features may still be achieved, but in general the classification vote fraction of a galaxy as ``featured'' may be considered a lower limit. We describe below the determination of a surface brightness limit for Galaxy Zoo CANDELS and discuss its implications for usage of the vote fractions.
 
