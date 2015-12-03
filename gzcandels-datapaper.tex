@@ -762,23 +762,40 @@ As in all other morphological parameters shown in Figure \ref{fig:candels_compar
 
 
 
-{\notebsm
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  
-\section{Visual Classifications and Sersic Indices}\label{sec:result}
+\section{A population of ``smooth'' disk galaxies}\label{sec:result}
 %
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-Distribution of Sersic indices for different galaxy types
-- I'm thinking of this as a result rather than a comparison, as they measure different things.\\
-e.g. we can use this to talk about how many smooth galaxies are actually disks *assuming* n=1 is a disk
+Although the morphological classifications described here present quantified visual assessments of a range of galaxy properties, the classification tree described in Section \ref{sec:tree} never explicitly asks the classifier to decide whether a galaxy has a disk. While many questions ask about disk instability features, there is no attempt to identify disks. This choice of what \emph{not} to ask, which echoes that of previous Galaxy Zoo projects, partly reflects a discomfort with asking classifiers to assess light concentrations by eye without any further context. 
 
-% want to compare to GZ2 / lackner & gunn sersic comparison, plus possibly GZ3 as well?
+Thus within the Galaxy Zoo CANDELS classifications disks may be identified by the presence of specific features, but the absence of these features does not necessarily imply the lack of a disk, particularly at the epochs probed here. Decoupling questions about ``features'' from measures of a galaxy's diskiness enables these to be assessed independently. Specifically, while galaxies with strong ``features'' (as defined by the classification tree in Section \ref{sec:tree}) may be prone to systematic biases in identification of disks via \citet{sersic68} index measurements, galaxies which are more ``smooth'' do not suffer from these effects, and thus disk strength may be more accurately assessed. With the advent of new tools to measure light profiles via simultaneous consideration of multi-wavelength imaging \citep{haeussler14}, measurements of relative bulge and disk strengths are now possible with much higher accuracy than available for single-wavelength measurements at $z \sim 2$. 
 
+To compare the Galaxy Zoo classifications of ``Featured'' and ``Smooth'' to measurements of disk strength, we first select samples of Smooth and of Featured galaxies by selecting subjects with redshifts $1 \leq z \leq 3$, with surface brightnesses brighter than 24.5 mag~arcsec$^{-2}$, and which have ``Star or Artifact'' vote fractions (as described in Section \ref{sec:release}, from the {\small \tt t00\_smooth\_or\_featured\_a2\_artifact\_weighted\_frac} column) $f_{\rm artifact} < 0.4$. For the Smooth sample, we select galaxies having $f_{\rm smooth} \geq 0.6$; galaxies in the Featured sample have $f_{\rm features} \geq 0.6$.
+
+Each sample is further refined by matching to multi-wavelength $IJH$ bulge-disk decompositions of galaxies in the CANDELS fields by Haeussler et al. (in preparation) using the software package MegaMorph \citep{haeussler14}. We choose galaxies where the bulge-disk fits reported no error flags and where the fit parameters converged to values well within the limits of constraints set by the fitting routine (i.e., limits on S\'ersic index and effective radius of $0.22 \leq n \leq 7.8$ and $0.33 \leq r_e \leq 390$, respectively). These selections result in a sample of 72 Featured galaxies and 1117 Smooth galaxies with reliable bulge-disk decompositions.
+
+Figure \ref{fig:btot} shows the distribution of bulge-to-total luminosity ratio (flux-summed to obtain one measurement across $IJH$) in the Featured and Smooth samples. A Kolmogorov-Smirnov test indicates the B/Tot distributions of Smooth and Featured galaxies are inconsistent with being drawn from the same parent sample at the $5 \sigma$ significance level. As expected, Featured galaxies are generally disk-dominated. However, the Smooth galaxies have a considerably more uniform distribution of bulge-to-total ratios, such that 25\% of galaxies in the Smooth sample have disk-dominated light profiles (B/Tot~$\leq 0.25$). 
+
+This finding of a substantial population of completely smooth disk galaxies is consistent with the results of an increasing number of dynamical studies of galaxies at $z > 1$ \citep{therotdiskone,amuseonemaybe}. Moreover, because galaxies with smoother light distribution are also more likely to have very reliable bulge-disk decompositions in large-scale galaxy fitting studies, the combination of Galaxy Zoo morphological selection and selection of smooth disks via bulge-to-total ratios is a more powerful selector of relatively complete samples of $z > 1$ disks than either selection method alone.
+
+%%%%% [FIGURE: BTot] %%%%%
+\begin{figure}
+\includegraphics[scale=0.85]{BTot_histogram.eps}
+\caption{
+Distributions of bulge-to-total ratios for samples of galaxies that are unambiguously Smooth (red dashed histogram) and Featured (blue solid histogram). The majority of features measured by Galaxy Zoo CANDELS are associated with disk instabilities; thus it is perhaps not surprising that the Featured sample is generally disk-dominated. However, the Smooth galaxy sample has a relatively uniform distribution of bulge-to-total ratios, including a substantial population of disk-dominated galaxies at $1 \leq z \leq 3$ which have no evidence of significant features.
 }
+\label{fig:btot}
+\end{figure}
+%%%%% END FIGURE %%%%%
+
+
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
@@ -788,7 +805,9 @@ e.g. we can use this to talk about how many smooth galaxies are actually disks *
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-The Galaxy Zoo project has collected typically 40 or more independent visual classifications to date from colour images of 3 CANDELS fields: GOODS-South, COSMOS, and the UDS. Here we present the public release of these classifications, after applying an iterative consensus-based classifier weighting scheme that has been successfully applied to multiple previous Galaxy Zoo projects. We provide an analysis of changes in classifications with observed surface brightness and offer caveats and advice for usage of these morphological measurements for different science goals. Comparison of the Galaxy Zoo morphologies with existing visual morphologies of a subset of the sample are in excellent agreement across a wide range of morphological features. 
+The Galaxy Zoo project has collected typically 40 or more independent visual classifications to date from colour images of 3 CANDELS fields: GOODS-South, COSMOS, and the UDS. Here we present the public release of these classifications, after applying an iterative consensus-based classifier weighting scheme that has been successfully applied to multiple previous Galaxy Zoo projects, as well as additional weighting techniques making use of the stellarity parameter from automated measurements. We provide an analysis of changes in classifications with imaging depth and offer caveats and advice for usage of these morphological measurements for different science goals. 
+
+Comparison of the Galaxy Zoo morphologies with existing visual morphologies of a subset of the sample are in excellent agreement across a wide range of morphological features. We also combine Galaxy Zoo morphologies with multi-wavelength bulge-disk decompositions to show that a substantial fraction of galaxies lacking significant morphological signatures of disk features have disk-dominated light profiles.
 
 The public catalog of Galaxy Zoo CANDELS morphologies may be obtained from {\tt data.galaxyzoo.org}.
   
