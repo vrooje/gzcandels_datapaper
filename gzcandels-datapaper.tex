@@ -224,7 +224,7 @@ Subsequent analysis has produced more refined photometry in each field (GOODS-S,
 
 In general, the morphological quantities presented here do not rely on photometric information beyond initial identification of the sample. For example, we do not use colour, size, or redshift information to inform the raw or weighted morphologies. There is one exception: in Section \ref{sec:rawclass} we describe how an analysis of ongoing classifications led to a modification to the retirement limit of some subjects based on their determined classifiability as a function of surface brightness and magnitude. Thus for fainter, lower-surface-brightness images the number of classifications may be lower than the average of $\sim40$ per subject. 
 
-Otherwise, we only incorporated photometry into our analysis after the collection of classifications was complete. In particular, we use $H$-band {\sc auto} magnitude, 80 per cent flux radius, and photometric redshifts in Section \ref{sec:biases} when discussing depth corrections and classification biases below. 
+Otherwise, we only incorporated photometry into our analysis after the collection of classifications was complete. In particular, we use $H$-band {\sc auto} magnitude and 80-per-cent flux radius in Section \ref{sec:depth} when discussing depth corrections and classification biases below and photometric redshifts in the analysis of smooth disks in Section \ref{sec:result}. 
 
 
 
@@ -405,14 +405,14 @@ T08  & {\it Do the clumps appear to be        } & yes               & 16        
 \begin{figure*}
 \includegraphics[scale=0.67]{classifications_users_basicinfo.eps}
 \caption{
-Basic information on classifications. \emph{Left}: Distribution of number of classifications per subject in Galaxy Zoo CANDELS. The majority of subjects have 40 independent classifications each; a subset of 13,392 were retired early after being identified as too faint and low-surface-brightness for additional classifications to be useful (11,837) or as stars or artifacts (1,555). Subsequently, 7,402 subjects where at least 20\% of classifiers registered a vote for ``Features or Disk'' in the first task were re-activated with a retirement limit of 80 classifications, in order to ensure a complete sampling of the deepest branches of the question tree. \emph{Right}: Cumulative distribution of classifications per classifier, where the classifiers are sorted in order of least to most classifications contributed (Lorenz curve for classifiers). If every classifier had contributed the same number of classifications, the Lorenz curve would be equal to the dashed curve. The top 9\% of classifiers contributed 80\% of the classifications (Gini coefficient = 0.86). 
+Basic information on classifications. \emph{Left}: Distribution of (unweighted) number of classifications per subject in Galaxy Zoo CANDELS. The majority of subjects have 40 independent classifications each; a subset of 13,392 were retired early after being identified as too faint and low-surface-brightness for additional classifications to be useful (11,837) or as stars or artifacts (1,555). Subsequently, 7,402 subjects where at least 20\% of classifiers registered a vote for ``Features or Disk'' in the first task were re-activated with a retirement limit of 80 classifications, in order to ensure a complete sampling of the deepest branches of the question tree. \emph{Right}: Cumulative distribution of classifications per classifier, where the classifiers are sorted in order of least to most classifications contributed (Lorenz curve for classifiers). If every classifier had contributed the same number of classifications, the Lorenz curve would be equal to the dashed curve. The top 9\% of classifiers contributed 80\% of the classifications (Gini coefficient = 0.86). 
 }
 \label{fig:classification_basic_info}
 \end{figure*}
 %%%%% END FIGURE %%%%%
 
 
-The first classification of a subject from CANDELS was registered on the Galaxy Zoo interface\footnote{zoo4.galaxyzoo.org} on the 10th of September 2012. The final classification considered here, in the first phase of Galaxy Zoo CANDELS, was registered on the 30th of November 2013. Between these times, the site collected 2,149,206 classifications of 52,076 CANDELS subjects from 41,552 registered classifiers and 53,714 web browser sessions where the classifier did not log in. For all analysis presented here we have assumed that each unregistered browser session contains classifications from a single, unique classifier. 
+The first classification of a subject from CANDELS was registered on the Galaxy Zoo interface\footnote{zoo4.galaxyzoo.org} on the 10th of September 2012. The final classification considered here, in the first phase of Galaxy Zoo CANDELS, was registered on the 30th of November 2013. Between these times, the site collected 2,149,206 classifications of 52,073 CANDELS subjects (of which 2,518 were intentional duplicates of the same galaxy; see Section \ref{sec:depth}) from 41,552 registered classifiers and 53,714 web browser sessions where the classifier did not log in. For all analysis presented here we have assumed that each unregistered browser session contains classifications from a single, unique classifier. 
 
 Subjects within a given Galaxy Zoo sample are chosen randomly for classification, so that the number of independent classifications per galaxy builds up uniformly through the full sample. Once a pre-set classification limit has been reached, the subject is retired from the active classification pool. The initial goal for Galaxy Zoo CANDELS was to obtain at least 40 independent classifications for each galaxy. 
 
@@ -447,14 +447,14 @@ We select a sample of bright stars having $F160W < 18.5$ and $\stellarity  > 0.8
 
 We select a sample of extended sources having $F160W < 25$ and $\stellarity < 0.03$, with further manual removal of images with artifacts and other ``unclassifiable'' sources. We first cleaned this sample by rejecting remaining sources where more than 65 per cent of classifiers had selected the ``star or artifact'' response to task T00, a choice made to favour purity of the extended-source sample over completeness. We additionally rejected 398 artifacts falling below this threshold, leaving a total of 29,996 subjects in the extended-source gold-standard sample. 
 
-Having selected these samples, we then assigned an index $n_s$ to each classification of a subject from within either gold-standard subject set. For subjects within the bright-star gold-standard set, the classification index was set to $n_s = -1$ if the classifier had \emph{not} marked the subject as ``star or artifact'', and was $n_s = 0$ otherwise. For subjects within the extended-source gold-standard set, the classification index was set to $n_s = -1$ if the classifier had marked the subject as ``star or artifact'', and was set to $n_s = +1$ otherwise.
+Having selected these samples, we then assigned an index $n_s$ to each subject classification from within either gold-standard subject set. For subjects within the bright-star gold-standard set, the classification index was set to $n_s = -1$ if the classifier had \emph{not} marked the subject as ``star or artifact'', and was $n_s = 0$ otherwise. For subjects within the extended-source gold-standard set, the classification index was set to $n_s = -1$ if the classifier had marked the subject as ``star or artifact'', and was set to $n_s = +1$ otherwise.
 
-We then define the index $n$ for each classifier as the sum of all their classification indices $n_s$, and the weight for task T00 is assigned based on the classifier index as
+We then define the index $n_c$ for each classifier as the sum of all their classification indices $n_s$, and the weight for task T00 is assigned based on the classifier index as
 \begin{equation}
    w_{00}= \left\{
     \begin{array}{l l}
-      \max \left(1.1^n, 0.01\right)       & \text{ if } n < 0 \\
-      \min \left(1.05^n, 3 \right) & \text{ if } n \geq 0.\\
+      \max \left(1.1^{n_c}, 0.01\right)       & \text{ if } n_c < 0 \\
+      \min \left(1.05^{n_c}, 3 \right) & \text{ if } n_c \geq 0.\\
     \end{array} \right.
     \label{eqn-seedweight}
  \end{equation}
@@ -654,7 +654,7 @@ We provide these flags for the convenience of the end user, but we additionally 
 
 
 
-\subsection{Depth Corrections}
+\subsection{Depth Corrections}\label{sec:depth}
 
 As outlined in Section \ref{sec:images}, the depth of the CANDELS survey varies substantially between two types of fields, from shallower ``wide'' fields with $\sim 1$ orbit depth in $F160W$ to ``deep'' fields with $\gtrsim 4$ times the overall depth of the wide fields. 
 
@@ -668,7 +668,7 @@ Figure \ref{fig:depthcorr} shows the difference between shallower and deeper wei
 
 The best-fit planes for each response to each task can be used to predict the wide-field depth classifications for each galaxy in the deep fields, in this paper and in future releases of Galaxy Zoo-CANDELS data. In addition to the release of classification data described in Section \ref{sec:release} above, we additionally present these ``corrected'', weighted classifications for each of the {\notebsm NNNN} subjects in the deep fields for which we do not also have separate wide-field depth classifications, as well as the measured wide-field depth classifications for the 2,518 GOODS-South subjects used to map the change in classification between deeper and shallower fields as a function of surface brightness and deep-exposure morphology. 
 
-For those subjects where it is relevant, the wide-field depth classifications are labelled as described in Section \ref{sec:release}, except with an additional {\small \tt \_deepcorr} added to each relevant weighted-classification column. For example, the wide-field vote fraction for classifiers indicating an answer of `Features or Disk' to Task T00 is labelled {\small \tt t00\_smooth\_or\_featured\_a0\_smooth\_weighted\_frac\_deepcorr}, which is depth-corrected from the deep-exposure classification indicated in the {\small \tt t00\_smooth\_or\_featured\_a0\_smooth\_weighted\_frac} column. For those investigating science questions where it is advantageous to consider classifications from images of comparable depth across an entire sample, we recommend using the {\small \tt \_deepcorr} classifications for subjects in the ``deep'' fields.
+For those subjects where it is relevant, the wide-field depth classifications are labelled in the data catalogs as described in Section \ref{sec:release}, except with an additional {\small \tt \_deepcorr} added to each relevant weighted-classification column. For example, the wide-field vote fraction for classifiers indicating an answer of `Features or Disk' to Task T00 is labelled {\small \tt t00\_smooth\_or\_featured\_a0\_smooth\_weighted\_frac\_deepcorr}, which is depth-corrected from the deep-exposure classification indicated in the {\small \tt t00\_smooth\_or\_featured\_a0\_smooth\_weighted\_frac} column. For those investigating science questions where it is advantageous to consider classifications from images of comparable depth across an entire sample, we recommend using the {\small \tt \_deepcorr} classifications for subjects in the ``deep'' fields.
 
 
 %%%%% [FIGURE: Depth Corrections] %%%%%
@@ -700,7 +700,7 @@ In fact, \emph{all} responses collected by the CANDELS team interface are 1st-ti
 Despite these significant differences, it is nevertheless helpful to compare the CANDELS team classifications to the Galaxy Zoo CANDELS classifications. Figure \ref{fig:candels_compare} shows the comparison of vote fractions in four categories: Featured, Merger or Interaction, Edge-On, and Spiral. For all comparisons below we have compared the subset of sources in CANDELS above the surface brightness limit 
 $\mu_{\textsc{auto}} < 24.2$
 %described in Section \ref{sec:sb} 
-which have visual classifications from both teams, which have \emph{not} been deemed ``unclassifiable'' by the CANDELS team, and which have \emph{not} been rejected as stars or artifacts by more than 50\% of classifiers for either project. The surface brightness limit is deliberately fainter than that described in Section \ref{sec:sb} to favour inclusiveness. While this adds to the noise seen in each panel in Figure \ref{fig:candels_compare}, we do not expect it to bias the correlations, as each classification project uses visual classifications of the same data so should be equally affected (or unaffected) by surface brightness issues.
+which have visual classifications from both teams, which have \emph{not} been deemed ``unclassifiable'' by the CANDELS team, and which have \emph{not} been rejected as stars or artifacts by more than 50\% of classifiers for either project. The surface brightness limit is chosen to favour inclusiveness. While this choice adds somewhat to the noise seen in each panel in Figure \ref{fig:candels_compare}, we do not expect it to bias the correlations, as each classification project uses visual classifications of the same data so should be equally affected (or unaffected) by surface brightness issues.
   
 %%%%% [FIGURE: CANDELS and GZ Comparisons] %%%%%
 \begin{figure*}
