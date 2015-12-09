@@ -72,44 +72,49 @@
 \title[Galaxy Zoo: CANDELS Data Release]{Galaxy Zoo: Detailed Morphological Classifications for 48,000 galaxies from CANDELS\thanks{This publication has been made possible by the participation of more than 95,000 volunteers in the Galaxy Zoo project. The contributions of the more than $40,000$ of those who registered a username with Galaxy Zoo are
 individually acknowledged at http://authors.galaxyzoo.org/ .} } 
 
-\author[Simmons et al.]{\parbox[t]{16cm}{B. D. Simmons$^{1}\thanks{E-mail: brooke.simmons@astro.ox.ac.uk}$, {\notebsm and a \emph{lot} of other people to be named later}
-%Chris Lintott$^{1,3}$, 
-%Kyle W. Willett$^{5}$, 
-%Karen L. Masters$^{2,4}$, 
-%Robert C. Nichol$^{2,4}$, 
+\author[Simmons et al.]{\parbox[t]{16cm}{B. D. Simmons$^{1,2,3,4}$\thanks{E-mail: bdsimmons@ucsd.edu}\footnote{Einstein Fellow}, 
+Chris Lintott$^{1,3}$, 
+Kyle W. Willett$^{5}$, 
+Karen L. Masters$^{2,4}$, 
+Robert C. Nichol$^{2,4}$, 
 %William C. Keel$^{6}$, 
 %Thomas Melvin$^{2}$, 
-%R. J. Smethurst$^{1}$, 
+R. J. Smethurst$^{1}$, 
 %Edmond Cheung$^{7}$, 
 %Kevin Schawinski$^{8}$, 
 %Michael Rutkowski$^{5}$,
-%Jeyhan S. Kartaltepe$^{9,}$\footnote{Hubble Fellow}, 
+Jeyhan S. Kartaltepe$^{9,}$, 
 %Kevin R. V. Casteels$^{11}$, 
 %Christopher J. Conselice$^{12}$,
-%Omar Almaini$^{12}$, 
-%Henry C. Ferguson$^{13}$,
+Omar Almaini$^{12}$, 
+Eric F. Bell$^{99}$,
+Henry C. Ferguson$^{13}$,
 %Lucy Fortson$^{5}$, 
 %William Hartley$^{12,8}$, 
-%Dale Kocevski$^{14}$,
-%Anton M. Koekemoer$^{13}$,
-%Daniel H. McIntosh$^{15}$,
+Dale Kocevski$^{14}$,
+Anton M. Koekemoer$^{13}$,
+David Koo$^{99}$,
+Jennifer Lotz$^{99}$,
+Daniel H. McIntosh$^{15}$,
 %Alice Mortlock$^{12}$, 
 %{\builderUC Jeffrey A. Newman$^{16}$,}
 %Jamie Ownsworth$^{12}$, 
 %Steven Bamford$^{12}$,
 %{\builderUC Tomas Dahlen$^{13}$,} 
-%{\builderUC Sandra M. Faber$^{17}$,}
+{\builderUC Sandra M. Faber$^{17}$,}
 %{\builderUC Steven L. Finkelstein$^{18}$,} 
 %{\builderUC Adriano Fontana$^{19}$,}
-%{\builderUC Audrey Galametz$^{19}$,}
+{\builderUC Audrey Galametz$^{19}$,}
 %N. A. Grogin$^{13}$,
 %{\builderUC Ruth Gr\"utzbauch$^{12, 20}$,} 
-%{\builderUC Yicheng Guo$^{17}$,}
-%{\builderUC Boris H\"au\ss ler$^{12,21,1}$,}
+{\builderUC Yicheng Guo$^{17}$,}
+{\builderUC Boris H\"au\ss ler$^{12,21,1}$,}
 %Kian Jek$^{22}$,
 %Sugata Kaviraj$^{21}$,
 %Ray A. Lucas$^{13}$,
-%{\builderUC Michael Peth$^{23}$,}
+Elizabeth McGrath$^{99}$,
+Mark Mozena$^{99}$,
+{\builderUC Michael Peth$^{23}$,}
 %{\builderUC Mara Salvato$^{24}$,} 
 %{\builderUC Tommy Wiklind$^{25}$,} 
 %{\builderUC Stijn Wuyts$^{24}$}
@@ -177,7 +182,7 @@ We present quantified visual morphologies of approximately 48,000 galaxies havin
 
 This paper presents morphological classifications of nearly $50,000$ galaxies imaged in the Cosmic And Near-infrared Deep Extragalactic Legacy Survey \citep[CANDELS;][]{grogin11,koekemoer11} measured by the Galaxy Zoo{\footnote{zoo4.galaxyzoo.org}} project \citep{lintott08}. Over 95,000 volunteers have contributed over 2,000,000 detailed galaxy classifications to this effort. We combine, on average, 43 independent classifications of each galaxy to produce detailed, quantitative morphological descriptions of these distant galaxies along many physical axes of interest. 
 
-The shape and appearance of a galaxy trace the underlying physical processes that have formed it and continue to influence its evolution. For example, the signatures of past merger events \citep[from $z \sim 2$ onwards;][]{martig12} are visible even at $z = 0$ in the form of a galactic bulge; the strength of the bulge is tied to the strength of the merger, as indeed the lack of a bulge indicates a lack of significant mergers \citep[e.g.,][]{kormendy10}. Likewise, other morphological features are tied to disk instabilities and resonances \citep[e.g.,][]{kormendy04,b_elmegreen08,donghia13}, and orbital changes from the disruptive \citep[mergers; e.g.,][]{darg10a,darg10b,lotz08a,lotz08b} to the relatively subtle \citep[e.g., bars,][]{athanassoula92b,sellwood93,athanassoula05,athanassoula13,simmons14}. Furthermore, combination of morphological parameters with other measures, such as environment, color, mass and star formation histories \citep[e.g.][]{bamford09,tojeiro07,schawinski14,smethurst15}, can provide more insight than either alone.
+The shape and appearance of a galaxy trace the underlying physical processes that have formed it and continue to influence its evolution. For example, the signatures of past merger events \citep[from $z \sim 2$ onwards;][]{martig12} are visible even at $z = 0$ in the form of a galactic bulge; the strength of the bulge is tied to the strength of the merger, as indeed the lack of a bulge indicates a lack of significant mergers \citep[e.g.,][]{kormendy10}. Likewise, other morphological features are tied to disk instabilities and resonances \citep[e.g.,][]{kormendy04,b_elmegreen08,donghia13}, and orbital changes from the disruptive \citep[mergers; e.g.,][]{darg10a,darg10b,lotz08a,lotz08b} to the relatively subtle \citep[e.g., bars,][and for studies of visually-identified bars at $z > 0$ specifically, see e.g. \citeauthor{sheth08} \citeyear{sheth08}; \citeauthor{melvin14} \citeyear{melvin14}; \citeauthor{simmons14} \citeyear{simmons14}; \citeauthor{cheung15} \citeyear{cheung15}]{athanassoula92b,sellwood93,athanassoula05,athanassoula13}. Furthermore, combination of morphological parameters with other measures, such as environment, color, mass and star formation histories \citep[e.g.][]{bamford09,tojeiro07,schawinski14,smethurst15}, can provide more insight than either alone.
 
 Morphological measures have a long history in astronomy \citep[e.g.,][]{hubble26,devaucouleurs,devaucouleurs59,sandage61,vandenbergh76,abraham96c,nair10}. The computerized era of astrophysics has brought with it a number of automated morphological classification techniques. Some use multiple parameters to characterise a galaxy's distribution of light \citep{sersic68,odewahn02}, while others adopt a non-parametric approach, each reducing a galaxy to one number \citep[and often used in combination; e.g.][]{abraham94, conselice03, lotz04a}. Both types of analyses lend themselves relatively well to large-scale processing of images from galaxy surveys \citep[e.g.][]{simard02,scarlata07,simard09,griffith12,lackner12,lackner13} and provide a uniform quantitative set of measures. Modern machine learning techniques, with appropriate training, are also applicable to large data sets \citep{huertascompany08,huertascompany15,dieleman15}.
 
