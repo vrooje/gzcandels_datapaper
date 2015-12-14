@@ -187,7 +187,7 @@ def morphology_distribution(survey='candels'):
 
     fraccols,colnames = [],[]
     for c in columns:
-        if c[-4:] == 'frac':
+        if c[-13:] == 'weighted_frac':
             fraccols.append(c)
         if c[0] == 't' and is_number(c[1:3]):
             colnames.append(c[:3])
@@ -210,7 +210,7 @@ def morphology_distribution(survey='candels'):
         return [x for x in seq if not (x in seen or seen_add(x))] 
 
     tasklabels = f7([re.split("[ax][0-9]",f)[0][4:-1] for f in fraccols])
-    labels = [re.split("[ax][0-9]",f[4:-5])[-1][1:] for f in fraccols]
+    labels = [re.split("[ax][0-9]",f[4:-14])[-1][1:] for f in fraccols]
 
     # Make pie charts of the plurality votes
 
