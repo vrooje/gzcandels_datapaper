@@ -561,6 +561,19 @@ Example (inverted) galaxy images for different consensus classifications of diff
 
 \subsection{Use of Classifications in Practice}\label{sec:usage}
 
+
+%%%%% [FIGURE: Example images] %%%%%
+\begin{figure*}
+\includegraphics[scale=0.46]{pie_candels_mod.eps}
+\caption{
+Overall vote fractions for each task in the Galaxy Zoo CANDELS decision tree. {\notebsm More needed here...}
+}
+\label{fig:pie}
+\end{figure*}
+%%%%% END FIGURE %%%%%
+
+
+
 The branched nature of the decision tree (Figure \ref{fig:tree}) means that selection of a sample of galaxies for a given morphological investigation may depend on a number of factors. For example, it is possible to choose a quantitative threshold for selection of a sample of galaxies with a given feature or combination of features corresponding to one's optimal trade-off between sample completeness and purity. One may also weight a population analysis by the vote fraction for a particular morphological feature \citep[making the assumption that the probability of a galaxy having that feature, or the strength of the feature, is a function of the vote fraction, e.g.,][]{smethurst15}. However, for all tasks below T00 in the tree, it is important to consider the responses to the tasks above it in this analysis.
 
 For example, a study with the goal of examining spiral galaxies would ideally use a sample selected by considering the responses to task T12, ``Is there any sign of a spiral arm pattern?'' If a pure sample of galaxies with clear spiral arms is desired, a threshold may be selected at a high vote fraction for $f_{\rm spiral}$. If the threshold considers only this vote fraction, however, the final sample will likely be contaminated by galaxies where the spiral vote fraction is dominated by noise because only a small number of people reached that task (e.g., a warped edge-on disk). 
@@ -631,7 +644,7 @@ We provide these flags for the convenience of the end user, but we additionally 
 \textbf{Edge-on} & \parbox[t]{0.75cm}{T00\\T02\\T09} & \parbox[t]{3.5cm}{$f_{\rm features} \geq 0.4$\\$f_{\rm not\ clumpy} \geq 0.3$\\$f_{\rm edge-on} > 0.7$, $N_{\rm T09} \geq 10$} & 223\\ \hline
 \textbf{Spiral}  & \parbox[t]{0.75cm}{T00\\T02\\T09\\T12} & \parbox[t]{3.5cm}{$f_{\rm features} \geq 0.4$\\$f_{\rm not\ clumpy} \geq 0.3$\\$f_{\rm not\ edge-on} \geq 0.5$\\$f_{\rm spiral} \geq 0.8$, $N_{\rm T12} \geq 10$} & 383\\ \hline
  \end{tabular}
- \caption{Clean Samples, designated in the Galaxy Zoo CANDELS weighted classification catalog with flags. Each sample is selected using criteria from at least 1 task in the decision tree (Figure \ref{fig:tree} and Table \ref{table:tree}); samples selecting for features characterised in lower branches of the tree include selection criteria on dependent tasks. The selection for the Clumpy clean sample also includes a rejection of subjects having a substantial fraction of classifications for ``Merger'', ``Tidal Features'', or ``Both''. The Clean samples are relatively free from contaminants, and should correspondingly not be treated as complete samples.
+ \caption{Clean Samples, designated in the Galaxy Zoo CANDELS weighted classification catalog with flags. Each sample is selected using criteria from at least 1 task in the decision tree (Figure \ref{fig:tree} and Table \ref{table:tree}); samples selecting for features characterised in lower branches of the tree include selection criteria on dependent tasks. The selection for the Clumpy clean sample also includes a rejection of subjects having a substantial fraction of classifications for ``Merger'', ``Tidal Features'', or ``Both''. The Clean samples are relatively free from contaminants, and are correspondingly incomplete.
 \label{table:clean}}
 \end{table}
 
