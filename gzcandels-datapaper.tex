@@ -495,15 +495,15 @@ a formulation that preserves a uniform weighting for any classifier with $\mkapp
 
 The weighted consensus classifications are then calculated for each subject by summing the weighted votes for each task and response between task T01 and T16, and reporting the vote fractions $f$ for each. (Although the classifications for task T00 are included in the computation of the consensus-based weights, the vote fractions for task T00 are not re-computed using the consensus-based weights.) As the classifier weights are calculated via comparison with the consensus, which leads to a new consensus, this method can be iterated until the classifier weights converge to a stable value. 
 
-In practice, the number of iterations required to reach this goal is low \citep[e.g., 3 or less in previous projects;][]{bamford09,willett13}. In Figure \ref{fig:consistencies} we show the distribution of classifier consistencies after 1-5 iterations of the above method. Between the 4th and 5th iterations, more than 99 per cent of consistency values varied by less than 0.1 per cent. After 5 iterations, approximately 4 per cent of classifiers have consistency $\mkappamean < 0.5$ (corresponding to a weight $w \lesssim 0.2$), whereas 83 per cent of classifiers have an end weight of $w = 1$. The vast majority of Galaxy Zoo classifiers thus contribute highly valuable information to the project.
+In practice, the number of iterations required to reach this goal is low \citep[e.g., 3 or less in previous projects;][]{bamford09,willett13}. In Figure \ref{fig:consistencies} we show the distribution of classifier consistencies after 1-5 iterations of the above method, although the difference between iterations 3 through 5 cannot be distinguished within the line weight even in the inset (zoomed) subsection of the figure. Between the 4th and 5th iterations, more than 99 per cent of consistency values varied by less than 0.1 per cent. After 5 iterations, approximately 4 per cent of classifiers have consistency $\mkappamean < 0.5$ (corresponding to a weight $w \lesssim 0.2$), whereas 83 per cent of classifiers have an end weight of $w = 1$. The vast majority of Galaxy Zoo classifiers thus contribute highly valuable information to the project.
 
 Figure \ref{fig:exampleclass} shows examples of galaxies with different weighted consensus classifications for several of the tasks described in Table \ref{table:tree} and Figure \ref{fig:tree}. 
 
 %%%%% [FIGURE: classifier Consistencies] %%%%%
 \begin{figure}
-\includegraphics[scale=0.57]{consistencies_iterations2.eps}
+\includegraphics[scale=0.625]{consistencies_iterations2.eps}
 \caption{
-Distribution of classifier consistencies \kappamean\ after 1 (black dashed), 2 (black dotted), 3 (thick blue dotted), 4 (thick green dashed), and 5 (black solid) iterations of the consistency-based weighting method  (described in Section \ref{sec:weighting}). Convergence of this method requires relatively few iterations: further iterations do not change significantly from the solid curve. Approximately 83 per cent of classifiers have $\mkappamean \geq 0.6$ and weights $w = 1$. 
+Distribution of classifier consistencies \kappamean\ after 1 (black dashed), 2 (black dotted), and 3 or more (black solid) iterations of the consistency-based weighting method (described in Section \ref{sec:weighting}). A portion of the curve is magnified (inset) to show further detail. Convergence of this method requires relatively few iterations: further iterations do not change significantly from the solid curve. Approximately 83 per cent of classifiers have $\mkappamean \geq 0.6$ and weights $w = 1$. 
 }
 \label{fig:consistencies}
 \end{figure}
