@@ -52,6 +52,9 @@
 
 \def\kappamean {$\overline{\kappa}$}
 \def\mkappamean {\overline{\kappa}}
+\def\stellarity   {{\tt CLASS\_STAR}}
+\def\musb       {$\mu_{\rm{\textsc{sb}}}$}
+\def\mmusb     {\mu_{\rm{\textsc{sb}}}}
 
 
 %\def\lesssim{\mathrel{\hbox{\rlap{\hbox{\lower5pt\hbox{$\sim$}}}\hbox{$<$}}}}
@@ -63,95 +66,114 @@
 
 \newcommand\nodata{ ~$\cdots$~ }
 
-
+\makeatletter
+\def\@xfootnote[#1]{%
+  \protected@xdef\@thefnmark{#1}%
+  \@footnotemark\@footnotetext}
+\makeatother
 
 
 \begin{document}
 
-\title[Galaxy Zoo: CANDELS Data Release]{Galaxy Zoo: Detailed Morphological Classifications for 48,000 galaxies from CANDELS\thanks{This publication has been made possible by the participation of more than 95,000 volunteers in the Galaxy Zoo project. The contributions of the more than $40,000$ of those who registered a username with Galaxy Zoo are
+\title[Galaxy Zoo CANDELS Data Release]{Galaxy Zoo: Detailed Morphological Classifications for 48,000 galaxies from CANDELS\thanks{This publication has been made possible by the participation of more than 95,000 volunteers in the Galaxy Zoo project. The contributions of the more than $40,000$ of those who registered a username with Galaxy Zoo are
 individually acknowledged at http://authors.galaxyzoo.org/ .} } 
 
-\author[Simmons et al.]{\parbox[t]{16cm}{B. D. Simmons$^{1}\thanks{E-mail: brooke.simmons@astro.ox.ac.uk}$, {\notebsm and a \emph{lot} of other people to be named later}
-%Chris Lintott$^{1,3}$, 
-%Kyle W. Willett$^{5}$, 
-%Karen L. Masters$^{2,4}$, 
-%Robert C. Nichol$^{2,4}$, 
+\author[Simmons et al.]{\parbox[t]{16cm}{B. D. Simmons$^{1,2,3}$\thanks{E-mail: bdsimmons@ucsd.edu}\footnote{Einstein Fellow}, 
+% Maybe list: Avishai Dekel (wants to be included but isn't a builder (?) and hasn't commented on paper yet), Janine Pforr (builder?), Marco Castellano (photometry builder? unclear)
+Chris Lintott$^{1}$, 
+Kyle W. Willett$^{UMN,UKY}$, 
+Karen L. Masters$^{ICG,SEPnet}$, 
 %William C. Keel$^{6}$, 
-%Thomas Melvin$^{2}$, 
-%R. J. Smethurst$^{1}$, 
+%Thomas Melvin$^{ICG}$, 
+Jeyhan S. Kartaltepe$^{RIT}$, 
+Coleman Krawczyk$^{ICG}$,
+Sandor Kruk$^{1}$,
+R. J. Smethurst$^{1}$, 
+Robert C. Nichol$^{ICG,SEPnet}$, 
 %Edmond Cheung$^{7}$, 
-%Kevin Schawinski$^{8}$, 
+Kevin Schawinski$^{ETH}$, 
 %Michael Rutkowski$^{5}$,
-%Jeyhan S. Kartaltepe$^{9,}$\footnote{Hubble Fellow}, 
 %Kevin R. V. Casteels$^{11}$, 
-%Christopher J. Conselice$^{12}$,
-%Omar Almaini$^{12}$, 
-%Henry C. Ferguson$^{13}$,
+Christopher J. Conselice$^{NOTT}$,
+Omar Almaini$^{NOTT}$, 
+Eric F. Bell$^{99}$,
+Henry C. Ferguson$^{99}$,
 %Lucy Fortson$^{5}$, 
-%William Hartley$^{12,8}$, 
-%Dale Kocevski$^{14}$,
-%Anton M. Koekemoer$^{13}$,
-%Daniel H. McIntosh$^{15}$,
-%Alice Mortlock$^{12}$, 
-%{\builderUC Jeffrey A. Newman$^{16}$,}
-%Jamie Ownsworth$^{12}$, 
-%Steven Bamford$^{12}$,
-%{\builderUC Tomas Dahlen$^{13}$,} 
-%{\builderUC Sandra M. Faber$^{17}$,}
-%{\builderUC Steven L. Finkelstein$^{18}$,} 
-%{\builderUC Adriano Fontana$^{19}$,}
-%{\builderUC Audrey Galametz$^{19}$,}
-%N. A. Grogin$^{13}$,
-%{\builderUC Ruth Gr\"utzbauch$^{12, 20}$,} 
-%{\builderUC Yicheng Guo$^{17}$,}
-%{\builderUC Boris H\"au\ss ler$^{12,21,1}$,}
-%Kian Jek$^{22}$,
-%Sugata Kaviraj$^{21}$,
+William Hartley$^{ETH}$, 
+Dale Kocevski$^{CC}$,
+Anton M. Koekemoer$^{99}$,
+David Koo$^{99}$,
+Jennifer Lotz$^{99}$,
+Daniel H. McIntosh$^{MOKS}$,
+Alice Mortlock$^{NOTT}$, 
+{Jeffrey A. Newman$^{PITT}$,}
+Jamie Ownsworth$^{99}$, 
+Steven Bamford$^{NOTT}$,
+{\builderUC Tomas Dahlen$^{99}$,} 
+{\builderUC Sandra M. Faber$^{99}$,}
+{\builderUC Steven L. Finkelstein$^{99}$,} 
+{\builderUC Adriano Fontana$^{99}$,}
+{\builderUC Audrey Galametz$^{99}$,}
+N. A. Grogin$^{ST}$,
+{\builderUC Ruth Gr\"utzbauch$^{99}$,} 
+{\builderUC Yicheng Guo$^{99}$,}
+{\builderUC Boris H\"au\ss ler$^{1,HERTS,ESO}$,}
+Sugata Kaviraj$^{HERTS, WORC}$,
 %Ray A. Lucas$^{13}$,
-%{\builderUC Michael Peth$^{23}$,}
-%{\builderUC Mara Salvato$^{24}$,} 
-%{\builderUC Tommy Wiklind$^{25}$,} 
-%{\builderUC Stijn Wuyts$^{24}$}
+Elizabeth McGrath$^{CC}$,
+Bahram Mobasher$^{99}$,
+Mark Mozena$^{99}$,
+{\builderUC Michael Peth$^{99}$,}
+Janine Pforr$^{LAM}$,
+{\builderUC Mara Salvato$^{99}$,} 
+{\builderUC Tommy Wiklind$^{99}$,} 
+{\builderUC Stijn Wuyts$^{BATH}$}
+{\noteb (Note: author order not fixed, list likely incomplete (ping me if I missed you!), please send me your affiliations)}
 %
 \vspace{0.1in} }\\
 $^{1}$Oxford Astrophysics, Denys Wilkinson Building, Keble Road, Oxford OX1 3RH, UK\\
-%$^{2}$Institute of Cosmology \& Gravitation, University of Portsmouth, Dennis Sciama Building, Portsmouth PO1 3FX, UK\\
-%$^{3}$Adler Planetarium, 1300 S. Lake Shore Drive, Chicago, IL 60605, USA\\
-%$^{4}$SEPnet,\thanks{www.sepnet.ac.uk} South East Physics Network\\
-%$^{5}$School of Physics and Astronomy, University of Minnesota, 116 Church St. SE, Minneapolis, MN 55455, USA\\
+$^{2}$Balliol College, Oxford\\
+$^{3}$Center for Astrophysics and Space Sciences (CASS), Department of Physics, University of California, San Diego, CA 92093, USA\\
+%$^{4}$Adler Planetarium, 1300 S. Lake Shore Drive, Chicago, IL 60605, USA\\
+$^{ICG}$Institute of Cosmology \& Gravitation, University of Portsmouth, Dennis Sciama Building, Portsmouth PO1 3FX, UK\\
+$^{SEPnet}$SEPnet,\thanks{www.sepnet.ac.uk} South East Physics Network\\
+$^{UMN}$School of Physics and Astronomy, University of Minnesota, 116 Church St. SE, Minneapolis, MN 55455, USA\\
 %$^{6}$Department of Physics and Astronomy, University of Alabama, Box 870324, Tuscaloosa, AL 35487, USA\\
 %$^{7}$Department of Astronomy and Astrophysics, 1156 High Street, University of California, Santa Cruz, CA 95064, USA\\
-%$^{8}$Institute for Astronomy, ETH Z\"urich, Wolfgang-Pauli-Strasse 27, CH-8093 Z\"urich, Switzerland\\
+$^{ETH}$Institute for Astronomy, ETH Z\"urich, Wolfgang-Pauli-Strasse 27, CH-8093 Z\"urich, Switzerland\\
 %$^{9}$National Optical Astronomy Observatory, 950 N. Cherry Ave., Tucson, AZ, 85719, USA\\
 %$^{10}$Department of Astronomy, University of Michigan, Ann Arbor, MI 48104, USA\\
 %$^{11}$Institut de Cincies del Cosmos. Universitat de Barcelona (UB-IEEC), Mart i Franqus 1, E-08028 Barcelona, Spain\\
-%$^{12}$School of Physics \& Astronomy, University of Nottingham, Nottingham NG7 2RD\\
-%$^{13}$Space Telescope Science Institute, 3700 San Martin Drive, Baltimore, MD 21218\\
-%$^{14}$Department of Physics and Astronomy, University of Kentucky, Lexington, KY 40506, USA\\
-%$^{15}$Department of Physics, University of Missouri-Kansas City, 5110 Rockhill Road, Kansas City, MO 64110, USA\\
-%$^{16}$Department of Physics and Astronomy \& PITT PACC, University of Pittsburgh, Pittsburgh, PA 15217, USA\\
+$^{NOTT}$School of Physics \& Astronomy, University of Nottingham, Nottingham NG7 2RD\\
+$^{ST}$Space Telescope Science Institute, 3700 San Martin Drive, Baltimore, MD 21218\\
+$^{UKY}$Department of Physics and Astronomy, University of Kentucky, Lexington, KY 40506, USA\\
+$^{MOKC}$Department of Physics, University of Missouri-Kansas City, 5110 Rockhill Road, Kansas City, MO 64110, USA\\
+$^{PITT}$Department of Physics and Astronomy \& PITT PACC, University of Pittsburgh, Pittsburgh, PA 15217, USA\\
 %$^{17}$UC Observatories/Lick Observatory and Department of Astronomy and Astrophysics, University of California, Santa Cruz, CA 95064, USA\\
 %$^{18}$Department of Astronomy, The University of Texas at Austin, Austin, TX 78712, USA\\
 %$^{19}$INAF-Osservatorio Astronomico di Roma, Via Frascati 33, I-00040, Monteporzio, Italy\\
 %$^{20}$Centre for Astronomy and Astrophysics, University of Lisbon, P-1349-018 Lisbon, Portugal\\
-%$^{21}$Centre for Astrophysics Research, University of Hertfordshire, College Lane, Hatfield AL10 9AB, UK\\
+$^{HERTS}$Centre for Astrophysics Research, University of Hertfordshire, College Lane, Hatfield AL10 9AB, UK\\
+$^{WORC}$Worcester College, Oxford\\
 %$^{22}$Galaxy Zoo Volunteer\\
 %$^{23}$Department of Physics and Astronomy, The Johns Hopkins University, Baltimore, MD 21218, USA\\
 %$^{24}$Max-Planck-Institut f{\"u}r extraterrestrische Physik, Giessenbachstrasse 1, D–85748 Garching bei M{\"u}nchen, Germany\\
 %$^{25}$European Southern Observatory/Joint ALMA Observatory, 3107 Alonso de Cordova, Santiago, Chile\\
+$^{CC}$Department of Physics and Astronomy, Colby College, Waterville, ME 04901, USA\\
+$^{ESO}$European Southern Observatory, Alonso de Cordova 3107, Vitacura, Casilla 19001, Santiago, Chile\\
+$^{BATH}$Department of Physics, University of Bath, Claverton Down, Bath BA2 7AY, UK \\
+$^{LAM}$Aix Marseille Universit\'e, CNRS, LAM (Laboratoire d'Astrophysique de Marseille) UMR 7326, F-13388 Marseille, France
    }
 
 \maketitle
   
 \label{firstpage}
   
-%\clearpage
+\clearpage
 
 \begin{abstract}
 
-{\notebsm To be rewritten, probably last.}
-
-Galaxies are sometimes really far away. The distant ones are pretty cool, because they tell us what the Universe was like back when it was just a kid, or maybe a teenager. You really have to look hard to see these galaxies, but once you do, what you do see tells you a whole lot. I mean, it's not exactly a WYSIWYG type of thing: there's a lot of work to figure out what the faint stuff you see really means. We did a bunch of work, and we think we did pretty well. Also, we compared to others who have done different kinds of work to try and answer some of the same questions. But we have a unique way of answering them, so here are those answers, and you can use them to answer other questions about the Universe.
+We present quantified visual morphologies of approximately 50,000 galaxies having $z \lesssim 3$, using galaxies observed in three \emph{Hubble Space Telescope} legacy fields by the Cosmic And Near-infrared Deep Extragalactic Legacy Survey (CANDELS) and classified by participants in the Galaxy Zoo project. Each galaxy received an average of 40 independent classifications, which we combine into detailed morphological information on galaxy features such as clumpiness, bar instabilities, spiral structure, and merger and tidal signatures. We apply a consensus-based classifier weighting method that preserves classifier independence while effectively down-weighting significantly errant classifications. After analysing the effect of varying image depth on reported classifications, we also provide depth-corrected classifications to preserve the information in the deepest observations and also enable the use of classifications at comparable depths across the full survey. Comparing the Galaxy Zoo classifications to previous human and machine classifications of the same galaxies shows very good agreement; in some cases the high number of independent classifications provided by Galaxy Zoo provides an advantage in selecting galaxies with a particular morphological profile, while in others the combination of Galaxy Zoo with other classifications is a more promising approach than using any one method alone. We combine the Galaxy Zoo classifications of ``smooth'' galaxies with parametric morphologies to select a sample of featureless disks at $1 \leq z \leq 2$, which may represent a dynamically warmer progenitor population to the settled disk galaxies seen at later epochs.
 
 
   \end{abstract}
@@ -178,16 +200,15 @@ Galaxies are sometimes really far away. The distant ones are pretty cool, becaus
 
 This paper presents morphological classifications of nearly $50,000$ galaxies imaged in the Cosmic And Near-infrared Deep Extragalactic Legacy Survey \citep[CANDELS;][]{grogin11,koekemoer11} measured by the Galaxy Zoo{\footnote{zoo4.galaxyzoo.org}} project \citep{lintott08}. Over 95,000 volunteers have contributed over 2,000,000 detailed galaxy classifications to this effort. We combine, on average, 43 independent classifications of each galaxy to produce detailed, quantitative morphological descriptions of these distant galaxies along many physical axes of interest. 
 
-% for each of the morphology citation bombs below it would be good to have some non-GZ papers in there.
-The shape and appearance of a galaxy trace the underlying physical processes that have formed it and continue to influence its evolution. For example, the signatures of past merger events \citep[from $z \sim 2$ onwards;][]{martig12} are visible even at $z = 0$ in the form of a galactic bulge; the strength of the bulge is tied to the strength of the merger, as indeed the lack of a bulge indicates a lack of significant mergers \citep[e.g.,][]{kormendy10}. Likewise, other morphological features are tied to disk instabilities and resonances \citep[e.g., warps, bars, rings][]{dunno, dunno}, and orbital changes from the disruptive \citep[mergers; e.g.,][]{darg10a,darg10b,lotz_unsureofyear,others} to the relatively subtle \citep[e.g., bars,][]{sometheorypapershere,wouldbegood}. Furthermore, combination of morphological parameters with other measures, such as environment, color, mass and star formation histories \citep[e.g.][]{bamford09,tojiero_yearpls,schawinski14,smethurst15}, can provide more insight than either alone.
+The shape and appearance of a galaxy trace the underlying physical processes that have formed it and continue to influence its evolution. For example, the signatures of past merger events \citep[from $z \sim 2$ onwards;][]{martig12} are visible even at $z = 0$ in the form of a galactic bulge; the strength of the bulge is tied to the strength of the merger, as indeed the lack of a bulge indicates a lack of significant mergers \citep[e.g.,][]{kormendy10}. Likewise, other morphological features are tied to disk instabilities and resonances \citep[e.g.,][]{kormendy04,b_elmegreen08,donghia13}, and orbital changes from the disruptive \citep[mergers; e.g.,][]{darg10b,darg10a,lotz08a,lotz08b} to the relatively subtle \citep[e.g., bars,][and for studies of visually-identified bars at $z > 0$ specifically, see e.g. \citeauthor{sheth08} \citeyear{sheth08}; \citeauthor{melvin14} \citeyear{melvin14}; \citeauthor{simmons14} \citeyear{simmons14}; \citeauthor{cheung15} \citeyear{cheung15}]{athanassoula92b,sellwood93,athanassoula05,athanassoula13}. Furthermore, combinations of morphological parameters with other measures, such as environment, color, mass and star formation histories \citep[e.g.][]{bamford09,tojeiro07,schawinski14,smethurst15}, can provide more insight than either alone.
 
-Morphological measures have a long history in astronomy \citep[e.g.,][]{hubble26,a,few,more,pls}. The computerized era of astrophysics has brought with it a number of automated morphological classification techniques. Some use multiple parameters to characterise a galaxy's distribution of light \citep{sersic68,oneofthefouriermodepapers,etc}, while others adopt a non-parametric approach, each reducing a galaxy to one number \citep[and often used in combination; e.g.][]{gini,m20,abrahamCA,conseliceCAS,zestmaybe}. These lend themselves relatively well to large-scale processing of images from galaxy surveys \citep[e.g.][]{simard,griffith,lackner,zest} and provide a uniform quantitative set of measures. Modern machine learning techniques are also well-tested and applicable to large data sets \citep{huertascompany,kagglepaperifwecan}.
+Morphological measures have a long history in astronomy \citep[e.g.,][]{hubble26,devaucouleurs,devaucouleurs59,sandage61,vandenbergh76,abraham96c,nair10}. The computerized era of astrophysics has brought with it a number of automated morphological classification techniques. Some use multiple parameters to characterise a galaxy's distribution of light \citep{sersic68,odewahn02}, while others adopt a non-parametric approach, each reducing a galaxy to one number \citep[and often used in combination; e.g.][]{abraham94, conselice03, lotz04a}. Both types of analyses lend themselves relatively well to large-scale processing of images from galaxy surveys \citep[e.g.][]{simard02,scarlata07,simard09,griffith12,lackner12,lackner13} and provide a uniform quantitative set of measures. Modern machine learning techniques, with appropriate training, are also applicable to large data sets \citep{huertascompany08,huertascompany15,dieleman15}.
 
 However, no computer has yet exceeded the human brain's capacity for pattern detection and serendipitous discovery. Visual morphologies remain among the most nuanced and powerful measures of galaxy structure. Galaxy Zoo combines the strengths of both visual and computer-driven approaches, using the Internet to collect more independent and complete visual classifications than any group of astronomers is realistically capable of and combining these classifications via tested and proven techniques.
 
-Since 2007, Galaxy Zoo has been a unique resource of quantitative and statistically robust visual galaxy morphologies. Prior to Galaxy Zoo CANDELS, three Galaxy Zoo projects have collected morphologies for over $1,000,000$ galaxies using the largest surveys to date to $z \sim 1$. These projects have been and continue to be extremely scientifically productive, both for the project team \citep{citation,love,come,on,group,hug} and for the larger scientific community \citep{because,that,self,cite,thing,just,now,was,alittlecheeky}.
+Since 2007, Galaxy Zoo has been a unique resource of quantitative and statistically robust visual galaxy morphologies. Prior to Galaxy Zoo CANDELS, three Galaxy Zoo projects have collected morphologies for over $1,000,000$ galaxies using the largest surveys to date to $z \sim 1$. These projects have been and continue to be extremely scientifically productive, both for the project team \citep[e.g.,][]{keel15,galloway15,willett15} and for the larger scientific community \citep[e.g.][]{amorin10,finkelman12,robaina12,combes13,joachimi15,lopezcorredoira15,zhang15}.
 
-Here we present the Galaxy Zoo visual morphologies of $49,555$ galaxies imaged by the largest near-infrared \emph{Hubble Space Telescope (HST)} survey to date, CANDELS, which images galaxies at rest-frame optical wavelengths to $z \approx 2.7$. 
+Here we present the Galaxy Zoo visual morphologies of $49,555$ images from the largest near-infrared \emph{Hubble Space Telescope (HST)} survey to date, CANDELS, which images galaxies at rest-frame optical wavelengths to $z \approx 3$. 
 
 In Section \ref{sec:data} we describe the observational data and the preparation of CANDELS images for use in Galaxy Zoo. In Section \ref{sec:classifications} we detail the collection of morphological classifications and the method of weighting and combining independent classifications for each galaxy. Section \ref{sec:comparison} compares Galaxy Zoo classifications to other morphological measurements. In Section \ref{sec:result} we show an example result using the classifications, and in Section \ref{sec:summary} we summarize. Throughout
 this paper we use the AB magnitude system, and where necessary we adopt a cosmology consistent with $\Lambda$CDM, with $H_{\rm 0}=70~{\rm
@@ -207,72 +228,41 @@ km~s^{-1}}$Mpc$^{\rm -1}$, $\Omega_{\rm m}=0.3$ and $\Omega_{\rm \Lambda}=0.7$ \
 \subsection{Images}\label{sec:images}
 
 % Edited by CJL
-The Cosmic Assembly Near-infrared Extragalactic Legacy Survey \citep[CANDELS;][]{grogin11,koekemoer11} is an \emph{HST} Treasury programme combining optical and near-infrared imaging from the Advanced Camera for Surveys (ACS) and Wide Field Camera 3 (infrared channel; WFC3/IR), providing an unprecedented opportunity to study galaxy structure and evolution across a range of redshifts. CANDELS covers the area included in five fields which had been targeted for previous studies {(GOODS-North and -South, \citeauthor{giavalisco04} \citeyear{giavalisco04}; EGS, \citeauthor{davis07} \citeyear{davis07}; UDS, \citeauthor{lawrence07} \citeyear{lawrence07}, \citeauthor{cirasuolo07} \citeyear{cirasuolo07}; and COSMOS, \citeauthor{scoville07} \citeyear{scoville07}), divided into 'deep' and 'wide' fields. Each of the wide fields (UDS, COSMOS, EGS and flanking fields to the GOODS-S and GOODS-N deep fields) are imaged over 2 orbits in WFC3/IR, split in a 2:1 ratio between filters F160W and F125W respectively, with parallel exposures made in F606W and F814W using ACS. Each of the deep fields (corresponding to those targeted by GOODS-S and GOODS-N) are imaged over at least 4 orbits each in both the F160W and F125W filters and 3 orbits in the F105W filter, with ACS exposures in F606W and F814W in parallel. These data are reduced and combined to produce a single mosaic for each field in each band, with drizzled resolutions of $0.03^{\prime\prime}$ and $0.06^{\prime\prime}$ per pixel for ACS and WFC3/IR, respectively \citep{koekemoer11}.
+The Cosmic Assembly Near-infrared Extragalactic Legacy Survey \citep[CANDELS;][]{grogin11,koekemoer11} is an \emph{HST} Treasury programme combining optical and near-infrared imaging from the Advanced Camera for Surveys (ACS) and Wide Field Camera 3 (infrared channel; WFC3/IR), providing an unprecedented opportunity to study galaxy structure and evolution across a range of redshifts. CANDELS covers the area included in five fields which had been targeted for previous studies {(GOODS-North and -South, \citeauthor{giavalisco04} \citeyear{giavalisco04}; EGS, \citeauthor{davis07} \citeyear{davis07}; UDS, \citeauthor{lawrence07} \citeyear{lawrence07}, \citeauthor{cirasuolo07} \citeyear{cirasuolo07}; and COSMOS, \citeauthor{scoville07} \citeyear{scoville07}), divided into `deep' and `wide' fields. Each of the wide fields (UDS, COSMOS, EGS and flanking fields to the GOODS-S and GOODS-N deep fields) are imaged over 2 orbits in WFC3/IR, split in a 2:1 ratio between filters F160W and F125W respectively, with parallel exposures made in F606W and F814W using ACS. Each of the deep fields (corresponding to those targeted by GOODS-S and GOODS-N) are imaged over at least 4 orbits each in both the F160W and F125W filters and 3 orbits in the F105W filter, with ACS exposures in F606W and F814W in parallel. These data are reduced and combined to produce a single mosaic for each field in each band, with drizzled resolutions of $0.03^{\prime\prime}$ and $0.06^{\prime\prime}$ per pixel for ACS and WFC3/IR, respectively \citep{koekemoer11}.
 
-The 4th release of Galaxy Zoo included all detections with $H \leq 25.5$ from COSMOS, GOODS-South and UDS, comprising 49,555 unique images. These were shown to visitors to the website galaxyzoo.org starting on the 10th of September, 2012. The images shown to the public are colour composites of ACS $I$ ($F814W$), WFC3 $J$ ($F125W$), and WFC3 $H$ ($F160W$) filters for the blue, green and red channels, respectively. Previous iterations of Galaxy Zoo \citep{Lintott08} have shown that the effect of showing colour images (rather than monochrome or single filter images) is small, and greatly increases classifier engagement. The angular sizes of the images in different filters are matched, and the native point-spread functions (PSFs) are used. The images are combined with an asinh stretch \citep[described in detail in][]{luptonasinh} with a non-linearity value of {\notebsm 3.0}, chosen as a compromise between the need to show clearly features across a wide dynamic range. 
+The 4th release of Galaxy Zoo included all detections with $H \leq 25.5$ from COSMOS, GOODS-South and UDS, comprising 49,555 unique images. These were shown to visitors to the website {\tt www.galaxyzoo.org} starting on 10~September~2012. The images shown to the public are colour composites of ACS $I$ ($F814W$), WFC3 $J$ ($F125W$), and WFC3 $H$ ($F160W$) filters for the blue, green and red channels, respectively. Previous iterations of Galaxy Zoo \citep{lintott08} showed that the effect of using colour images (rather than monochrome or single filter images) for classifications is small, but that their inclusion greatly increases classifier engagement. 
 
-Sources in the dataset vary greatly in size and surface brightness, and therefore a single set of values for channel scalings is not adequate to capture the variety of features across the images. We therefore use a variable scaling based on the {\notebsm magnitude and size} of each target source. For each image the R, G, and B channels have a fixed ratio of {\notebsm [not sure; must get this from Jeyhan]}, and the multiplier can vary between {\notebsm A and B}. Figure \ref{fig:imageexamples} shows examples of these colour composites across a wide range of source fluxes and sizes. 
+The angular sizes of the Galaxy Zoo CANDELS images were matched in different filters, using the native point-spread functions (PSFs). The images were combined with an asinh stretch \citep[described in detail in][]{lupton04} with a non-linearity value of {\notebsm 3.0}, chosen as a compromise between the need to show clear features across a wide dynamic range. 
 
-Each colour image is 424 pixels square. The angular size of the image varies, such that the colour image encompasses at least {\notebsm 3 times the 80\% flux radius of the target source}, with a minimum screen-to-WFC3 zoom ratio of {\notebsm 1:10} and a maximum ratio of {\notebsm 3:1}. The Galaxy Zoo interface loads the normal colour images by default, and the user may choose to display an inverted colour image, but may not otherwise change the image scaling or size within the software while performing the classification; this design ensures a consistent set of classifications which can be combined as described below.
+Sources in the dataset vary greatly in size and surface brightness, and a single set of values for channel scalings is not adequate to capture the variety of features across the images. We therefore use a variable scaling based on the {\notebsm magnitude and size} of each target source. For each image the R, G, and B channels have a fixed ratio of {\notebsm [not sure; must get this from Jeyhan]}, and the multiplier can vary between {\notebsm A and B}. Figure \ref{fig:exampleclass} shows examples of these colour composites across a wide range of source fluxes and sizes. 
+
+Each colour image is 424 pixels square. The angular size of the image varies, such that the colour image encompasses at least {\notebsm 3 times the 80\% flux radius of the target source}, with a minimum screen-to-WFC3 zoom ratio of {\notebsm 1:10} and a maximum ratio of {\notebsm 3:1}. The Galaxy Zoo interface loads the normal colour images by default, and the classifier may choose to display an inverted colour image, but may not otherwise change the image scaling or size within the software while performing the classification. This design ensures a consistent set of classifications which can be combined as described below.
 
 
-{\notebsm 
+
 \subsection{Photometry}
 
+Selection of galaxies to include in Galaxy Zoo CANDELS was based on preliminary photometry of the ACS and WFC3 images, computed using Source Extractor \citep{bertin96}. As described in Section \ref{sec:images}, the sample was selected using $H \leq 25.5$~mag. 
 
-Brief description of photometric catalogs. Focus on $IJH$ because that's all the images consider. Do mention all the extra stuff available, but note that the classifications themselves don't depend on them.
-%The debiasing will, though, because the photometric redshifts do.
+Subsequent analysis has produced more refined photometry in each field (GOODS-S, \citeauthor{guo13} \citeyear{guo13}; UDS, \citeauthor{galametz13} \citeyear{galametz13}; COSMOS, M. Peth et al., in preparation). In particular, an adapted form of Source Extractor has been used to more cleanly determine backgrounds and provide improved flux measurements. As a result, many source magnitudes have been revised to fainter values: the average source magnitude in the sample is fainter by $0.35$ mag. The faintest detected source in the revised catalog has a magnitude of $H = 28.3$.
+
+In general, the morphological quantities presented here do not rely on photometric information beyond initial identification of the sample. For example, we do not use colour, size, or redshift information to inform the raw or weighted morphologies. There is one exception: in Section \ref{sec:rawclass} we describe how an analysis of ongoing classifications led to a modification to the retirement limit of some subjects based on their determined classifiability as a function of surface brightness and magnitude. Thus for fainter, lower-surface brightness images the number of classifications may be lower than the average of $\sim40$ per subject. 
+
+Otherwise, we only incorporated photometry into our analysis after the collection of classifications was complete. In particular, we use $H$-band {\sc auto} magnitude and 80-per-cent flux radius in Section \ref{sec:depth} when discussing depth corrections and classification biases below and photometric redshifts in the analysis of smooth disks in Section \ref{sec:result}. 
 
 
-}
+
 \subsection{Redshifts}\label{sec:z}
 
-% placeholder: this is currently pretty much exactly duplicated from Simmons et al. (2014) - now rewritten (a bit) by CJL
 
-The choice to cover areas which had been investigated by previous surveys, and the high profile nature of the CANDELS survey itself has ensured that each of the fields has considerable follow-up, providing a wealth of ancillary data. Of particular importance for our work is the availability of reliable estimates of redshift. Our approach has been, therefore, to gather spectroscopic and photometric data where possible. 
+The choice to cover areas which had been investigated by previous surveys, and the high-profile nature of the CANDELS survey itself has ensured that each of the fields has considerable follow-up, providing a wealth of ancillary data. Of particular importance for our work is the availability of reliable estimates of redshift. Our approach has been, therefore, to gather spectroscopic and photometric data where possible. 
 
-For COSMOS galaxies, we use spectroscopic redshifts from zCOSMOS \citep{lilly07} or, where this is not possible, photometric redshifts derived from the COSMOS survey itself \citet{ilbert09} and the NEWFIRM medium-band survey \citet{whitaker11}. For GOODS-South, \citet{cardamone10b} assembled photometric redshifts from deep imagine carried out by MuSYC \citep{gawiser06} and spectroscopic redshifts from a variety of sources  \citep{balestra10,vanzella08,lefevre04,cimatti02}. For UDS, we use available spectroscopic \citep{simpson12} and photometric redshifts \citep{hartley13}. The latter make use of deep multi-wavelength coverage from UKIDSS as well as $J$ and $H$-band magnitudes from CANDELS itself. 
-
-
-Of the 49,555 galaxies originally included in Galaxy Zoo: CANDELS, 46,234 currently have spectroscopic (2,886) or photometric (43,348) redshifts. Where available, agreement between spectroscopic and photometric redshift is generally very good, with $\Delta z \equiv \sigma_z/(1+z_{spec}) = 0.02$ and $\sim 8\%$ of sources having $\Delta z > 0.2$. The use of photometric redshifts introduces an uncertainty of less than $1\%$ into the analysis described here \citep{simmons14}. For the remaining $\sim 3000$ galaxies, we rely on photometric redshifts derived by \citet{dahlen13} who use a Bayesian approach which combines results from several different and independent approaches. 
-
-% end egregious self-plagiarism
-
-%%% I'm taking this out because at the moment we aren't using these
-%\subsection{Simulated Images}\label{sec:ferengi}
-
-%Describe simulations and what we'll use them for.
+For COSMOS galaxies, we use spectroscopic redshifts from zCOSMOS \citep{lilly07} or, where this is not possible, photometric redshifts derived from the COSMOS survey itself \citep{ilbert09} and the NEWFIRM medium-band survey \citep{whitaker11}. For GOODS-South, \citet{cardamone10b} assembled photometric redshifts from deep imagine carried out by MUSYC \citep{gawiser06} and spectroscopic redshifts from a variety of sources  \citep{balestra10,vanzella08,lefevre04,cimatti02}. For UDS, we use available spectroscopic \citep{simpson12} and photometric redshifts \citep{hartley13}. The latter makes use of deep multi-wavelength coverage from UKIDSS as well as $J$ and $H$-band magnitudes from CANDELS itself. 
 
 
+Of the 49,555 galaxies originally included in Galaxy Zoo CANDELS, 46,234 currently have spectroscopic (2,886) or photometric (43,348) redshifts. Where available, agreement between spectroscopic and photometric redshift is generally very good, with $\Delta z \equiv \sigma_z/(1+z_{spec}) = 0.02$ and $\sim 8\%$ of sources having $\Delta z > 0.2$. The use of photometric redshifts introduces an uncertainty of less than $1\%$ into the analysis described here \citep{simmons14}. For the remaining $\sim 3000$ galaxies, we rely on photometric redshifts derived by \citet{dahlen13} who use a Bayesian approach which combines results from several different and independent approaches. 
 
 
-%%%%% [FIGURE: Bar fractions and mags of sample] %%%%%
-%\begin{figure*}
-%\includegraphics[scale=0.273]{tree_part_with_selection.eps}
-%\caption{
-%\emph{Left:} Partial Galaxy Zoo: CANDELS classification tree, starting with the first question (top) and leading to the bar feature question. There are 17 questions total in the tree; the bar question is a 4th-tier task. \emph{Right:} Selection of the featured, not-edge-on disk galaxy sample (876 galaxies) in GZ-CANDELS; relative box areas are scaled to the sample sizes. This selection was made independently of restrictions on redshift or luminosity (a full description of the sample selection is given in Section \ref{sec:sample}). Eight independent classifiers subsequently examined each of the 876 disk galaxies for evidence of a bar. 
-%}
-%\label{fig:sampleselection}
-%\end{figure*}
-%%%%% END FIGURE %%%%%
-
-
-
-
-%%%%% [FIGURE: Example images] %%%%%
-%\begin{figure*}
-%\includegraphics[scale=1.0]{barfig_3.eps}
-%\caption{
-%Examples of disk galaxies in GZ-CANDELS whose bar vote percentage $(p_{bar})$ places them in the unbarred (top row) and barred (bottom row) sub-samples.
-%}
-%\label{fig:gals}
-%\end{figure*}
-%%%%% END FIGURE %%%%%
-
-%{\notebsm 
-%\subsection{Calibration and Simulated Images}
-%
-%Mention the duplicated images in GDS, which were put in both identically (this was by accident - so we got double each of these and can theoretically check the variance in classifications, but that's kind of a stupid justification and I'm not quite sure how to mention these without saying "oopsies") and at 2-epoch depth (though this has not actually happened yet so I may need to just leave it out). Also it'd be nice to mention the FERENGIfied images, but ... those aren't in yet either. Basically, the only reason to have this section at the moment is to say "oops".}
 
 
 
@@ -289,19 +279,18 @@ Of the 49,555 galaxies originally included in Galaxy Zoo: CANDELS, 46,234 curren
 
 \subsection{Definition of Terms}\label{sec:terms}
 
-Throughout this paper we follow \citet{willett13} and \citet{rsimpson14} in adopting the following terms to describe different parts of the Galaxy Zoo software and data:
+Throughout this paper we adopt the following terms to describe different parts of the Galaxy Zoo software and data (similar to \citeauthor{willett13} \citeyear{willett13} and \citeauthor{rsimpson14} \citeyear{rsimpson14}):
 
 \begin{itemize}
-\item \textbf{User} or \textbf{Volunteer}. Those classifying galaxies within the Galaxy Zoo software\footnote{All classifications discussed here were collected via web software.} are essential to the success of the project. While it is true that the software is written so that a user could in principle be a machine, during this project we have not included machine classifications, and thus we use the terms ``user'' and ``volunteer'' interchangeably here.
+\item \textbf{Classifier}. Those classifying galaxies within the Galaxy Zoo software are essential to the success of the project. While it is true that the core software is written so that a classifier could in principle be a machine, the classifications published here were collected via web software and are assumed to be submitted by humans (with a very small fraction of classifiers potentially being `bots': see Section \ref{sec:bots}).
 
-\item \textbf{Subject} or \textbf{Image}. Within the Zooniverse software, a subject is a unit of data to be classified. For other projects this may include light curves, groups of images, video or audio files. 
+\item \textbf{Subject}. Within the Zooniverse\footnote{www.zooniverse.org} software, a subject is a unit of data to be classified. For other projects this may include light curves, groups of images, video or audio files. 
 %could cite PH/SS/WhaleFM? No video projects with citations though.
-In Galaxy Zoo CANDELS, each subject consists of a single image, with the goal of classifying 1 galaxy per image. We therefore use the term ``subject'' interchangeably with ``image'' here.
-{\notebsm I'm not as comfortable with this one as I am with User/Volunteer. Maybe I should be stricter about Subjects.}
+In Galaxy Zoo CANDELS, each subject consists of a colour image and an inverted copy of the colour image, with the goal of classifying 1 galaxy per subject.
 
-\item \textbf{Classification}. Galaxy Zoo CANDELS asks the user to complete several tasks to classify each subject. A classification is a unit of data that consists of 1 complete flow through the decision tree described in Section \ref{sec:tree}.
+\item \textbf{Classification}. Galaxy Zoo CANDELS asks the classifier to complete several tasks to classify each subject. A classification is a unit of data that consists of 1 complete flow through the decision tree described in Section \ref{sec:tree}.
 
-\item \textbf{Task} and \textbf{Question}; \textbf{Response} and \textbf{Answer}. Each task in Galaxy Zoo CANDELS consists of a single question, with 2 or more possible responses, 1 of which the user selects as their answer in order to move on to the next task.
+\item \textbf{Task} and \textbf{Question}; \textbf{Response} and \textbf{Answer}. The decision tree described below is comprised of multiple tasks the classifier is asked to complete. Each task in Galaxy Zoo CANDELS consists of a single question, with 2 or more possible responses, 1 of which the classifier selects as their answer in order to move on to the next task.
 
 \end{itemize}
 
@@ -311,37 +300,34 @@ In Galaxy Zoo CANDELS, each subject consists of a single image, with the goal of
 
 %%%%% [FIGURE: Example images] %%%%%
 \begin{figure*}
-\includegraphics[scale=0.45]{candels_classification_tree_withlabels_new.eps}
+\includegraphics[scale=0.85]{candels_classification_tree_withlabels_icons.eps}
 \caption{
-The Decision Tree for Galaxy Zoo: CANDELS in visual format. There are 16 tasks, with one question per task and up to 6 answers per question. Questions are coloured according to the minimum number of branches prior to that question. All users are asked the first question (task T00), and there are 4 subsequent levels of branching. The tree is also shown in text in Table \ref{table:tree}.
+The decision tree for Galaxy Zoo CANDELS in visual format, including graphical icons associated with each response in the classification interface. There are 16 tasks, with one question per task and up to 6 possible responses per question. Questions are coloured according to the minimum number of branches prior to that question. All classifiers are asked the first question (task T00), and there are 4 subsequent levels of branching. The tree is also shown in text in Table \ref{table:tree}.
 }
 \label{fig:tree}
 \end{figure*}
 %%%%% END FIGURE %%%%%
 
 The goal of Galaxy Zoo CANDELS is to provide detailed quantitative visual morphologies of galaxies observed by the deepest, most complete \emph{HST} multi-wavelength legacy survey to date. 
-%The classification interface was designed first and foremost with this goal in mind. 
 There are many morphological features of interest, including both broad questions about a galaxy's overall appearance and more detailed questions about specific features. 
 
-We employ a tree-based structure for collecting information on these morphological features, a strategy that has been used successfully in both Galaxy Zoo 2 {\notebsm (refs here)} and Galaxy Zoo: Hubble {\notebsm (and here)}. The decision tree, shown visually in Figure \ref{fig:tree} and in text in Table \ref{table:tree}, first asks the classifier to choose between the broad categories of "smooth and rounded", "features or disk", and "star or artifact". The next question either exits the classification (if the classifier has indicated the image is of a star or artifact) or asks for further details about the galaxy. 
+We employ a tree-based structure for collecting information on these morphological features, a strategy that has been used successfully in both Galaxy Zoo 2 and Galaxy Zoo: Hubble. The decision tree, shown visually in Figure \ref{fig:tree} and in text in Table \ref{table:tree}, first asks the classifier to choose between the broad categories of ``smooth and rounded'', ``features or disk'', and ``star or artifact''. The next step either exits the classification (if the classifier has indicated the subject is of a star or artifact) or moves on to a task which asks for further details about the galaxy. 
 
-If the classifier has indicated in the first question that the galaxy has features or a disk, a series of follow-up questions are asked about features such as clumps, spiral patterns, bulge strength, and the presence of a bar. If the classifier has instead indicated the galaxy is mostly smooth and rounded, the next question asks them to rate the overall roundedness, a question roughly corresponding to an axis ratio measurement. Finally, when the classifier has finished answering all follow-up questions about either the "smooth" or "featured" galaxy, they are then asked whether the galaxy is undergoing a merger, has tidal tails, or has both, or neither.
+If the classifier has indicated in the first task that the galaxy has features or a disk, the subsequent tasks ask a series of follow-up questions about features such as clumps, spiral patterns, bulge strength, and the presence of a bar. If the classifier has instead indicated the galaxy is mostly smooth and rounded, the next task asks them to rate the overall roundedness, a question roughly corresponding to an axis ratio measurement. Finally, when the classifier has finished answering all follow-up questions about either the ``smooth'' or ``featured'' galaxy, the final task asks whether the galaxy is undergoing a merger, has tidal tails, or has both, or neither.
 
 The tree-based structure has a number of advantages. First, it collects substantially more information on each galaxy than a single question would, and captures a more detailed classification of higher-order structures while minimising the effort required on the part of the classifier by only asking for relevant inputs based on the answers provided to previous questions. 
 
-Second, it focuses the classifier on a single feature at a time, highlighting each feature. This resets the attention of the classifier with each new question and avoids the problems that may result when a person is presented with a large number of decision tasks at once, including a decrease in optimal decision-making \citep{references, for, overchoice} and a reduced ability to recognise the unexpected \citep{references_for,inattentional_blindness}. 
+Second, it focuses the classifier on a single feature at a time, highlighting each feature. This resets the attention of the classifier with each new question and avoids the problems that may result when a person is presented with a large number of decision tasks at once, including a decrease in optimal decision-making \citep{iyengar00,crescenzi13, besedes15} and a reduced ability to recognise the unexpected \citep{simons99,todd05}. 
 
-Third, the tree-based structure is especially optimal for an interface which may collect classifications from users who have never before seen an image of a galaxy and may seek additional training. Within the interface, the classifier may optionally display training images in a ``Help'' section that shows different examples of the feature relevant to the current question. Asking single-topic questions in turn permits a full set of training images to be available throughout the classification without placing an unnecessary cognitive load on the classifier.
+Third, the tree-based structure is especially optimal for an interface which may collect classifications from classifiers who have never before seen an image of a galaxy and may seek additional training. Within the interface, the classifier may optionally display training images in a ``help'' section that shows different examples of the feature relevant to the current question. Asking single-topic questions in turn permits a full set of training images to be available throughout the classification without placing an unnecessary cognitive load on the classifier.
 
-%{\notebsm Other advantages we should mention?}
+The disadvantage of a tree-based classification structure concerns the dependencies introduced into the vote fractions by such a structure. A classifier cannot, for example, answer that the same galaxy has both a mostly smooth appearance and also has a spiral feature. This is in some ways an advantage, as it prevents contradictory and unphysical classifications, but it also means that an analysis of morphological vote fractions with the goal of examining spiral galaxies must account for the fact that whether a given classifier reached the spiral branch of the decision tree depends on their answer to the questions preceding it. 
 
-The disadvantage of a tree-based classification structure concerns the dependencies introduced into the vote fractions by such a structure. A classifier cannot, for example, answer that the same galaxy has both a mostly smooth appearance and also has a spiral feature. This is in some ways an advantage, as it prevents contradictory and unphysical classifications, but it also means that an analysis of  morphological vote fractions with the goal of examining spiral galaxies must account for the fact that whether a given classifier reached the spiral branch of the decision tree depends on their answer to the questions preceding it. 
+Accounting for dependencies of questions in deeper branches of the decision tree on higher-level questions is, however, a manageable task which has been undertaken successfully in many previous studies of specific galaxy structural features \citep[for specific examples, see e.g.][]{masters11a,melvin14,galloway15}. We provide guidelines for optimal morphological selection of samples using Galaxy Zoo consensus classifications in Section \ref{sec:usage}.
 
-Accounting for dependencies of questions in deeper branches of the decision tree on higher-level questions is, however, a manageable task which has been undertaken successfully in many previous studies of specific galaxy structural features {\notebsm {(for specific examples, see [citation bomb here])}}. 
+The Galaxy Zoo CANDELS decision tree is shown in visual form in Figure \ref{fig:tree} and in text form in Table \ref{table:tree}. We note that this tree is most similar to the tree used in the Galaxy Zoo: Hubble project \citep[described in][]{melvin14}, which also has an additional branch identifying clumpy galaxies and focusing on the detailed structure of galaxy clumps. There are small differences, however: for example, Task 10, which asks about a bulge in an edge-on disk, is a Yes/No question here, whereas in previous iterations of the decision tree this question also asked whether the bulge shape was rounded or boxy. Additionally, the final task in the tree (Task 16) is substantially different from previous versions and is here only concerned with galaxy mergers and tidal features. 
 
-The Galaxy Zoo CANDELS decision tree is shown in visual form in Figure \ref{fig:tree} and in text form in Table \ref{table:tree}. We note that this tree is most similar to the tree used in the Galaxy Zoo: Hubble project \citep[shown in ][]{melvin14} {\notebsm (note to self to check that the full tree is actually shown there)}, which also has an additional branch identifying clumpy galaxies and focusing on the detailed structure of galaxy clumps. There are small differences, however: for example, Task 10, the question about a bulge in an edge-on disk, is a Yes/No question here, whereas in previous iterations of the decision tree this question also asked whether the bulge shape was rounded or boxy. Additionally, the final question in the tree (Task 16) is substantially different from previous versions and is here only concerned with galaxy mergers and tidal features. 
-
-After the classification of each image is finished, the classifier is asked "Would you like to discuss this object?" If the classifier selects "No", a new image is shown for classification. If the classifier selects yes, a new window opens with a discussion page focused on the image they have just classified. Within this part of the Galaxy Zoo software, called Talk, users may ask questions and make comments on specific images, or engage in more general discussions. Users may also "tag" images and discussions using a format identical to Twitter's hashtag system. Some of these tags were used in the pre-analysis of Galaxy Zoo CANDELS data, on which more details are given in Section \ref{sec:rawclass} below.
+After the classification of each subject is finished, the classifier is asked ``Would you like to discuss this object?'' If the classifier selects ``no'', a new subject is shown for classification. If the classifier selects ``yes'', a new window opens with a discussion page focused on the subject they have just classified. Within this part of the Galaxy Zoo software, called Talk, people may ask questions and make comments on specific subjects, or engage in more general discussions. People may also ``tag'' subjects and discussions using a format similar to Twitter's hashtag system. Some of these tags were used in the pre-analysis of Galaxy Zoo CANDELS data, on which more details are given in Section \ref{sec:rawclass} below.
 
 
 
@@ -395,7 +381,6 @@ T08  & {\it Do the clumps appear to be        } & yes               & 16        
      & {\it embedded within a larger object?  } & no                & 16         &       &                                       &                  &    \\
  \end{tabular}
  \caption{The Galaxy Zoo CANDELS decision tree, comprising 16 tasks and 51 responses. Each task is comprised of a single question and up to 6 possible responses. The first question is Task 00, and a classification is completed by responding to all subsequent questions until the end of the tree is reached. The `Next' column indicates the subsequent task the classifier is directed to upon choosing a specific response. Although a classifier will flow through the tree from top to bottom, there is no path through the tree that includes all tasks. 
-%The texts in `Question' and `Responses' are displayed to volunteers during classification, along with the icons in Figure~\ref{fig-flowchart}.
 \label{table:tree}}
 \end{table*}
 
@@ -404,44 +389,75 @@ T08  & {\it Do the clumps appear to be        } & yes               & 16        
 \subsection{Raw classifications}\label{sec:rawclass}
 
 % First classification 2012-09-10 18:41:25 UTC, last classification 2013-11-30 12:58:51 UTC
-% NOTE I've just discovered that people who put commas in their usernames can mess up my (admittedly simple and awk-based) system of separating classifications. 
-% So I am 99% sure the total number of classifications is 2,149,206 but I'm not 100% sure yet.
 
 %%%%% [FIGURE: Example images] %%%%%
 \begin{figure*}
 \includegraphics[scale=0.67]{classifications_users_basicinfo.eps}
 \caption{
-Basic information on classifications. \emph{Left}: Distribution of number of classifications per subject in Galaxy Zoo CANDELS. The majority of images have 40 independent classifications each; a subset of 13,392 were retired early after being identified as too faint and low-surface-brightness for additional classifications to be useful (11,837) or as stars or artifacts (1,555). Subsequently, 7,402 subjects where at least 20\% of classifiers registered a vote for ``Features or Disk'' in the first task were re-activated with a retirement limit of 80 classifications, in order to ensure a complete sampling of the deepest branches of the question tree. \emph{Right}: Cumulative distribution of classifications by volunteers, where the volunteers are sorted in order of least to most classifications contributed (Lorenz curve for classifiers). If every volunteer had contributed the same number of classifications, the Lorenz curve would be equal to the dashed curve. The top 9\% of users contributed 80\% of the classifications (Gini coefficient = 0.86). 
+Basic information on classifications. \emph{Left}: Distribution of (unweighted) number of classifications per subject in Galaxy Zoo CANDELS. The majority of subjects have 40 independent classifications each; a subset of 13,392 were retired early after being identified as too faint and low-surface brightness for additional classifications to be useful (11,837) or as stars or artifacts (1,555). Subsequently, 7,402 subjects where at least 20\% of classifiers registered a vote for ``features or disk'' in the first task were re-activated with a retirement limit of 80 classifications, in order to ensure a complete sampling of the deepest branches of the decision tree. \emph{Right}: Cumulative distribution of classifications per classifier, where the classifiers are sorted in order of least to most classifications contributed (Lorenz curve for classifiers). If every classifier had contributed the same number of classifications, the Lorenz curve would be equal to the dashed curve. The top 9\% of classifiers contributed 80\% of the classifications (Gini coefficient = 0.86). 
 }
 \label{fig:classification_basic_info}
 \end{figure*}
 %%%%% END FIGURE %%%%%
 
 
-The first classification of an image from CANDELS was registered on the Galaxy Zoo interface\footnote{zoo4.galaxyzoo.org} on the 10th of September 2012. The final classification considered here, in the first phase of Galaxy Zoo CANDELS, was registered on the 30th of November 2013. Between these times, the site collected 2,149,206 classifications of 52,076 CANDELS subjects from 41,552 registered volunteers and 53,714 web browser sessions where the user did not log in. For all analysis presented here we have assumed that each unregistered browser session contains classifications from a single, unique volunteer. 
+The first classification of a subject from CANDELS was registered on the Galaxy Zoo interface\footnote{zoo4.galaxyzoo.org} on the 10th of September 2012. The final classification considered here, in the first phase of Galaxy Zoo CANDELS, was registered on the 30th of November 2013. Between these times, the site collected 2,149,206 classifications of 52,073 CANDELS subjects (of which 2,518 were intentional duplicates of the same galaxy; see Section \ref{sec:depth}) from 41,552 registered classifiers and 53,714 web browser sessions where the classifier did not log in. For all analysis presented here we have assumed that each unregistered browser session contains classifications from a single, unique classifier. 
 
 Subjects within a given Galaxy Zoo sample are chosen randomly for classification, so that the number of independent classifications per galaxy builds up uniformly through the full sample. Once a pre-set classification limit has been reached, the subject is retired from the active classification pool. The initial goal for Galaxy Zoo CANDELS was to obtain at least 40 independent classifications for each galaxy. 
 
-This uniform retirement limit was modified twice during the project. In the first instance, a pre-analysis of the dataset performed when the average number of classifications per galaxy had reached approximately 20 revealed 11,837 subjects where further classification was unlikely to provide any additional information. These subjects were identified with the help of a set of subjects tagged in the Galaxy Zoo Talk software as ``\#toofainttoclassify'' and ``\#FHB'' (which stands for ``Faint Hubble Blob''). Tags in Galaxy Zoo Talk are generally highly incomplete; thus the 204 tagged subjects were used as tracers during a further examination of all subjects in magnitude-surface brightness parameter space. The selection, made from initial photometry, was deliberately conservative, retiring only those subjects where it was clear that the classification vote fractions had converged at all tiers of the classification tree. During this analysis, an additional 1,555 subjects were identified as highly likely to be stars or artifacts and were also retired.
+This uniform retirement limit was modified twice during the project. In the first instance, a pre-analysis of the dataset performed when the average number of classifications per galaxy had reached approximately 20 revealed 11,837 subjects where further classification was unlikely to provide significant additional information. These subjects were identified with the help of a set of subjects tagged in the Galaxy Zoo Talk software as ``\#toofainttoclassify'' and ``\#FHB'' (which stands for ``Faint Hubble Blob''). Tags in Galaxy Zoo Talk are generally highly incomplete; thus the 204 tagged subjects were used as tracers during a further examination of all subjects in magnitude-surface brightness parameter space. The selection, made from initial photometry, was deliberately conservative, retiring only those subjects where it was clear that the classification vote fractions had converged at all tiers of the classification tree. During this analysis, an additional 1,555 subjects were identified as highly likely to be stars or artifacts and were also retired.
 
-The second modification of the retirement limit was implemented 1 year after the project start. At this time, the retirement limit was raised to 80 classifications for all galaxies where at least 20\% of volunteers had answered ``Features or Disk'' to the first question (task T00 in Figure \ref{fig:tree} and Table \ref{table:tree}). This is a higher retirement limit than in previous Galaxy Zoo projects, and it is justified by the increased complexity of the question tree compared to, e.g., Galaxy Zoo 2 \citep{willett13}. The Galaxy Zoo CANDELS question tree has an additional branch level, and the number of volunteers answering a question is typically reduced at each branch point. Thus, 40 classifications at the first question may not be enough to ensure convergence in, for example, task 14, ``How many spiral arms are there?'', a 5th-tier question with 6 possible answers. The increased retirement limit affected 7,402 subjects.
+The second modification of the retirement limit was implemented 1 year after the project start. At this time, the retirement limit was raised to 80 classifications for all galaxies where at least 20\% of classifiers had answered ``features or disk'' to the first question (task T00 in Figure \ref{fig:tree} and Table \ref{table:tree}). This is a higher retirement limit than in previous Galaxy Zoo projects, and it is justified by the increased complexity of the decision tree compared to, e.g., Galaxy Zoo 2 \citep{willett13}. The Galaxy Zoo CANDELS decision tree has an additional branch level, and the number of classifiers answering a question is typically reduced at each branch point. Thus, 40 classifications at the first question may not be enough to ensure convergence in, for example, task 14, ``How many spiral arms are there?'', a 5th-tier task with 6 possible responses. The increased retirement limit affected 7,402 subjects.
 
-Figure \ref{fig:classification_basic_info}a shows the distribution of total classification counts within the sample. The majority of subjects received 40 classifications, but the distribution is asymmetric: there are peaks at $\sim 20$, $40$, and $80$ classifications, consistent with the description above. The Lorenz curve of classifications by volunteers is shown in Figure \ref{fig:classification_basic_info}b. The curve is highly skewed from the $1:1$ line that would be seen if all volunteers contributed the same number of classifications; the top 9\% volunteers contributed 80\% of total classifications. The Gini coefficient for classfications, i.e., the fractional difference in area under the Lorenz curve versus the dashed line, is 0.86. This is typical of past Galaxy Zoo projects and Zooniverse\footnote{zooniverse.org} citizen research projects in general {\notebsm (could cite VOLCROWE CiSE paper here)}. 
+Figure \ref{fig:classification_basic_info}a shows the distribution of total classification counts within the sample. The majority of subjects received 40 classifications, but the distribution is asymmetric: there are peaks at $\sim 20$, $40$, and $80$ classifications, consistent with the description above. The Lorenz curve of classifications is shown in Figure \ref{fig:classification_basic_info}b. The curve is highly skewed from the $1:1$ line that would be seen if all classifiers contributed the same number of classifications; the top 9\% of classifiers contributed 80\% of total classifications. The Gini coefficient for classfications, i.e., the fractional difference in area under the Lorenz curve versus the dashed line, is 0.86. This is typical of past Galaxy Zoo projects and Zooniverse citizen research projects in general \citep{cox15}. 
 
-The values in Figure \ref{fig:classification_basic_info} are raw classification counts; while raw classification counts and vote fractions are certainly useful, we additionally apply a user weighting scheme to classifications to produce a cleaner set of vote fractions for each subject. The user weighting is described in further detail below.
+The values in Figure \ref{fig:classification_basic_info} are raw classification counts; while raw classification counts and vote fractions are certainly useful, we additionally ``clean'' the data with a simple method to identify seriously errant classifiers (most likely from bots), and then apply a classifier weighting scheme to classifications to produce a cleaner set of vote fractions for each subject. Both steps are described in further detail below.
 
+\subsection{Identification and removal of single-answer prolific classifiers}\label{sec:bots}
 
+Only a small number of unresolved sources or sources dominated by an unresolved element (i.e., stars and quasars) are included in the full Galaxy Zoo CANDELS subject sample. Examination of the CANDELS photometric catalogs \citep[][M. Peth et al., in preparation]{galametz13,guo13} shows that less than 12 per cent of subjects have $\stellarity > 0.25$ (a very inclusive cut; a more typical cut on stellarity estimates the number of unresolved sources at less than 3 per cent). If the subjects assigned to a classifier are drawn at random from the subject set, then for any classifier who submits a substantial number of classifications, the chances they will be shown a large fraction of stars is very small. 
 
-\subsection{User Weighting} \label{sec:weighting}
+Even for more common answers to the first task, the chances of a classifier being randomly assigned a highly uniform set of $N$ subjects becomes very small as $N$ becomes large. For example, if the probability of being assigned a ``smooth'' galaxy is $p = 0.9$, the chance of being assigned a subject set of 98 per cent smooth galaxies out of $N > 200$ total is so small that it would likely happen approximately once per billion classifiers, \emph{i.e.}, it is highly unlikely in a project with $\sim 100,000$ classifiers.
 
-% If we're not talking about IBCC then we don't need to distinguish this.
-%\subsubsection{Consensus Weighting}
+Within the raw classifications, a small group of classifiers (86, or less than 0.1 per cent) classified at least 200 subjects \emph{and} gave the same answer to the question in the first task at least 98 per cent of the time. Within this group, 99.6 per cent of classifications were for ``star or artifact'' (from 84 classifiers) and 0.4 per cent were for ``smooth'' (from 2 classifiers). As the chances of any classifier being actually served $> 98$ per cent of subjects with the same intrinsic classification in more than 200 classifications is vanishingly small, these classifiers are most likely bots or are otherwise not actually engaging in the classification task. While these classifications ($6.8$ per cent of the total classifications) would be substantially down-weighted during the classifier weighting process described below, we formally omit them from further analysis and do not include them in the weighting and consensus calculations. The average number of classifications per unique subject after excluding the omitted classifications is 40.4. 
 
-Multiple methods of user weighting have been successfully employed by many different Zooniverse projects {\notebsm \citep{lintott08, bamford09, lintott11, esimpson12, rsimpson12, johnson15, marshall15}}. In general, the optimal choice of user weighting depends on the amount of information available per subject and the goal of the project. In Galaxy Zoo CANDELS the goal is to converge to a classification for each galaxy whilst still allowing for unexpected discoveries, and there is ample information from classifiers but little information on the ``ground truth'', i.e., we do not know what the true intrinsic classification is for even a modest fraction of the sample.
+We did not manually search for classifiers whose inputs are consistent with random or otherwise suspect; these inputs, if they exist, are effectively down-weighed via the consensus-based classifier weighting described below, within which prolific classifiers tend to have very high consistency values.
 
-For these reasons, we adopt an iterative consensus-based weighting method, following previous Galaxy Zoo projects. This weighting scheme effectively identifies the small proportion of classifiers whose contributions are routinely errant compared to other classfiiers (or consistent with random inputs) and downweights their contributions, while preserving the inputs from the vast majority of users.
+\subsection{Classifier Weighting} \label{sec:weighting}
 
-Weights for each user are computed based on a mean consistency factor, \kappamean , which is the average of consistencies for each of that user's classifications. For a given classification $i$ composed of a series of completed tasks $t$ answered about a specific subject, we compare the user's answer to each task with the aggregated classifications of other users of the same subject. Each task has $a_t$ answers from all users, each of which is assigned to one of $N_{r,t}$ possible responses to the task. We define the vote fraction for a particular response $r$ as $f_r \equiv a_r/a_t$, where $a_r$ is the number of positive answers for that response (i.e., the number of classifiers who selected that response out of all possible responses to the task).
+Multiple methods of classifier weighting have been successfully employed by many different Zooniverse projects \citep{lintott08, bamford09, lintott11, rsimpson12, schwamb12,esimpson13, johnson15, marshall16}. In general, the optimal choice of classifier weighting depends on the amount of information available per subject and the goal of the project. In Galaxy Zoo CANDELS the goal is to converge to a classification for each galaxy whilst still allowing for unexpected discoveries, and there is ample information from classifiers but little information on the ``ground truth'', i.e., we do not know what the true intrinsic classification is for even a modest fraction of the sample.
+
+For these reasons, we apply a consensus-based weighting method for the majority of the tasks in the decision tree, informed first by the application of initial weights based on comparison of the classifications in the first task to the stellarity (\stellarity ) parameter from the CANDELS photometric catalogs. Both are described below, in the order in which they are applied.
+
+\subsubsection{Initial weighting based on ``star'' versus ``galaxy'' classifications}
+
+In the initial classification task (T00), we ask classifiers to separate stars from galaxies and identify a galaxy as ``smooth'' or ``features or disk''. Although we have no ``ground truth'' information on the overall morphology of a galaxy, we do have very reliable information on whether the source detected in each image is extended, from the \stellarity\ parameter. We can therefore apply classifier weightings to this task based on whether classifiers typically classify bright stars as ``star or artifact'', and whether they classify extended objects as galaxies (i.e., whether they answer \emph{either} ``smooth'' or ``features or disk'').
+
+We select a sample of bright stars having $F160W < 18.5$ and $\stellarity  > 0.8$ from within the Galaxy Zoo-CANDELS subject set. After manually rejecting 2 subjects which contain a galaxy in the central image position with a bright star nearby or overlapping, the bright-star gold-standard sample contains 263 subjects.
+
+We select a sample of extended sources having $F160W < 25$ and $\stellarity < 0.03$, with further manual removal of images with artifacts and other ``unclassifiable'' sources. We first cleaned this sample by rejecting remaining sources where more than 65 per cent of classifiers had selected the ``star or artifact'' response to task T00, a choice made to favour purity of the extended-source sample over completeness. We additionally rejected 398 artifacts falling below this threshold, leaving a total of 29,996 subjects in the extended-source gold-standard sample. 
+
+Having selected these samples, we then assigned an index $n_s$ to each subject classification from within either gold-standard subject set. For subjects within the bright-star gold-standard set, the classification index was set to $n_s = -1$ if the classifier had \emph{not} marked the subject as ``star or artifact'', and was $n_s = 0$ otherwise. For subjects within the extended-source gold-standard set, the classification index was set to $n_s = -1$ if the classifier had marked the subject as ``star or artifact'', and was set to $n_s = +1$ otherwise.
+
+We then define the index $n_c$ for each classifier as the sum of all their classification indices $n_s$, and the weight for task T00 is assigned based on the classifier index as
+\begin{equation}
+   w_{00}= \left\{
+    \begin{array}{l l}
+      \max \left(1.1^{n_c}, 0.01\right)       & \text{ if } n_c < 0 \\
+      \min \left(1.05^{n_c}, 3 \right) & \text{ if } n_c \geq 0.\\
+    \end{array} \right.
+    \label{eqn-seedweight}
+ \end{equation}
+
+This weighting results in a set of classifier weights between $0.01 < w_{00} < 3$, with classifiers whose classifications are generally ``correct'' being up-weighted and classifiers who are more often ``incorrect'' being down-weighted.  79 per cent of classifiers classified at least 1 subject within either gold-standard subject set; classifiers who did not classify any subjects in the gold-standard subject set have $w_{00} = 1$. Of the classifiers who were included in the weighting, 56 per cent have $w_{00} > 1$, with a mean of $\left< w_{00} \right> = 1.11$. As a last step, the weights are re-normalised so that the sum of weights is equal to the total number of classifications.
+
+Following this initial weighting, we create an initial set of vote fractions for each subject by summing the weighted votes for each task and response, and reporting the vote fractions $f$ for each. We use this as an initial consensus classification catalog in the consensus-based weighting applied to the remaining tasks, described in further detail below.
+
+\subsubsection{Consensus-based classifier weighting}
+
+Following the weighting of task T00 described above, we adopt an iterative consensus-based weighting method for classification tasks T01 through T16. This weighting scheme follows previous Galaxy Zoo projects and effectively identifies the small proportion of classifiers whose contributions are routinely errant compared to other classfiers (or consistent with random inputs) and downweights their contributions, while preserving the inputs from the vast majority of classifiers.
+
+Weights for each classifier are computed based on a mean consistency factor, \kappamean , which is the average of consistencies for each of that classifier's classifications. For a given classification $i$ composed of a series of completed tasks $t$ answered about a specific subject, we compare the classifier's answer to each task with the aggregated classifications of all classifiers of the same subject. Each task has $a_t$ answers from all classifiers, each of which is assigned to one of $N_{r,t}$ possible responses to the task. We define the vote fraction for a particular response $r$ as $f_r \equiv a_r/a_t$, where $a_r$ is the number of positive answers for that response (i.e., the number of classifiers who selected that response out of all possible responses to the task).
 
 For each task that was completed by the classifier in classification $i$, the consistency index $\kappa_r$ for each response $r$ to that task $t$ is 
 \begin{equation}
@@ -453,122 +469,109 @@ For each task that was completed by the classifier in classification $i$, the co
     \end{array} \right.
     \label{eqn-consistency-r}
  \end{equation}
-The consistency for that task, $\kappa_t$, is the average of these indices over all possible responses. For example, if a classifier responded ``Star or Artifact'' to Task T00 for a particular subject, and the overall vote fractions on that task for that subject are $($``Smooth'', ``Features or Disk'', ``Star or Artifact''$) = (0.1, 0.6, 0.3)$, then the user's consistency for Task T00 for this classification is
+The consistency for that task, $\kappa_t$, is the average of these indices over all possible responses. For example, if a classifier answered ``star or artifact'' to Task T00 for a particular subject, and the overall vote fractions on that task for that subject are $($``smooth'', ``features or disk'', ``star or artifact''$) = (0.1, 0.6, 0.3)$, then the classifier's consistency for Task T00 for this classification is
 $$
 \kappa_t = \left[\left(1 - 0.1\right) + \left(1 - 0.6\right) + 0.3\right]/3 = 0.5\overline{3}.
 $$
-In the above example, the user's answer to Task T00 leads to the end of the workflow (Table \ref{table:tree}), so this $\kappa_t$ is also equal to the user's consistency for the overall classification, $\kappa_i$. More generally, the classification consistency is the answer-weighted average of the task consistencies:
+In the above example, the classifier's answer to Task T00 leads to the end of the workflow (Table \ref{table:tree}), so this $\kappa_t$ is also equal to the classifier's consistency for the overall classification, $\kappa_i$. More generally, the classification consistency is the answer-weighted average of the task consistencies:
 \begin{equation}
-\kappa_i = \frac{\sum_t \kappa_t a_t}{\sum_t a_t} ,
+\kappa_i = \frac{\sum\limits_t \kappa_t a_t}{\sum\limits_t a_t} ,
 \label{eqn-consistency-i}
 \end{equation}
-where each sum is over the number of tasks the user completed during the classification.
+where each sum is over the number of tasks the classifier completed during the classification.
 
-Following this calculation for the entire classification database, each user's average consistency is calculated as
+Following this calculation for the entire classification database, each classifier's average consistency is calculated as
 \begin{equation}
-\mkappamean = \frac{1}{N_i} \sum_i \kappa_i .
+\mkappamean = \frac{1}{N_i} \sum\limits_i \kappa_i .
 \label{eqn-consistency-avg}
 \end{equation}
 
-Averaging over a user's individual consistency values for all classifications effectively downweights those contributions from users whose classifications regularly diverge from the consensus whilst preserving the diversity of classifications from volunteers who are \emph{on average} consistent with each other. It also allows for the classifications of skilled volunteers to remain highly weighted even on difficult subjects where the individual consensus is skewed (e.g., if an image is very noisy or if a nearby artifact is distracting to less experienced volunteers). 
+Averaging over a classifier's individual consistency values for all classifications effectively downweights those contributions from classifiers whose classifications regularly diverge from the consensus whilst preserving the diversity of classifications from classifiers who are \emph{on average} consistent with each other. It also allows for the classifications of skilled classifiers to remain highly weighted even on difficult subjects where the individual consensus is skewed (e.g., if an image is very noisy or if a nearby artifact is distracting to less experienced classifiers). 
 
-The user weight is then calculated as 
+The classifier weight is then calculated as 
 \begin{equation}
 w = \min \left(1.0,(\mkappamean / 0.6)^{8.5} \right) ,
 \label{eqn-weight}
 \end{equation}
 a formulation that preserves a uniform weighting for any classifier with $\mkappamean \geq 0.6$ and downweights those with a lower consistency rating.
 
-The weighted consensus classifications are then calculated for each subject by summing the weighted votes for each task and response, and reporting the vote fractions $f$ for each. As the user weights are calculated via comparison with the consensus, which leads to a new consensus, this method can be iterated until the user weights converge to a stable value. 
+The weighted consensus classifications are then calculated for each subject by summing the weighted votes for each task and response between task T01 and T16, and reporting the vote fractions $f$ for each. (Although the classifications for task T00 are included in the computation of the consensus-based weights, the vote fractions for task T00 are not re-computed using the consensus-based weights.) As the classifier weights are calculated via comparison with the consensus, which leads to a new consensus, this method can be iterated until the classifier weights converge to a stable value. 
 
-In practice, the number of iterations required to reach this goal is low \citep[e.g., 3 or less in previous projects;][]{bamford09,willett13}. In Figure \ref{fig:consistencies} we show the distribution of user consistencies after 1, 2 and 3 iterations of the above method. Approximately 3 per cent of users have consistency $\mkappamean < 0.5$ (corresponding to a weight $w \lesssim 0.2$), whereas 85 percent of users have an end weight of $w = 1$. The vast majority of Galaxy Zoo volunteers contribute highly valuable information to the project.
+In practice, the number of iterations required to reach this goal is low \citep[e.g., 3 or less in previous projects;][]{bamford09,willett13}. In Figure \ref{fig:consistencies} we show the distribution of classifier consistencies after 1-5 iterations of the above method, although the difference between iterations 3 through 5 cannot be distinguished within the line weight even in the inset (zoomed) subsection of the figure. Between the 4th and 5th iterations, more than 99 per cent of consistency values varied by less than 0.1 per cent. After 5 iterations, approximately 4 per cent of classifiers have consistency $\mkappamean < 0.5$ (corresponding to a weight $w \lesssim 0.2$), whereas 83 per cent of classifiers have an end weight of $w = 1$. The vast majority of Galaxy Zoo classifiers thus contribute highly valuable information to the project.
 
-%%%%% [FIGURE: Example images] %%%%%
+Figure \ref{fig:exampleclass} shows examples of galaxies with different weighted consensus classifications for several of the tasks described in Table \ref{table:tree} and Figure \ref{fig:tree}. 
+
+%%%%% [FIGURE: classifier Consistencies] %%%%%
 \begin{figure}
-\includegraphics[scale=0.465]{consistencies_iterations.eps}
+\includegraphics[scale=0.625]{consistencies_iterations2.eps}
 \caption{
-Distribution of user consistencies \kappamean\ after 1 (dashed), 2 (dotted), and 3 (solid) iterations of the consistency-based weighting method  (described in Section \ref{sec:weighting}). Convergence of this method requires relatively few iterations: further iterations do not change significantly from the solid curve. Approximately 85 per cent of users have $\mkappamean \geq 0.6$ and weights $w = 1$. 
+Distribution of classifier consistencies \kappamean\ after 1 (black dashed), 2 (black dotted), and 3 or more (black solid) iterations of the consistency-based weighting method (described in Section \ref{sec:weighting}). A portion of the plot is magnified (inset) to show further detail. Convergence of this method requires relatively few iterations, consistent with previous Galaxy Zoo projects. Approximately 83 per cent of classifiers have $\mkappamean \geq 0.6$ and weights $w = 1$. 
 }
 \label{fig:consistencies}
 \end{figure}
 %%%%% END FIGURE %%%%%
 
 
-% Postponing this as the IBCC classifications are a little weird - we need a bigger training set.
-%\subsubsection{IBCC}
-
-
-\subsection{Depth, Surface Brightness, and Classification Bias}\label{sec:biases}
-
-The consistency-based weighting described above ensures the preservation of the way in which the variety of volunteer classifications echoes the confidence level in any individual response, while ensuring expert classifiers remain highly weighted and the very small fraction of errant classifiers are down-weighted.
-
-However, the amount of information available per subject varies: the CANDELS survey takes images at multiple depths, and the galaxies themselves have a wide range of intrinsic brightnesses and distances. Even at a given redshift, the classification of a galaxy depends on both its luminosity and size (i.e., its surface brightness). In particular, as the observed surface brightness of a galaxy decreases it tends to appear more smooth compared to the image noise, decreasing the detection of features \citep{bamford09,willett13}.
-
-Previous Galaxy Zoo projects examining galaxies in the more local Universe have accounted for this bias by using less distant galaxies to determine how to debias the classifications of more distant galaxies as a function of redshift. This is effective under the assumption that the underlying distribution of classifications is invariant with redshift. Clearly this is an inappropriate assumption in the case of a deep \emph{HST} survey such as CANDELS, where 80 per cent of subjects fall within the redshift range $0.25 < z < 3.5$, over which galaxy shapes most certainly evolve.
-
-Despite these challenges, Galaxy Zoo volunteers have proven extremely reliable at classifying features which are visible above some surface brightness detection limit. When the overall surface brightness of a galaxy falls below that limit, the detection of locally more bright features may still be achieved, but in general the classification vote fraction of a galaxy as ``featured'' may be considered a lower limit. We describe below the determination of a surface brightness limit for Galaxy Zoo CANDELS and discuss its implications for usage of the vote fractions.
-
-
-\subsubsection{Surface brightness limits in Galaxy Zoo CANDELS}\label{sec:sb}
-
-We aim to determine empirically the surface brightness threshold above which Galaxy Zoo CANDELS classifications reliably characterise the level of ``features'' present in a galaxy. It is therefore important to choose a subset of galaxies so as to minimise the dependence of a galaxy's ``true'' classification on factors such as distance and luminosity.
-
-We define the observed surface brightness of a galaxy using the magnitude and size reported in the CANDELS photometric catalogs for each field \citep[][Peth et al., in preparation]{guo13,fill_in,later}. Specifically, we use the $F160W$ \textsc{auto} fluxes and the radius containing 80\% of the galaxy light, $r_{80}$, to determine a representative surface brightness for each galaxy. We also use the measured axis ratios $b/a$, dividing the flux by the area contained within an ellipse of area $\pi a_{80} b_{80}$, in square arcseconds. We then convert to magnitudes, resulting in a single surface brightness $\mu_{\textsc{auto}}$ in mag/arcsec$^2$ for each subject. 
-
-We then choose a subset of subjects from the full sample described above within a narrow range of redshifts to minimise evolutionary effects. We use galaxies with $1.1 < z < 1.4$, spanning an evolutionary period of $\sim 1$~Gyr, but note the analysis is insensitive to the specific choice of redshifts so long as the bin spans a similar time period.
-
-Figure \ref{fig:sb_z1} shows the vote fractions for the response ``Features or Disk'' in the first question (task T00) in the decision tree, versus surface brightness. The variation in the distribution of featured classifications with surface brightness is apparent even after disregarding subjects with $\mu_{\textsc{auto}} < 20$~mag/arcsec$^2$, which are typically stars. The right panel of Figure \ref{fig:sb_z1} shows these distributions as cumulative histograms binned by $\Delta \mu_{\textsc{auto}}$. As expected, the distribution of featured vote fractions changes with surface brightness, with all vote fraction distributions being similarly lacking in detected features for observed $\mu_{\textsc{auto}} > 23.0$~mag/arcsec$^2$.  
-
-Therefore, although we report vote fractions for all subjects in the Galaxy Zoo CANDELS catalog, including those with $\mu_{\textsc{auto}} > 23$, we strongly urge caution when using classifications of galaxies fainter than this surface brightness level. Featured vote fractions at surface brightnesses fainter than this may be reasonably considered lower limits, as many features may not be visually apparent. In all subsequent analysis in this paper, we consider only galaxies with $\mu_{\textsc{auto}} < 23.0$ unless otherwise specified. 
-
-
 %%%%% [FIGURE: Example images] %%%%%
 \begin{figure*}
-\includegraphics[scale=0.8]{sb_z1.eps}
+\includegraphics[scale=0.875]{mosaic_inv_with_hists_sm2.png}
 \caption{
-Comparison of subject surface brightnesses and vote fractions for the response ``Features or Disk'' in the first task (T00) of Galaxy Zoo CANDELS for subjects with $1.1 < z < 1.4$. \emph{Left:} 2-D histogram of $f_{\rm features}$ versus $\mu_{\textsc{auto}}$, with shading of each hexagonal bin indicating the number of subjects in that bin. Subjects with  $\mu_{\textsc{auto}} < 20$~mag/arcsec$^2$ are generally point-like sources. The distribution of featured vote fraction is a function of surface brightness. \emph{Right:} Cumulative distributions of $f_{\rm features}$ in bins of surface brightness. Although we note that some of the variations seen are likely due to intrinsic differences in populations at different luminosities, there is a clear and strong change in the distribution at $\mu_{\textsc{auto}} \approx 23.0$. 
+Example (inverted) galaxy images for different consensus classifications of different responses to tasks in the Galaxy Zoo CANDELS classification tree. From top to bottom row, the responses are: Task 00, ``smooth''; Task 00, ``features or disk''; Task 00, ``star or artifact''; Task T02, ``yes'' (Clumpy); Task T09, ``yes'' (Edge-on); Task T12, ``yes'' (Spiral); Task T16, ``merging''. Each image is labelled with the weighted percentage of total votes for that task that were registered for that response, with the weighted vote percentage increasing from left to right. The galaxies were selected after following the suggestions in Section \ref{sec:usage} regarding selection of appropriate samples, including restrictions on votes from earlier branches in the tree (see Figure \ref{fig:tree} for more information on branches). The right-most column shows vote fraction distributions for the task and response in each row, among galaxies where at least 10 answers total were received for that question.
 }
-\label{fig:sb_z1}
+\label{fig:exampleclass}
 \end{figure*}
 %%%%% END FIGURE %%%%%
 
 
 
-%\subsubsection{The effect of image depth on classifications}
 
-%Old words
-%80 per cent of all subjects in Galaxy Zoo CANDELS have redshifts $0.25 < z < 3.5$, over which cosmological distances galaxies of identical luminosities will have observed fluxes that differ by orders of magnitude. The angular diameter distance, meanwhile, varies in a very different way (and indeed does not evolve much beyond $z \sim 1$ compared to the luminosity distance). 
+
 
 
 \subsection{Use of Classifications in Practice}\label{sec:usage}
 
-The branched nature of the decision tree (Figure \ref{fig:tree}) means that selection of a sample of galaxies for a given morphological investigation may depend on a number of factors. For example, it is possible to choose a quantitative threshold for selection of a sample of galaxies with a given feature or combination of features corresponding to one's optimal trade-off between sample completeness and purity. One may also weight a population analysis by the vote fraction for a particular morphological feature (making the assumption that the probability of a galaxy having that feature, or the strength of the feature, is a function of the vote fraction). However, for all tasks below T00 in the tree, it is important to consider the responses to the tasks above that question in this analysis.
+
+%%%%% [FIGURE: Example images] %%%%%
+\begin{figure*}
+\includegraphics[scale=0.46]{pie_candels_mod.eps}
+\caption{
+Distribution of weighted vote fractions for each task in the Galaxy Zoo CANDELS decision tree. Each pie chart shows the distribution of morphologies for the plurality answer for a given task. The plurality answer represents the single most common response to a task --- this may be either above or below 50\%, depending on the number of answers and level of consensus. This plot shows only data for which a question was reliably answered; for example, if the plurality answer for a given galaxy classified it as ``smooth'', no responses for any questions regarding disk or clumpy morphology are considered. 
+}
+\label{fig:pie}
+\end{figure*}
+%%%%% END FIGURE %%%%%
+
+
+
+The branched nature of the decision tree (Figure \ref{fig:tree}) means that selection of a sample of galaxies for a given morphological investigation may depend on a number of factors. For example, it is possible to choose a quantitative threshold for selection of a sample of galaxies with a given feature or combination of features corresponding to one's optimal trade-off between sample completeness and purity. One may also weight a population analysis by the vote fraction for a particular morphological feature \citep[making the assumption that the probability of a galaxy having that feature, or the strength of the feature, is a function of the vote fraction, e.g.,][]{skibba09,smethurst15}. However, for all tasks below T00 in the tree, it is important to consider the responses to the tasks above it in this analysis.
 
 For example, a study with the goal of examining spiral galaxies would ideally use a sample selected by considering the responses to task T12, ``Is there any sign of a spiral arm pattern?'' If a pure sample of galaxies with clear spiral arms is desired, a threshold may be selected at a high vote fraction for $f_{\rm spiral}$. If the threshold considers only this vote fraction, however, the final sample will likely be contaminated by galaxies where the spiral vote fraction is dominated by noise because only a small number of people reached that task (e.g., a warped edge-on disk). 
 
-In order to reach task T12, a user must give specific answers to the questions ``Is the galaxy simply smooth and rounded, with no sign of a disk?'' (T00), ``Does the galaxy have a mostly clumpy appearance?'' (T02), and ``Could this be a disk viewed edge-on?'' Each of these classifications should be considered in the context of the study's goals in order to select as pure a sample as possible whilst minimising contamination and bias.
+In order to reach task T12, a classifier must give specific answers to the questions ``Is the galaxy simply smooth and rounded, with no sign of a disk?'' (T00), ``Does the galaxy have a mostly clumpy appearance?'' (T02), and ``Could this be a disk viewed edge-on?'' (T09). Each of these classifications should be considered in the context of this hypothetical study's goals in order to select as pure a sample as possible whilst minimising contamination and bias.
 
-If a moderately complete sample is desired, for example, the user could select thresholds for the selection such as $f_{\rm features} > 0.5$, $f_{\rm not\ clumpy} > 0.5$, $f_{\rm not\ edge-on} > 0.5$. Because most galaxies with these classifications will have received 80 classifications apiece (Section \ref{sec:rawclass}), these chained thresholds mean the minimum number of volunteers who will have answered the spiral question is $80 \times 0.5^3 = 10$. Higher thresholds will further restrict the minimum number of respondents to the deeper-branched question. If lower thresholds are desired, we recommend that the selection explicitly require a minimum number of respondents to each task. 
+If a moderately complete sample is desired, for example, the user could select thresholds for the selection such as $f_{\rm features} > 0.5$, $f_{\rm not\ clumpy} > 0.5$, $f_{\rm not\ edge-on} > 0.5$. Because most galaxies with these classifications will have received 80 classifications apiece (Section \ref{sec:rawclass}), these chained thresholds mean the minimum number of classifiers who will have answered the spiral question for subjects that are included in the sample is $80 \times 0.5^3 = 10$. Higher thresholds will further increase the minimum number of respondents to the deeper-branched task. If lower thresholds are desired, we recommend that the selection explicitly require a minimum number of respondents to each task. 
 
 There is no single set of thresholds that is ideal for all situations. However, in the data release accompanying this paper, we include ``clean'' selections of galaxies with different morphological features. These are detailed further below, but we additionally encourage users of this rich data set to experiment with different threshold/weight combinations in order to achieve their scientific goals.
 
-\subsection{Data release and ``clean'' samples}
+\subsection{Data release and ``clean'' samples}\label{sec:release}
 
-This paper includes the release of the raw and weighted classifications for each of the $49,555$ subjects in the Galaxy Zoo CANDELS sample. In addition to each raw and weighted vote fraction for each task, we include the raw and weighted number of answers to each task, as well as for the whole galaxy overall. This combines for a total of 136 quantities for each subject, not including the subject ID or any other metadata. Clearly this is too much information to present a sample table in print here. However, the data is structured thusly for each task number $NN$ with $i = {0 {\rm\ to\ } n-1}$ responses:
+This paper includes the release of the raw and weighted classifications for each of the $49,555$ subjects in the Galaxy Zoo CANDELS sample. In addition to each raw and weighted vote fraction for each task, we include the raw and weighted number of answers to each task, as well as the total raw and weighted classifier count for each subject. This combines for a total of 136 quantities for each subject, not including the subject ID or any other metadata. {\notebsm This is too much information to present a meaningful sample table in print here.} The structure of the data for each task number $NN$ with $i = {0 {\rm\ to\ } n-1}$ responses is as follows:
 %oh god it's really late and I just said "thusly"
 
+% THUSLY REMOVED - KWW
+
 \begin{itemize}
-\item[] \small{\tt t[$NN$]\_[quest\_abbrev]\_a[$i$]\_[resp\_abbrev]\_frac} : the raw fraction of users who gave this response. {\tt quest\_abbrev} and {\tt resp\_abbrev} are abbreviated versions of the specific question and response, respectively.
+\item[] \small{\tt t[$NN$]\_[quest\_abbrev]\_a[$i$]\_[resp\_abbrev]\_frac} : the raw fraction of classifiers who gave this response. {\tt quest\_abbrev} and {\tt resp\_abbrev} are abbreviated versions of the specific question and response, respectively.
 
-\item[] \small{\tt t[$NN$]\_[quest\_abbrev]\_a[$i$]\_[resp\_abbrev]\_weighted\_frac} : the weighted fraction of users who gave this response. 
+\item[] \small{\tt t[$NN$]\_[quest\_abbrev]\_a[$i$]\_[resp\_abbrev]\_weighted\_frac} : the weighted fraction of classifiers who gave this response. 
 
-\item[] \small{\tt t[$NN$]\_[quest\_abbrev]\_count} : the raw count of users who responded to this task. 
+\item[] \small{\tt t[$NN$]\_[quest\_abbrev]\_count} : the raw count of classifiers who responded to this task. 
 
-\item[] \small{\tt t[$NN$]\_[quest\_abbrev]\_weight} : the weighted count of users who responded to this task. 
+\item[] \small{\tt t[$NN$]\_[quest\_abbrev]\_weight} : the weighted count of classifiers who responded to this task. 
 
 \end{itemize}
 
-For example, the information available for task T00, which has 3 responses, is structured as:
+For example, the information available for task T00 (which has 3 responses) is structured as:
 
 \begin{itemize}
 \item[] \small{\tt t00\_smooth\_or\_featured\_a0\_smooth\_frac}
@@ -589,26 +592,72 @@ For example, the information available for task T00, which has 3 responses, is s
 
 \end{itemize}
 
-The sum of raw  {\tt \_frac} fractions adds to 1.0, as does the sum of {\tt \_weighted\_frac} fractions. Multiplying the {\tt \_frac} values (raw fractions) by the {\tt \_count} (raw user counts) will retrieve the number of people who gave a specific response; likewise with weighted answer counts from {\tt \_weighted\_frac} and {\tt \_weight}. As the user weighting described in Section \ref{sec:weighting} assigns a weight of $w \leq 1$ to each classifier, the weighted vote count must be less than or equal to the raw vote count. While the raw vote counts and fractions are provided for completeness, we recommend that users of this data set use the weighted fractions and counts.
+The sum of raw  {\tt \_frac} fractions adds to 1.0, as does the sum of {\tt \_weighted\_frac} fractions. Multiplying the {\tt \_frac} values (raw fractions) by the {\tt \_count} (raw classifier counts) will retrieve the number of people who gave a specific answer; likewise with weighted answer counts from {\tt \_weighted\_frac} and {\tt \_weight}. As the consensus-based classifier weighting described in Section \ref{sec:weighting} assigns a weight of $w \leq 1$ to each classifier, the weighted vote count for tasks T01--T16 must be less than or equal to the raw vote count for those tasks. While the raw vote counts and fractions are provided for completeness, we recommend that users of this data set use the weighted fractions and counts.
 
-In addition to the vote fractions for each subject, we provide a set of flags for each subject that indicates its member or non-member status in a ``clean'' sample of galaxies of a specific type. We select separate clean samples of smooth, featured, clumpy, edge-on, and spiral galaxies. These samples contain exemplars of each galaxy type with minimal contamination of the sample, and are correspondingly highly incomplete. They are selected according to the following thresholds using weighted vote fractions:
-
-\begin{itemize}
-
-\item[] \textbf{Smooth} - Task T00: $f_{\rm smooth} > 0.9$, $f_{\rm star\ or\ artifact} < 0.2$
-
-\item[] \textbf{Featured} - Task T00: $f_{\rm features} > 0.9$, $f_{\rm star\ or\ artifact} < 0.2$
-
-\item[] \textbf{Clumpy} - Task T00: $f_{\rm smooth} > 0.9$, $f_{\rm star\ or\ artifact} < 0.2$; Task T02: $f_{\rm clumpy} > 0.8$
-
-\item[] \textbf{Edge-on} - Task T00: $f_{\rm smooth} > 0.9$, $f_{\rm star\ or\ artifact} < 0.2$; Task T02: $f_{\rm not\ clumpy} > 0.5$; Task T09: $f_{\rm edge-on} > 0.7$
-
-\item[] \textbf{Spiral} - Task T00: $f_{\rm smooth} > 0.9$, $f_{\rm star\ or\ artifact} < 0.2$,; Task T02: $f_{\rm not\ clumpy} > 0.5$; Task T09: $f_{\rm not\ edge-on} > 0.7$; Task T12: $f_{\rm spiral} > 0.8$
-
-\end{itemize}
-
+In addition to the vote fractions for each subject, we provide a set of flags for each subject that indicates its member or non-member status in a ``clean'' sample of galaxies of a specific type. We select separate clean samples of smooth, featured, clumpy, edge-on, and spiral galaxies. These samples contain exemplars of each galaxy type with minimal contamination of the sample --- as a result, samples selected with the flags will be highly incomplete, but also highly pure. They are selected according to vote fraction and vote count thresholds given in Table \ref{table:clean}.
 
 We provide these flags for the convenience of the end user, but we additionally encourage those wishing to use Galaxy Zoo classifications to investigate whether a different set of thresholds would be optimal for their own science case.
+
+
+\begin{table}
+ \begin{tabular}{@{}lllr}
+ \hline
+\multicolumn{1}{l}{Clean sample} &
+\multicolumn{1}{c}{Tasks} &
+\multicolumn{1}{c}{Selection} &
+\multicolumn{1}{c}{$N_{\rm sample}$}
+\\ 
+\hline
+\hline
+\textbf{Smooth} & T00 & $f_{\rm smooth} \geq 0.8$ & 6770\\ \hline
+\textbf{Featured} & T00 & $f_{\rm features} \geq 0.7$ & 312\\ \hline
+\textbf{Clumpy} & \parbox[t]{0.75cm}{T00\\T02\\T16} & \parbox[t]{3.5cm}{$f_{\rm features} \geq 0.4$\\$f_{\rm clumpy} \geq 0.7$, $N_{\rm T02} \geq 10$\\$f_{\rm neither} \geq 0.25$} & 333\\ \hline
+\textbf{Edge-on} & \parbox[t]{0.75cm}{T00\\T02\\T09} & \parbox[t]{3.5cm}{$f_{\rm features} \geq 0.4$\\$f_{\rm not\ clumpy} \geq 0.3$\\$f_{\rm edge-on} > 0.7$, $N_{\rm T09} \geq 10$} & 223\\ \hline
+\textbf{Spiral}  & \parbox[t]{0.75cm}{T00\\T02\\T09\\T12} & \parbox[t]{3.5cm}{$f_{\rm features} \geq 0.4$\\$f_{\rm not\ clumpy} \geq 0.3$\\$f_{\rm not\ edge-on} \geq 0.5$\\$f_{\rm spiral} \geq 0.8$, $N_{\rm T12} \geq 10$} & 383\\ \hline
+ \end{tabular}
+ \caption{Clean samples, designated in the Galaxy Zoo CANDELS weighted classification catalog with flags. Each sample is selected using criteria from at least 1 task in the decision tree (Figure \ref{fig:tree} and Table \ref{table:tree}); samples selecting for features characterised in lower branches of the tree include selection criteria on dependent tasks. The selection for the Clumpy clean sample also includes a rejection of subjects having a substantial fraction of classifications for ``merging'', ``tidal debris'', or ``both''. The Clean samples are relatively free from contaminants, and are correspondingly incomplete.
+\label{table:clean}}
+\end{table}
+
+
+
+\subsection{Depth Corrections}\label{sec:depth}
+
+
+%%%%% [FIGURE: Depth Corrections] %%%%%
+\begin{figure*}
+\includegraphics[scale=0.5]{depthcorr_plane_2d_t00.png}
+\caption{
+Depth corrections to classifications for individual responses to task T00: ``smooth'' (top row), ``features or disk'' (middle row), and ``star or artifact'' (bottom row). The change in classification ($\Delta f$) between the deep- and wide-field-depth observations of the same subjects is fit as a function of deep-field-depth morphology (vote fraction $f$, left column) and galaxy characteristic surface brightness (\musb , middle column) . Each point is a subject which received at least 10 responses within the task. The best-fit plane is shown in projection (blue line) in the right-hand column. 
+%Fits were performed only for tasks where at least 75 subjects had 10 or more responses to the task; otherwise the correction is assumed to be 0. 
+}
+\label{fig:depthcorr}
+\end{figure*}
+%%%%% END FIGURE %%%%%
+
+
+
+As outlined in Section \ref{sec:images}, the depth of the CANDELS survey varies substantially between two types of fields, from shallower ``wide'' fields with $\sim 1$ orbit depth in $F160W$ to ``deep'' fields with $\gtrsim 4$ times the overall depth of the wide fields. 
+
+Because different morphological signatures have different characteristic surface brightnesses and light profiles (e.g. clumps, tidal signatures, spheroids, disks), we expect the morphological classifications of subjects to vary somewhat based on the imaging depth. For a survey such as CANDELS that is already relatively deep, we expect this effect to generally be small, but nevertheless using classifications based on imaging from both the wide and deep fields could complicate some scientific inquiries.
+
+To measure and correct for this, shallower (2-epoch) images of a sub-sample of ``deep'' subjects were created and added to the active subject sets. These images (from 2,518 subjects in the GOODS-South deep field; hereafter the ``measured-correction'' subset) are of comparable depth to the wide fields. Below we describe how comparison of the shallower and deeper weighted consensus classifications of these subjects allows us to determine typical depth corrections to all deep-field subject morphologies as a function of deep-exposure morphology and galaxy surface brightness.
+
+We define the observed surface brightness of a galaxy using the magnitude and size reported in the CANDELS photometric catalogs for each field. Specifically, we use the $F160W$ \textsc{auto} fluxes and the radius containing 80\% of the galaxy light, $r_{80}$, to determine a representative surface brightness for each galaxy. We also use the measured axis ratios $b/a$, dividing the flux by the area contained within an ellipse of area $\pi a_{80} b_{80}$, in square arcseconds. We then convert to magnitudes, resulting in a single surface brightness \musb\ in mag/arcsec$^2$ for each subject.
+
+Figure \ref{fig:depthcorr} shows the difference between shallower and deeper weighted consensus classifications as a function of surface brightness and deep-exposure morphology for the initial task in the classification tree, T00. When determining depth corrections for each task, we consider subjects which received more than 10 answers to the question presented by the task, and we also remove 42 bright stars with $\mmusb > 17$ (the mean weighted ``star or artifact'' vote fraction for these is $f_{\rm artifact} = 0.89$). For tasks T01-T16, we additionally remove subjects with $f_{\rm artifact} \geq 0.5$. We then determine a best-fit plane to the change in vote fraction, $\Delta f_r \equiv f_{\rm shallow} - f_{\rm deep}$, for each response as a function of galaxy surface brightness and the vote fraction $f_{r, \rm\ deep}$ for the deep-exposure image. 
+% Turns out this wasn't the case for any of the tasks in the end
+%If fewer than 75 subjects received at least 10 responses to a particular question, the correction is assumed to be 0 for that task.
+
+In general, the correction to the vote fraction is a stronger function of the vote fraction than of the surface brightness, though most corrections do depend on both. For example, the correction $\Delta f_{\rm features}$ (middle panel of Figure \ref{fig:depthcorr}) is clearly a linear function of the deep-exposure vote fraction $f_{\rm features}$, such that highly ``featured'' galaxies tend to have lower featured vote fractions in the shallower images (as expected), with a slight turnover at $f_{\rm features} > 0.9$ indicating that such strongly featured galaxies are still identifiable as featured even at shallower depth. The $\Delta f_{\rm features}-\mmusb$ relation is nearly flat, but the scatter is higher for lower surface-brightness galaxies. As expected, for very bright galaxies the change in depth makes little difference to the classification, whereas for fainter galaxies the change depends more on details of features that vary from galaxy to galaxy. It is therefore important to note that the best-fit corrections (right column of Figure \ref{fig:depthcorr}) are average values across the whole sample and can be highly uncertain for an individual galaxy.
+
+The best-fit planes for each response to each task can be used to predict the wide-field depth classifications for galaxies in the deep fields, both in this paper and in future releases of Galaxy Zoo-CANDELS data.  For the 8,130 subjects with $F160W$ limiting magnitudes at least as faint as the brightest limiting magnitude in the measured-correction subset ($F160W = 28.26$) but for which we do not also have separate wide-field depth classifications, we use their vote fractions for each task and response, $f_r$, and their surface brightnesses \musb , to interpolate corrections $\Delta f_r$ along the best-fit plane for each task and response. Where a $\left( f_r, \mmusb \right)$ pair is outside the area defined by the data (points in each panel of Figure \ref{fig:depthcorr}), we assume the correction is equal to the value of the correction at the nearest boundary defined by the projection of the data in the measured-correction subset onto the best-fit plane (that is, we do not extrapolate). 
+
+In addition to the release of classification data described in Section \ref{sec:release} above, we additionally present these ``corrected'', weighted classifications for each of the 8,130 subjects with deep exposures but for which we do not also have separate wide-field depth classifications, as well as the measured wide-field depth classifications for the measured-correction subset, for a total of 10,648 morphological classifications of deep-field subjects corrected to the wide-field average depth.
+
+For these subjects, the wide-field depth classifications are given in a separate table in the data release and labelled in the data catalogs as described in Section \ref{sec:release}, except with an additional {\small \tt \_deepcorr} added to each relevant weighted-classification column. For example, the wide-field vote fraction for classifiers indicating an answer of `Features or Disk' to Task T00 is labelled {\small \tt t00\_smooth\_or\_featured\_a0\_smooth\_weighted\_frac\_deepcorr}, which is depth-corrected from the deep-exposure classification indicated in the {\small \tt t00\_smooth\_or\_featured\_a0\_smooth\_weighted\_frac} column. For those investigating science questions where it is advantageous to consider classifications from images of comparable depth across an entire sample, we recommend using the {\small \tt \_deepcorr} classifications for subjects in the ``deep'' fields.
+
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
@@ -618,94 +667,139 @@ We provide these flags for the convenience of the end user, but we additionally 
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-Most of the galaxies in the CANDELS data set have additional visual classifications available in the form of expert classifications from astronomers and students who are members of the CANDELS team. Analysis of the full set of classifications in that separate project is still underway; the first release of classifications from the GOODS-South field is presented by \citet{kartaltepe14}, hereafter K14, who also detail the project design and objectives, including the classification interface. Consensus classifications from the UDS field are also available {\notebsm (Kartaltepe et al., in preparation)}. For each galaxy in all fields, between 3 and 7 (typically 3) members of the CANDELS team provided classifications.
+Most of the galaxies in the CANDELS data set have additional visual classifications available in the form of expert classifications from astronomers and students who are members of the CANDELS team. Analysis of the full set of classifications in that separate project is still underway; the first release of classifications from the GOODS-South field is presented by \citet{kartaltepe15}, hereafter K15, who also detail the project design and objectives, including the classification interface. Consensus classifications from the UDS field are also available {\notebsm (Kartaltepe et al., in preparation)}. For each galaxy in all fields, between 3 and 7 (typically 3) members of the CANDELS team provided classifications.
 
-The classification scheme described in K14 is substantially different to that presented here. Firstly, while that project collects detailed classifications about a number of possible structural features (with 37 different responses possible), they do not always align precisely with the questions asked in Galaxy Zoo CANDELS. For example, the Main Morphology Class of K14 requires the user to select at least one option from among ``Disk'', ``Spheroid'', and ``Peculiar/Irregular'' galaxy types, along with options for ``Point Source/Compact'' and ``Unclassifiable''. The last of these is not an option Galaxy Zoo provides, and the first two are not necessarily the same as task T00's responses of ``Features or Disk'' versus ``Smooth''. While Galaxy Zoo does ask about bulges, it does so after multiple branches of the decision tree, and therefore this is not easily comparable to a 1st-tier question.
+The classification scheme described in K15 is substantially different to that presented here. Firstly, while that project collects detailed classifications about a number of possible structural features (with 37 different responses possible), they do not always align precisely with the questions asked in Galaxy Zoo CANDELS. For example, the Main Morphology Class of K15 requires the classifier to select at least one option from among ``disk'', ``spheroid'', and ``peculiar/irregular'' galaxy types, along with options for ``point source/compact'' and ``unclassifiable''. The last of these is not an option Galaxy Zoo provides, and the first two are not necessarily the same as task T00's responses of ``features'' versus ``smooth'' \citep[note: this also means we cannot compare to the machine classifications of][as there are no categories in that study that translate to the measurements made by Galaxy Zoo volunteers]{huertascompany15}. While Galaxy Zoo does classify bulge strength, it does so after multiple branches of the decision tree, and therefore this is not easily comparable to a first-tier task.
 
-In fact, \emph{all} responses collected by the CANDELS team interface are 1st-tier questions: the user is presented with all 37 options at once. Additionally, colour composites are not used in that project. Images from each ACS and WFC3 filter are presented separately within the interface, with options for the user to specify when classifications differ significantly between filters. Users may also view the segmentation map in the $F160W$ band, and in the Perl/DS9 version of the CANDELS team interface the user may adjust the stretch of the image. These options are not available to Galaxy Zoo volunteers. On the other hand, the Galaxy Zoo decision tree asks multiple questions designed to elucidate the spatial configuration of clumps in a galaxy, whereas the CANDELS team interface instead requests a clumpiness rating and makes a distinction between patchiness and clumpiness. 
+In fact, \emph{all} responses collected by the CANDELS team interface are first-tier tasks: the classifier is presented with all 37 options at once. Additionally, colour composites are not used in that project. Images from each ACS and WFC3 filter are presented separately within the interface, with options for the classifier to specify when classifications differ significantly between filters. Classifers may also view the segmentation map in the $F160W$ band, and in the Perl/DS9 version of the CANDELS team interface the classifier may adjust the stretch of the image. These options are not available to Galaxy Zoo classifiers. On the other hand, the Galaxy Zoo decision tree asks multiple questions designed to elucidate the spatial configuration of clumps in a galaxy, whereas the CANDELS team interface instead requests a clumpiness rating and makes a distinction between patchiness and clumpiness. 
 
-Despite these significant differences, it is nevertheless helpful to compare the CANDELS team classifications to the Galaxy Zoo CANDELS classifications. Figure \ref{fig:candels_compare} shows the comparison of vote fractions in four categories: Featured, Merger or Interaction, Edge-On, and Spiral. For all comparisons below we have compared the subset of sources in CANDELS above the surface brightness limit 
-$\mu_{\textsc{auto}} < 24.2$
+Despite these significant differences, it is nevertheless helpful to compare the CANDELS team classifications to the Galaxy Zoo CANDELS classifications. There are 15,383 Galaxy Zoo CANDELS subjects which also have classifications from the CANDELS team. Figure \ref{fig:candels_compare} shows the comparison of vote fractions in four categories: Featured, Merger or Interaction, Edge-On, and Spiral. For all comparisons below we have compared the subset of CANDELS sources that: are brighter than the surface brightness limit $\mmusb < 24.5$, have visual classifications from both teams, have \emph{not} been deemed ``unclassifiable'' by the CANDELS team ($f_{\rm unc,~\textsc{ct}} < 0.3$), and have \emph{not} been rejected as stars or artifacts by more than 50\% of classifiers for either project. This selection results in a sample of 13,145 galaxies. The surface brightness limit is chosen to favour inclusiveness. While this choice adds somewhat to the noise seen in each panel in Figure \ref{fig:candels_compare}, we do not expect it to bias the correlations, as each classification project uses visual classifications of the same data so should be equally affected (or unaffected) by surface brightness issues.
 %described in Section \ref{sec:sb} 
-which have visual classifications from both teams, which have \emph{not} been deemed ``unclassifiable'' by the CANDELS team, and which have \emph{not} been rejected as stars or artifacts by more than 50\% of classifiers for either project. The surface brightness limit is deliberately fainter than that described in Section \ref{sec:sb} to favour inclusiveness. While this adds to the noise seen in each panel in Figure \ref{fig:candels_compare}, we do not expect it to bias the correlations, as each classification project uses visual classifications of the same data so should be equally affected (or unaffected) by surface brightness issues.
   
-%%%%% [FIGURE: Example images] %%%%%
+%%%%% [FIGURE: CANDELS and GZ Comparisons] %%%%%
 \begin{figure*}
-\includegraphics[scale=0.65]{gzteam_candelsteam_multiplot_compare2.eps}
+\includegraphics[scale=0.65]{gzteam_candelsteam_multiplot_compareboth.eps}
 \caption{
-Comparison of Galaxy Zoo classifications with visual classifications from the CANDELS team \citep[][K14]{kartaltepe14}. The classification questions differ between the two projects, but we have selected 4 different classifications which are the most similar: (a) the sum of vote fractions in K14 for spiral, bar, and clumpy features, versus the Galaxy Zoo vote fraction for ``Features or Disk'' in task T00. Note that the sum of these vote fractions from K14 can add to $> 1$; (b) vote fractions for merger or interactions (task T16 in the Galaxy Zoo decision tree) for those subjects not identified as ``Star or Artifact'' in task T00; (c) vote fractions for the presence of an edge-on disk (task T09) for subjects that are neither artifacts nor predominantly smooth, nor dominated by clumps; and (d) vote fractions for the presence of spiral arms (task T12) for those subjects in panel (c) that are not edge-on. In all panels, the number of individual galaxies in a given hexagon in parameter space is shown by its shaded value. Red squares show the median Galaxy Zoo vote fraction and within a given K14 vote fraction bin; error bars show the interquartile region (from the 25th to 75th percentile). The different visual classification methods track each other well across many different kinds of structural classification.
+Comparison of Galaxy Zoo classifications with visual classifications from the CANDELS team \citep[][K15]{kartaltepe15}. The classification questions differ between the two projects, but we have selected 4 different classifications which are the most similar: (a) the sum of vote fractions in K15 for spiral, bar, and clumpy features, versus the Galaxy Zoo vote fraction for ``features or disk'' in task T00. Note that the sum of these vote fractions from K15 can add to $> 1$; (b) vote fractions for merger or interactions (task T16 in the Galaxy Zoo decision tree) for those subjects not identified as ``star or artifact'' in task T00; (c) vote fractions for the presence of an edge-on disk (task T09) for subjects that are neither artifacts nor predominantly smooth, nor dominated by clumps; and (d) vote fractions for the presence of spiral arms (task T12) for those subjects in panel (c) that are not edge-on. In all panels, the number of individual galaxies in a given hexagon in parameter space is shown by its shaded value. Red squares show the average Galaxy Zoo vote fraction binned by CANDELS team classification; Blue circles show the average CANDELS team classification in bins of Galaxy Zoo vote fraction. Error bars on red and blue points show the region enclosing the middle 68 per cent of values in that bin. The different visual classification methods track each other well across many different kinds of structural classification.
 }
 \label{fig:candels_compare}
 \end{figure*}
 %%%%% END FIGURE %%%%%
 
-\subsection{Featured Galaxies}
+% Pearson r values
+%In [282]: print("%.4f %.2e (%d subjects)\n" % (featured_r, featured_p, len(featured[0])))
+%0.5679 0.00e+00 (13145 subjects)
+%
+%In [283]: print("%.4f %.2e (%d subjects)\n" % (merger_r, merger_p, len(merger_or_interacting[0])))
+%0.6717 0.00e+00 (13145 subjects)
+%
+%In [284]: print("%.4f %.2e (%d subjects)\n" % (edge_on_r, edge_on_p, len(edge_on[0])))
+%0.7771 0.00e+00 (1611 subjects)
+%
+%In [285]: print("%.4f %.2e (%d subjects)\n" % (spiral_r, spiral_p, len(spiral[0])))
+%0.6095 3.64e-122 (1192 subjects)
 
-We seek to compare the overall classification of CANDELS galaxies as ``smooth'' or ``featured'' between Galaxy Zoo and the CANDELS team. However, the team interface described in K14 does not specifically ask about this distinction. It does ask about disks and spheroids; however, equating ``smooth'' to ``spheroid'' and ``featured'' to ``disk'' requires assumptions about galaxies at $z > 1$ that we would prefer to avoid.
+% Spearman r values
+%In [299]: spearmanr(featured[0], featured[1])
+%Out[299]: (0.44550532412648242, 0.0)
+%
+%In [300]: spearmanr(merger_or_interacting[0], merger_or_interacting[1])
+%Out[300]: (0.66843746334447618, 0.0)
+%
+%In [301]: spearmanr(edge_on[0], edge_on[1])
+%Out[301]: (0.7192386952518216, 9.0519935179250988e-257)
+%
+%In [302]: spearmanr(spiral[0], spiral[1])
+%Out[302]: (0.61284675890750606, 7.6620130174538219e-124)
+%
+% i.e. very significant correlations in all cases, unsurprisingly
 
-We therefore compare the ``Features or Disk'' vote fraction for T00 in Galaxy Zoo CANDELS to a combination of vote fractions from the CANDELS team classifications. We choose a set of structures that are unambigously inconsistent with a smooth light distribution in a galaxy, namely spiral arms, clumps, and bar features. 
 
-Within the CANDELS team classification interface, a user may indicate the presence of a bar or spiral arms by selecting one response for each, $f_{\rm bar, \textsc{ct}}$ or $f_{\rm spiral, \textsc{ct}}$. The clumpy classification, however, is actually a rating of both ``clumpiness'' and ``patchiness'', in a $3 \times 3$ grid with ratings from 0 to 2 along each axis. According to K14, ``Clumps are concentrated independent knots of light while patches are more diffuse structures.'' Both are distinct from a smooth light distribution, so we include both in the creation of a ``featured'' vote for the CANDELS team classifications.
+\subsection{Featured Galaxies}\label{sec:compare_featured}
 
-We follow an approach similar to \citet{guo14} in combining clumpy classifications within this matrix of possible responses. Each vote is weighted by the strength of features that it indicates, by assigning a weight of 0.25 for each level along each axis. For a clumpiness rating $i$ and a patchiness rating $j$, the weight for that vote fraction is $$w_{ij} = 0.25 (i + j) .$$ For example, the weight for $C_1 P_2$ = 0.75. As the maximum value within the selection matrix is  $C_2 P_2$, the maximum weight is 1. The overall clumpy vote fraction for a given object is then $$f_{\rm clumpy, \textsc{ct}} = \sum_i{\sum_j{w_{ij} f_{ij}}} .$$ We note that users may make multiple selections within the clumpiness/patchiness rating matrix, so the weighted, summed vote fraction $f_{\rm clumpy}$ can in principle exceed 1.
+We seek to compare the overall classification of CANDELS galaxies as ``smooth'' or ``featured'' between Galaxy Zoo and the CANDELS team. However, the team interface described in K15 does not specifically ask about this distinction. It does ask about disks and spheroids; however, equating ``smooth'' to ``spheroid'' and ``featured'' to ``disk'' requires assumptions about galaxies at $z > 1$ that we would prefer to avoid (see Section \ref{sec:result} for a discussion of ``smooth'' disks).
 
-Figure \ref{fig:candels_compare}a shows the summed ``featured'' vote fraction for the CANDELS team, $f_{\rm bar, \textsc{ct}} + f_{\rm spiral, \textsc{ct}} + f_{\rm clumpy, \textsc{ct}}$, versus the Galaxy Zoo vote fraction for the response ``Features or Disk'' to task T00, for the 13,195 galaxies that have been classified by both and that meet the surface-brightness and other criteria described at the start of Section \ref{sec:comparison}. The figure shows the 2-D histogram via hexagonal shading, indicating that in both projects a high vote for features of any kind is relatively rare (most galaxies have $f_{\rm features} \sim 0$ and $f_{\rm features, \textsc{ct}} \sim 0$). 
+We therefore compare the ``featured'' vote fraction for T00 in Galaxy Zoo CANDELS to a combination of vote fractions from the CANDELS team classifications. We choose a set of structures that are unambigously inconsistent with a smooth light distribution in a galaxy, namely spiral arms, clumps, and bar features. 
 
-The featured vote fractions track each other well, with a clear correlation shown by the red points indicating the median Galaxy Zoo vote fraction within equal-sized bins of the CANDELS team vote fraction. There are virtually no galaxies for which the CANDELS team voted strongly for features being present but the Galaxy Zoo volunteers did not. It is also rare for the Galaxy Zoo volunteers to find a proportionally higher vote fraction for features than the CANDELS team, although the few examples seen in this parameter space may contain examples of distraction bias in a classification interface that presents dozens of choices simultaneously. This is clearly a small effect, however: on the whole the classifications agree very well with each other.
-% correlation coefficient 0.5688
+Within the CANDELS team classification interface, a classifier may indicate the presence of a bar or spiral arms by selecting one response for each, $f_{\rm bar, \textsc{ct}}$ or $f_{\rm spiral, \textsc{ct}}$. The clumpy classification, however, is actually a rating of both ``clumpiness'' and ``patchiness'', in a $3 \times 3$ grid with ratings from 0 to 2 along each axis. According to K15, ``Clumps are concentrated independent knots of light while patches are more diffuse structures.'' Both are distinct from a smooth light distribution, so we include both in the creation of a ``featured'' vote for the CANDELS team classifications.
+
+We follow an approach similar to \citet{guo15} in combining clumpy classifications within this matrix of possible responses, modifying it to include clumpiness and patchiness in the same metric. Each vote is weighted by the strength of features that it indicates, by assigning a weight of 0.25 for each level along each axis. For a clumpiness rating $i$ and a patchiness rating $j$, the weight for that vote fraction is $$w_{ij} = 0.25 (i + j) .$$ For example, the weight for $C_1 P_2$ = 0.75. As the maximum value within the selection matrix is  $C_2 P_2$, the maximum weight is 1. The overall clumpy vote fraction for a given object is then $$f_{\rm clumpy, \textsc{ct}} = \sum_i{\sum_j{w_{ij} f_{ij}}} .$$ We note that classifiers may make multiple selections within the clumpiness/patchiness rating matrix, so the weighted, summed vote fraction $f_{\rm clumpy}$ can in principle exceed 1.
+
+Figure \ref{fig:candels_compare}a shows the summed ``featured'' vote fraction for the CANDELS team, $f_{\rm bar, \textsc{ct}} + f_{\rm spiral, \textsc{ct}} + f_{\rm clumpy, \textsc{ct}}$, versus the Galaxy Zoo vote fraction for the response ``features or disk'' to task T00, for the 13,145 galaxies that have been classified by both and that meet the surface brightness and other criteria described at the start of Section \ref{sec:comparison}. Figure~\ref{fig:candels_compare} shows the 2-D histogram via hexagonal shading, indicating that in both projects a high vote for features of any kind is relatively rare (most galaxies have $f_{\rm features} \sim 0$ and $f_{\rm features, \textsc{ct}} \sim 0$). 
+
+The featured vote fractions track each other well, with a clear and highly significant positive correlation (Spearman $\rho = 0.45$, $p < 2 \times 10^{-16}$\footnote[\dagger]{The reported $p$ value was precisely $0.0$, indicating a value consistent with zero within machine precision, i.e., highly significant.}). To guide the eye, Figure \ref{fig:candels_compare} also shows binned averages: blue circles show the average CANDELS team classification in equal-sized bins of Galaxy Zoo vote fraction, while red squares show the average Galaxy Zoo classification binned by CANDELS team classification. 
+
+There are virtually no galaxies for which the CANDELS team voted strongly for features being present but the Galaxy Zoo classifiers did not. It is also rare for the Galaxy Zoo classifiers to find a proportionally higher vote fraction for features than the CANDELS team, although the few examples seen in this parameter space may contain examples of distraction bias in a classification interface that presents dozens of choices simultaneously \citep[e.g.,][]{simons99,iyengar00}. This is clearly a small effect, however: on the whole the classifications agree very well with each other.
+
 
 
 \subsection{Merging or Interacting Galaxies}
 
-The last task (T16) in the Galaxy Zoo decision tree asks whether the user sees evidence of a merger, or of tidal interaction, or both, or neither. The CANDELS team Interaction Class asks the user to decide whether the galaxy is a merger, or whether there is interaction within the segmentation map, or outside of it, with an additional option for a non-interacting companion. There is also a separate flag within the CANDELS team classification to indicate whether a galaxy has tidal arms. Because these selections between projects are similar but not exactly the same, we choose to compare the sum of all signs of interaction of any kind within both projects. Specifically, we consider the sum of vote fractions within the CANDELS team classifications for ``Merger'', ``Interaction within Segmap'',  ``Interaction beyond Segmap'', and ``Tidal Arms'', while for Galaxy Zoo we consider the sum of vote fractions for ``Merger'', ``Tidal Interaction'', or ``Both''. Given this selection, the maximum value for the combined CANDELS team vote is 2, whereas for Galaxy Zoo the maximum vote fraction is 1.
+The final classification task (T16) in the Galaxy Zoo decision tree asks whether the classifier sees evidence of a merger, or of tidal interaction, or both, or neither. The CANDELS team Interaction Class asks the classifier to decide whether the galaxy is a merger, or whether there is interaction within the segmentation map, or outside of it, with an additional option for a non-interacting companion. There is also a separate flag within the CANDELS team classification to indicate whether a galaxy has tidal arms. Because these selections between projects are similar but not exactly the same, we choose to compare the sum of all signs of interaction of any kind within both projects. Specifically, we consider the sum of vote fractions within the CANDELS team classifications for ``merger'', ``interaction within segmap'',  ``interaction beyond segmap'', and ``tidal arms'', while for Galaxy Zoo we consider the sum of vote fractions for ``merging'', ``tidal debris'', or ``both''. Given this selection, the maximum value for the combined CANDELS team vote is 2, whereas for Galaxy Zoo the maximum vote fraction is 1.
 
-Figure \ref{fig:candels_compare}b compares these fractions for each galaxy in the same way as Figure \ref{fig:candels_compare}a, with darker shaded bins representing a higher number of galaxies within that bin, and with red squares indicating the median Galaxy Zoo vote fraction within a given range of vote fractions for the CANDELS team. The striations seen in the figure reflect the finite number of possible vote fractions within the CANDELS team votes; this structure was not seen in Figure \ref{fig:candels_compare}a due to the weighted combination of clumpy vote fractions. 
+Figure \ref{fig:candels_compare}b compares these fractions for each galaxy in the same way and using the same sample as Figure \ref{fig:candels_compare}a, with darker shaded bins representing a higher number of galaxies within that bin, and with red squares and blue circles indicating averages of one classification binned by the other, as described in Section \ref{sec:compare_featured} above. The striations seen in the hexagonal bins reflect the finite number of possible vote fractions within the CANDELS team votes; this structure was not seen in Figure \ref{fig:candels_compare}a due to the weighted combination of clumpy vote fractions. 
 
-The majority of images received 3 independent classifications each by the CANDELS team, and thus the majority of vote fractions fall within fractions of thirds. We therefore choose asymmetric bins within which to calculate median Galaxy Zoo vote fractions, with the aim of minimising the spread in source counts per bin: bins falling in increments of thirds include only sources with those exact CANDELS team vote fractions, and each bin between those values covers every other value. We adopt this binning strategy in Figures \ref{fig:candels_compare}c and d as well.
+%The majority of subjects received 3 independent classifications each by the CANDELS team, and thus the majority of vote fractions fall within fractions of thirds. We therefore choose asymmetric bins within which to calculate average Galaxy Zoo vote fractions, with the aim of minimising the spread in source counts per bin: bins falling in increments of thirds include only sources with those exact CANDELS team vote fractions, and each bin between those values covers every other value. We adopt this binning strategy in Figures \ref{fig:candels_compare}c and d as well.
 
-Although Galaxy Zoo and the CANDELS team measure different aspects of mergers differently, in combination the merger/interaction vote fractions clearly correlate. As in the comparison between overall featured fractions, there are more examples where the Galaxy Zoo vote fraction is notably higher than the CANDELS team vote fraction than vice-versa. Examination of galaxies where Galaxy Zoo $f_{\rm merger\ or\ interaction} > 0.5$ and CANDELS team $f_{\rm merger\ or\ interaction, \textsc{ct}} = 0$ indicates some cases where a merger or tidal feature is clearly present, but others where it is less obvious whether a nearby companion is interacting. 
+Although Galaxy Zoo and the CANDELS team measure different aspects of mergers differently, in combination the merger/interaction vote fractions clearly correlate ($\rho = 0.67$, $p < 2 \times 10^{-16}$). As in the comparison between overall featured fractions, there are more examples where the Galaxy Zoo vote fraction is notably higher than the CANDELS team vote fraction than vice-versa. Examination of galaxies where Galaxy Zoo $f_{\rm merger\ or\ interaction} > 0.5$ and CANDELS team $f_{\rm merger\ or\ interaction, \textsc{ct}} = 0$ indicates some cases where a merger or tidal feature is clearly present, but others where it is less obvious whether a nearby companion is interacting. 
 
-Indeed, among this sample the CANDELS team vote fraction for ``Non-Interacting Companion'' is considerably higher on average than for the overall sample. This option is not explicitly available to Galaxy Zoo volunteers, although even moderately experienced users, particularly those who participate in discussions within the community Talk software, will in general select ``Neither'' if they decide the companion is not interacting. This explains why the number of galaxies showing this mismatch is much smaller (less than 2\% of the sample) than the overall number of galaxies which CANDELS team classifications mark as having a non-interacting companion. Future analyses of mergers and interacting galaxies may find a combination of Galaxy Zoo and CANDELS team classifications useful for eliminating the effects of distraction bias and distinguishing between interacting and non-interacting companions.
+Indeed, among this sub-sample the CANDELS team vote fraction for ``non-interacting companion'' is considerably higher on average than for the overall sample. This option is not explicitly available to Galaxy Zoo classifiers, although even moderately experienced classifiers, particularly those who participate in discussions within the community Talk software, will in general select ``neither'' if they decide the companion is not interacting. This explains why the number of galaxies showing this mismatch is much smaller (less than 2\% of the sample) than the overall number of galaxies which CANDELS team classifications mark as having a non-interacting companion. Future analyses of mergers and interacting galaxies may find a combination of Galaxy Zoo and CANDELS team classifications useful for eliminating the effects of distraction bias and distinguishing between interacting and non-interacting companions.
 
-% correlation coefficient 0.6645
+
 
 \subsection{Edge-On Galaxies}
 
-As described in Section \ref{sec:usage}, the branched nature of the Galaxy Zoo decision tree means that selecting a sample for comparison of edge-on vote fraction requires care. We thus consider, in addition to the previous sample requirements, that a galaxy must also have a featured vote fraction $f_{\rm features} \geq 0.3$ and a not-clumpy vote fraction $f_{\rm not\ clumpy} \geq 0.3$. This selection favours completeness over purity, and is thus appropriate for a comparison of different visual classification methods. The selection results in a sample of 1,273 galaxies.
+As described in Section \ref{sec:usage}, the branched nature of the Galaxy Zoo decision tree means that selecting a sample for comparison of edge-on vote fraction requires care. We thus consider, in addition to the previous sample requirements, that a galaxy must also have a featured vote fraction $f_{\rm features} \geq 0.3$ and a not-clumpy vote fraction $f_{\rm not\ clumpy} \geq 0.3$. This selection favours completeness over purity, and is thus appropriate for a comparison of different visual classification methods. The selection results in a sample of 1,611 galaxies.
 
-Both the CANDELS team and Galaxy Zoo volunteer classifications allow for the flagging of a galaxy as edge-on with a single selection, allowing for direct comparison. Figure \ref{fig:candels_compare}c shows the CANDELS team versus the Galaxy Zoo volunteer classification vote fractions. The two agree very well, with the median Galaxy Zoo vote fraction in bins of CANDELS team vote fraction generally consistent with a 1:1 line. 
+Both the CANDELS team and Galaxy Zoo classifications allow for the flagging of a galaxy as edge-on with a single selection, facilitating a direct comparison. Figure \ref{fig:candels_compare}c shows the CANDELS team versus the Galaxy Zoo classification vote fractions. The two agree very well ($\rho = 0.72$, $p < 2 \times 10^{-16}$), with the average vote fractions in one classification schema binned by the other (red squares and blue circles) generally consistent with a 1:1 line. 
 
-% correlation coefficient 0.8069
+
 
 \subsection{Spiral Galaxies}
 
-The spiral galaxy tasks in Galaxy Zoo are 1 branch below the edge-on disk galaxy task (T09), introducing another dependency on the sample selection, as described in Section \ref{sec:usage}. From within the sample used to construct Figure \ref{fig:candels_compare}c, we further require a vote of $f_{\rm not\ edge-on} \geq 0.5$, a selection chosen to balance the desire for completeness with the need to be able to see spiral arms if they are present. This selects 941 galaxies, whose positions in Figure \ref{fig:candels_compare}d are shown in the 2-D shaded histograms. 
+The spiral galaxy tasks in Galaxy Zoo are one branch below the edge-on disk galaxy task (T09), introducing another dependency on the sample selection, as described in Section \ref{sec:usage}. From within the sample used to construct Figure \ref{fig:candels_compare}c, we further require a vote of $f_{\rm not\ edge-on} \geq 0.5$, a selection chosen to balance the desire for completeness with the need to be able to see spiral arms if they are present. This selects 1,192 galaxies, whose positions in Figure \ref{fig:candels_compare}d are shown in the 2-D shaded histograms. 
 
-As in all other morphological parameters shown in Figure \ref{fig:candels_compare}, the visual classifications from both projects agree very well. Outliers in this figure include some examples that are best explained by distraction bias in the absence of a decision tree in CANDELS, and also include a few examples of distraction bias of a different sort in Galaxy Zoo: a handful of subjects that include a spiral galaxy very near the central, much fainter, galaxy. Such examples are a very small part of the overall sample, and are relatively easily rejected from a sample selection in any case. In general the classifications agree very well along this and other morphological axes which are directly comparable between the CANDELS team and Galaxy Zoo visual classifiations.
-
-
-% correlation coefficient 0.5676
+As in all other morphological parameters shown in Figure \ref{fig:candels_compare}, the visual classifications from both projects agree very well ($\rho = 0.61$, $p < 2 \times 10^{-16}$). Outliers in this figure include some examples that are best explained by distraction bias in the absence of a decision tree in CANDELS, and also include a few examples of distraction bias of a different sort in Galaxy Zoo: a handful of subjects that include a spiral galaxy very near the central, much fainter, galaxy. Such examples are a very small part of the overall sample, and are relatively easily rejected from a sample selection in any case. In general the classifications agree very well along this and other morphological axes which are directly comparable between the CANDELS team and Galaxy Zoo visual classifiations.
 
 
 
 
-{\notebsm
+
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  
-\section{Visual Classifications and Sersic Indices}\label{sec:result}
+\section{A population of ``smooth'' disk galaxies}\label{sec:result}
 %
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-Distribution of Sersic indices for different galaxy types
-- I'm thinking of this as a result rather than a comparison, as they measure different things.\\
-e.g. we can use this to talk about how many smooth galaxies are actually disks *assuming* n=1 is a disk
+Although the morphological classifications described here present quantified visual assessments of a range of galaxy properties, the classification tree described in Section \ref{sec:tree} never explicitly asks the classifier to decide whether a galaxy has a disk. While many questions ask about disk instability features, there is no attempt to identify disks. This choice of what \emph{not} to ask, which echoes that of previous Galaxy Zoo projects, partly reflects a discomfort with asking classifiers to assess light concentrations by eye without any further context. 
 
-% want to compare to GZ2 / lackner & gunn sersic comparison, plus possibly GZ3 as well?
+Thus within the Galaxy Zoo CANDELS classifications disks may be identified by the presence of specific features, but the absence of these features does not necessarily imply the lack of a disk, particularly at the epochs probed here. Decoupling questions about ``features'' from measures of a galaxy's diskiness enables these to be assessed independently. Specifically, while galaxies with strong ``features'' (as defined by the classification tree in Section \ref{sec:tree}) may be prone to systematic biases in identification of disks via \citet{sersic68} index measurements, galaxies which are more ``smooth'' do not suffer from these effects, and thus disk strength may be more accurately assessed. With the advent of new tools to measure light profiles via simultaneous consideration of multi-wavelength imaging \citep{haeussler13}, measurements of relative bulge and disk strengths are now possible with much higher accuracy than available for single-wavelength measurements at $z \sim 2$. 
 
+To compare the Galaxy Zoo classifications of ``featured'' and ``smooth'' to measurements of disk strength, we first select samples of Smooth and of Featured galaxies by selecting subjects with redshifts $1 \leq z \leq 3$, with surface brightnesses brighter than 24.5 mag~arcsec$^{-2}$, and which have ``star or artifact'' vote fractions (as described in Section \ref{sec:release}, from the {\small \tt t00\_smooth\_or\_featured\_a2\_artifact\_weighted\_frac} column) $f_{\rm artifact} < 0.4$. For the Smooth sample, we select galaxies having $f_{\rm smooth} > 0.6$; galaxies in the Featured sample have $f_{\rm features} \geq 0.4$.
+
+Each sample is further refined by matching to multi-wavelength $IJH$ bulge-disk decompositions of galaxies in the CANDELS fields by H\"au\ss ler et al. (in preparation) using the software package MegaMorph \citep{haeussler13}. We choose galaxies where the bulge-disk fits reported no error flags and where the fit parameters converged to values well within the limits of constraints set by the fitting routine (i.e., limits on S\'ersic index and effective radius of $0.22 \leq n \leq 7.8$ and $0.33 \leq r_e \leq 390$, respectively). These selections result in a sample of 85 Featured galaxies and 1,933 Smooth galaxies with reliable bulge-disk decompositions.
+
+Figure \ref{fig:btot} shows the distribution of bulge-to-total luminosity ratio (flux-summed to obtain one measurement across $IJH$) in the Featured and Smooth samples. A Kolmogorov-Smirnov test indicates the B/Tot distributions of Smooth and Featured galaxies are inconsistent with being drawn from the same parent sample to better than $6 \sigma$ significance. As expected, Featured galaxies are generally disk-dominated. However, the Smooth galaxies have a considerably more uniform distribution of bulge-to-total ratios, such that 23\% of galaxies in the Smooth sample have disk-dominated light profiles (B/Tot~$\leq 0.25$). 
+
+This finding of a substantial population of completely smooth disk galaxies is consistent with the results of recent dynamical studies of galaxies at $z > 1$ \citep[e.g.][]{wisnioski15}. Moreover, because galaxies with smoother light distribution are also more likely to have very reliable bulge-disk decompositions in large-scale galaxy fitting studies, the combination of Galaxy Zoo morphological selection and selection of smooth disks via bulge-to-total ratios is a more powerful selector of relatively complete samples of $z > 1$ disks than either selection method alone.
+
+%%%%% [FIGURE: BTot] %%%%%
+\begin{figure}
+\includegraphics[scale=0.85]{BTot_histogram.eps}
+\caption{
+Distributions of bulge-to-total ratios for samples of galaxies that are unambiguously Smooth (red dashed histogram) and Featured (blue solid histogram). The majority of features measured by Galaxy Zoo CANDELS are associated with disk instabilities; thus it is perhaps not surprising that the Featured sample is generally disk-dominated. However, the Smooth galaxy sample has a relatively uniform distribution of bulge-to-total ratios, including a substantial population of disk-dominated galaxies at $1 \leq z \leq 3$ which have no evidence of significant features.
 }
+\label{fig:btot}
+\end{figure}
+%%%%% END FIGURE %%%%%
+
+
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
@@ -715,7 +809,9 @@ e.g. we can use this to talk about how many smooth galaxies are actually disks *
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-The Galaxy Zoo project has collected typically 40 or more independent visual classifications to date from colour images of 3 CANDELS fields: GOODS-South, COSMOS, and the UDS. Here we present the public release of these classifications, after applying an iterative consensus-based user weighting scheme that has been successfully applied to multiple previous Galaxy Zoo projects. We provide an analysis of changes in classifications with observed surface brightness and offer caveats and advice for usage of these morphological measurements for different science goals. Comparison of the Galaxy Zoo morphologies with existing visual morphologies of a subset of the sample are in excellent agreement across a wide range of morphological features. 
+The Galaxy Zoo project has collected typically 40 or more independent visual classifications to date from colour images of three CANDELS fields: GOODS-South, COSMOS, and the UDS. Here we present the public release of these classifications, after applying an iterative consensus-based classifier weighting scheme that has been successfully applied to multiple previous Galaxy Zoo projects, as well as additional weighting techniques making use of the stellarity parameter from automated measurements. We provide an analysis of changes in classifications with imaging depth and offer caveats and advice for usage of these morphological measurements for different science goals. 
+
+Comparison of the Galaxy Zoo morphologies with existing visual morphologies of a subset of the sample are in excellent agreement across a wide range of morphological features. We also combine Galaxy Zoo morphologies with multi-wavelength bulge-disk decompositions to show that a substantial fraction of galaxies lacking significant morphological signatures of disk features have disk-dominated light profiles.
 
 The public catalog of Galaxy Zoo CANDELS morphologies may be obtained from {\tt data.galaxyzoo.org}.
   
@@ -730,9 +826,9 @@ The public catalog of Galaxy Zoo CANDELS morphologies may be obtained from {\tt 
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%TOPCAT \citep{taylor05} and an OS X widget form of the JavaScript Cosmology Calculator \citep{wright06} were used while preparing this paper. 
+Astropy \citep{astropy13}, TOPCAT \citep{taylor05} and an OS X widget form of the JavaScript Cosmology Calculator \citep{wright06,rsimpson13} were used while preparing this paper. 
 %
-%BDS gratefully acknowledges support from the Oxford Martin School, Worcester College and Balliol College, Oxford.
+BDS gratefully acknowledges support from the Oxford Martin School and Balliol College, Oxford. Support for this work was provided by the National Aeronautics and Space Administration through Einstein Postdoctoral Fellowship Award Number PF5-160143 issued by the Chandra X-ray Observatory Center, which is operated by the Smithsonian Astrophysical Observatory for and on behalf of the National Aeronautics Space Administration under contract NAS8-03060.
 %
 %TM acknowledges funding from the Science and Technology Facilities Council ST/J500665/1.
 %
@@ -740,7 +836,7 @@ The public catalog of Galaxy Zoo CANDELS morphologies may be obtained from {\tt 
 %
 %KWW and LF acknowledge funding from the UMN Grant-In-Aid program. 
 %
-%RCN acknowledges STFC Rolling Grant ST/I001204/1 to ICG for ‘Survey Cosmology and Astrophysics’. 
+%RCN acknowledges STFC Rolling Grant ST/I001204/1 to ICG for ``Survey Cosmology and Astrophysics''. 
 %
 %KS gratefully acknowledges support from Swiss National Science Foundation Grant PP00P2\_138979/1. 
 %
