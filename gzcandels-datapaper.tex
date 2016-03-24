@@ -49,6 +49,8 @@
 \def\mfedgeon  {f_{\rm edge-on}}
 \def\fcnobulge    {$f_{\rm confirmed~no~bulge}$}
 \def\mfcnobulge {f_{\rm confirmed~no~bulge}}
+\def\ffeat            {$f_{\rm features}$}
+\def\mffeat           {f_{\rm features}}
 
 \def\kappamean {$\overline{\kappa}$}
 \def\mkappamean {\overline{\kappa}}
@@ -157,7 +159,7 @@ $^{HERTS}$Centre for Astrophysics Research, University of Hertfordshire, College
 $^{WORC}$Worcester College, Oxford\\
 %$^{22}$Galaxy Zoo Volunteer\\
 %$^{23}$Department of Physics and Astronomy, The Johns Hopkins University, Baltimore, MD 21218, USA\\
-%$^{24}$Max-Planck-Institut f{\"u}r extraterrestrische Physik, Giessenbachstrasse 1, D√ê85748 Garching bei M{\"u}nchen, Germany\\
+%$^{24}$Max-Planck-Institut f{\"u}r extraterrestrische Physik, Giessenbachstrasse 1, D–85748 Garching bei M{\"u}nchen, Germany\\
 %$^{25}$European Southern Observatory/Joint ALMA Observatory, 3107 Alonso de Cordova, Santiago, Chile\\
 $^{CC}$Department of Physics and Astronomy, Colby College, Waterville, ME 04901, USA\\
 $^{ESO}$European Southern Observatory, Alonso de Cordova 3107, Vitacura, Casilla 19001, Santiago, Chile\\
@@ -498,7 +500,9 @@ The weighted consensus classifications are then calculated for each subject by s
 
 In practice, the number of iterations required to reach this goal is low \citep[e.g., 3 or less in previous projects;][]{bamford09,willett13}. In Figure \ref{fig:consistencies} we show the distribution of classifier consistencies after 1-5 iterations of the above method, although the difference between iterations 3 through 5 cannot be distinguished within the line weight even in the inset (zoomed) subsection of the figure. Between the 4th and 5th iterations, more than 99 per cent of consistency values varied by less than 0.1 per cent. After 5 iterations, approximately 4 per cent of classifiers have consistency $\mkappamean < 0.5$ (corresponding to a weight $w \lesssim 0.2$), whereas 83 per cent of classifiers have an end weight of $w = 1$. The vast majority of Galaxy Zoo classifiers thus contribute highly valuable information to the project.
 
-Figure \ref{fig:exampleclass} shows examples of galaxies with different weighted consensus classifications for several of the tasks described in Table \ref{table:tree} and Figure \ref{fig:tree}. 
+Figure \ref{fig:exampleclass} shows examples of galaxies with different weighted consensus classifications for several of the tasks described in Table \ref{table:tree} and Figure \ref{fig:tree}. Figure \ref{fig:sankey} shows the demographics of the full sample, using the weighted vote fractions to assign a single label to each galaxy at each task in the classification tree. We only consider galaxies for a given task if they were assigned an appropriate label that flows into that task (Figure \ref{fig:tree}). Galaxies are considered ``featured'' if at least 30\% of (weighted) classifiers answered``features or disk'' in the initial task; for all other tasks and responses we assign labels based on a plurality of weighted responses. 
+
+This very simple method provides an overview of the sample demographics. The majority of galaxies in the sample would be considered ``smooth'', with only 12\% labelled as ``featured'' even given the relatively generous selection of featured galaxies. Were we to select subsets of galaxies based on other criteria, such as stellar mass, the demographics would likely change substantially. For example, the vast majority of the galaxies that were retired early based on their low surface brightnesses and sizes (Section \ref{sec:rawclass}) would be considered ``smooth'' or, owing to the high noise levels relative to the detected galaxy, would be labelled as artifacts. 
 
 %%%%% [FIGURE: classifier Consistencies] %%%%%
 \begin{figure}
@@ -522,6 +526,25 @@ Example (inverted) galaxy images for different consensus classifications of diff
 %%%%% END FIGURE %%%%%
 
 
+%%%%% [FIGURE: Sankey diagrams] %%%%%
+\begin{figure*}
+\hfill
+\includegraphics[width=8.5cm]{sankey_gzcandels_ffeat03_full.png}
+\hfill
+\includegraphics[width=8.5cm]{sankey_gzcandels_ffeat03_featured.png}
+\hfill
+%\includegraphics[scale=0.65]{sankey_gzcandels_ffeat03_full.png}%{sankey_gzcandels_ffeat03_featured.png}
+\caption{
+Demographics of the Galaxy Zoo CANDELS sample, using the aggregate distribution of weighted morphologies. In the left panel, the full classification tree (Figure \ref{fig:tree} and Table \ref{table:tree}) is shown. The right panel shows only tasks T02-T16, the ``featured'' branches of the tree, for which the full detail is difficult to see in the left panel. Each node in each diagram (dark blue horizontal bars of uniform height) represents a task in the tree. The paths between tasks represent each possible answer to the task; these flow from top to bottom between their origin question and the subsequent task in the tree. For the first task, T00, a galaxy is considered ``featured'' if the weighted vote fractions meet the criteria $\left(\mffeat \geq 0.3\ \&\ f_{\rm star\ or\ artifact} < 0.5\right)$. From among galaxies not considered ``featured'', a galaxy is then assigned a label (i.e., to a path) of ``smooth'' or ``artifact'' based on the plurality classification between those 2 responses. For the remaining tasks, the label for an eligible galaxy is assigned according to the plurality answer for that task. At each node, a galaxy is assigned only one label. The widths of the paths are proportional to the number of galaxies assigned to that path; the widths of the nodes are proportional to the number of galaxies for which the question was reliably answered. The plurality answer represents the single most common response to a task --- this may be either above or below 50\%, depending on the number of answers and level of consensus. While this method provides a useful overview of the morphologies of the entire data set, we note that examining subsets based on various cuts (for example, stellar mass or luminosity thresholds) may reveal very different demographics for those sub-populations.
+}
+\label{fig:sankey}
+\end{figure*}
+%%%%% END FIGURE %%%%%
+
+
+
+%%%%%%%%%%%%%%%% Discussion of resolution effects here?
+
 
 
 
@@ -529,16 +552,6 @@ Example (inverted) galaxy images for different consensus classifications of diff
 
 \subsection{Use of Classifications in Practice}\label{sec:usage}
 
-
-%%%%% [FIGURE: Example images] %%%%%
-\begin{figure*}
-\includegraphics[scale=0.46]{pie_candels_mod.eps}
-\caption{
-Distribution of weighted vote fractions for each task in the Galaxy Zoo CANDELS decision tree. Each pie chart shows the distribution of morphologies for the plurality answer for a given task. The plurality answer represents the single most common response to a task --- this may be either above or below 50\%, depending on the number of answers and level of consensus. This plot shows only data for which a question was reliably answered; for example, if the plurality answer for a given galaxy classified it as ``smooth'', no responses for any questions regarding disk or clumpy morphology are considered. 
-}
-\label{fig:pie}
-\end{figure*}
-%%%%% END FIGURE %%%%%
 
 
 
