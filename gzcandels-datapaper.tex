@@ -313,7 +313,7 @@ The decision tree for Galaxy Zoo CANDELS in visual format, including graphical i
 The goal of Galaxy Zoo CANDELS is to provide detailed quantitative visual morphologies of galaxies observed by the deepest, most complete \emph{HST} multi-wavelength legacy survey to date. 
 There are many morphological features of interest, including both broad questions about a galaxy's overall appearance and more detailed questions about specific features. 
 
-We employ a tree-based structure for collecting information on these morphological features, a strategy that has been used successfully since Galaxy Zoo 2 (GZ2) \citep{willett2014}. The Galaxy Zoo CANDELS decision tree is shown in visual form in Figure \ref{fig:tree} and in text form in Table \ref{table:tree}. We note that this tree is most similar to the tree used in the Galaxy Zoo: Hubble project \citep[described in][]{melvin14,willetinprep}, which also has a branch identifying clumpy galaxies and focusing on the detailed structure of galaxy clumps not present in the GZ2 tree. There are small differences between the CANDELS and GZH tree, however: for example, Task 10, which asks about a bulge in an edge-on disk, is a Yes/No question here, whereas in previous iterations of the decision tree this question also asked whether the bulge shape was rounded or boxy. Additionally, the final task in the tree (Task 16) is substantially different from previous versions and is here only concerned with galaxy mergers and tidal features. 
+We employ a tree-based structure for collecting information on these morphological features, a strategy that has been used successfully since Galaxy Zoo 2 \citep[GZ2;][]{willett13}. The Galaxy Zoo CANDELS decision tree is shown in visual form in Figure \ref{fig:tree} and in text form in Table \ref{table:tree}. We note that this tree is most similar to the tree used in the Galaxy Zoo: Hubble project \citep[described in][Willett et al., in preparation]{melvin14}, which also has a branch identifying clumpy galaxies and focusing on the detailed structure of galaxy clumps not present in the GZ2 tree. There are small differences between the CANDELS and GZH tree, however: for example, Task 10, which asks about a bulge in an edge-on disk, is a Yes/No question here, whereas in previous iterations of the decision tree this question also asked whether the bulge shape was rounded or boxy. Additionally, the final task in the tree (Task 16) is substantially different from previous versions and is here only concerned with galaxy mergers and tidal features. 
 
 The CANDELS decision tree first asks the classifier to choose between the broad categories of ``smooth and rounded'', ``features or disk'', and ``star or artifact''. The next step either exits the classification (if the classifier has indicated the subject is of a star or artifact) or moves on to a task which asks for further details about the galaxy. 
 
@@ -546,12 +546,6 @@ Demographics of the Galaxy Zoo CANDELS sample, using the aggregate distribution 
 
 
 
-%%%%%%%%%%%%%%%% Discussion of resolution effects here?
-
-
-
-
-
 
 \subsection{Use of Classifications in Practice}\label{sec:usage}
 
@@ -671,6 +665,18 @@ The best-fit planes for each response to each task can be used to predict the wi
 In addition to the release of classification data described in Section \ref{sec:release} above, we additionally present these ``corrected'', weighted classifications for each of the 8,130 subjects with deep exposures but for which we do not also have separate wide-field depth classifications {\notecsm (why don't we? should we collect these asap?)}, as well as the measured wide-field depth classifications for the measured-correction subset, for a total of 10,648 morphological classifications of deep-field subjects corrected to the wide-field average depth.
 
 For these subjects, the wide-field depth classifications are given in a separate table in the data release and labelled in the data catalogs as described in Section \ref{sec:release}, except with an additional {\small \tt \_deepcorr} added to each relevant weighted-classification column. For example, the wide-field vote fraction for classifiers indicating an answer of `Features or Disk' to Task T00 is labelled {\small \tt t00\_smooth\_or\_featured\_a0\_smooth\_weighted\_frac\_deepcorr}, which is depth-corrected from the deep-exposure classification indicated in the {\small \tt t00\_smooth\_or\_featured\_a0\_smooth\_weighted\_frac} column. For those investigating science questions where it is advantageous to consider classifications from images of comparable depth across an entire sample, we recommend using the {\small \tt \_deepcorr} classifications for subjects in the ``deep'' fields.
+
+
+
+
+\subsection{Resolution effects}\label{sec:resolution}
+
+{\notebsm
+Resolution gets worse for a while in the redshifts we care about, but then it basically flattens out. At its worst it's X, which means that we have Y per pixel, or Z kpc resolution at worst given 2.5 pixels FWHM PSF for HST.
+So we may not be resolving features smaller than that, but this depends somewhat on redshift and is a stronger function of z for z less than 1.
+
+This resolution is slightly (better) than what Euclid \citep{refregier10} will get. Why are we mentioning Euclid specifically?
+}
 
 
 
