@@ -1,6 +1,6 @@
 \documentclass[useAMS,usenatbib]{mn2e}
 %\documentclass[twocolumn]{emulateapj}
-\usepackage{graphicx,natbib,color,multirow,amsmath}
+\usepackage{graphicx,natbib,color,multirow,amsmath,deluxetable}
 \voffset=-0.8in
 
 \definecolor{titlecol}{rgb}{0,0,1}
@@ -66,7 +66,7 @@
 \def\gtrsim{\mathrel{\hbox{\rlap{\hbox{\lower3pt\hbox{$\sim$}}}\hbox{\raise2pt\hbox{$>$}}}}}
 
 
-\newcommand\nodata{ ~$\cdots$~ }
+%\newcommand\nodata{ ~$\cdots$~ }
 
 \makeatletter
 \def\@xfootnote[#1]{%
@@ -492,12 +492,12 @@ Following this calculation for the entire classification database, each classifi
 
 Averaging over a classifier's individual consistency values for all classifications effectively downweights those contributions from classifiers whose classifications regularly diverge from the consensus whilst preserving the diversity of classifications from classifiers who are \emph{on average} consistent with each other. It also allows for the classifications of skilled classifiers to remain highly weighted even on difficult subjects where the individual consensus is skewed (e.g., if an image is very noisy or if a nearby artifact is distracting to less experienced classifiers). 
 
-{\notebsm The classifier weight is then calculated as 
+The classifier weight is then calculated as 
 \begin{equation}
 w = \min \left(1.0,(\mkappamean / 0.6)^{8.5} \right) ,
 \label{eqn-weight}
 \end{equation}
-a formulation that preserves a uniform weighting for any classifier with $\mkappamean \geq 0.6$ and downweights those with a lower consistency rating.}
+a formulation that preserves a uniform weighting for any classifier with $\mkappamean \geq 0.6$ and downweights those with a lower consistency rating.
 
 The weighted consensus classifications are then calculated for each subject by summing the weighted votes for each task and response between task T01 and T16, and reporting the vote fractions $f$ for each. (Although the classifications for task T00 are included in the computation of the consensus-based weights, the vote fractions for task T00 are not re-computed using the consensus-based weights.) As the classifier weights are calculated via comparison with the consensus, which leads to a new consensus, this method can be iterated until the classifier weights converge to a stable value. 
 
@@ -564,7 +564,7 @@ There is no single set of thresholds that is ideal for all situations. However, 
 
 \subsection{Data release and ``clean'' samples}\label{sec:release}
 
-This paper includes the release of the raw and weighted classifications for each of the $49,555$ subjects in the Galaxy Zoo CANDELS sample. In addition to each raw and weighted vote fraction for each task, we include the raw and weighted number of answers to each task, as well as the total raw and weighted classifier count for each subject. This combines for a total of 136 quantities for each subject, not including the subject ID or any other metadata. {\notebsm This is too much information to present a meaningful sample table in print here.} The structure of the data for each task number $NN$ with $i = {0 {\rm\ to\ } n-1}$ responses is as follows:
+This paper includes the release of the raw and weighted classifications for each of the $49,555$ subjects in the Galaxy Zoo CANDELS sample. In addition to each raw and weighted vote fraction for each task, we include the raw and weighted number of answers to each task, as well as the total raw and weighted classifier count for each subject. This combines for a total of 136 quantities for each subject, not including the subject ID or any other metadata. The structure of the data for each task number $NN$ with $i = {0 {\rm\ to\ } n-1}$ responses is as follows:
 %oh god it's really late and I just said "thusly"
 
 % THUSLY REMOVED - KWW
@@ -601,12 +601,14 @@ For example, the information available for task T00 (which has 3 responses) is s
 
 \end{itemize}
 
-The sum of raw  {\tt \_frac} fractions adds to 1.0, as does the sum of {\tt \_weighted\_frac} fractions. Multiplying the {\tt \_frac} values (raw fractions) by the {\tt \_count} (raw classifier counts) will retrieve the number of people who gave a specific answer; likewise with weighted answer counts from {\tt \_weighted\_frac} and {\tt \_weight}. As the consensus-based classifier weighting described in Section \ref{sec:weighting} assigns a weight of $w \leq 1$ to each classifier, the weighted vote count for tasks T01--T16 must be less than or equal to the raw vote count for those tasks. While the raw vote counts and fractions are provided for completeness, we recommend that users of this data set use the weighted fractions and counts.
+The sum of raw  {\tt \_frac} fractions adds to 1.0, as does the sum of {\tt \_weighted\_frac} fractions. Multiplying the {\tt \_frac} values (raw fractions) by the {\tt \_count} (raw classifier counts) will retrieve the number of people who gave a specific answer; likewise with weighted answer counts from {\tt \_weighted\_frac} and {\tt \_weight}. As the consensus-based classifier weighting described in Section \ref{sec:weighting} assigns a weight of $w \leq 1$ to each classifier, the weighted vote count for tasks T01--T16 must be less than or equal to the raw vote count for those tasks. While the raw vote counts and fractions are provided for completeness, we recommend that users of this data set use the weighted fractions and counts. The raw and weighted classifications are presented in Table \ref{table:data-main}.
 
 In addition to the vote fractions for each subject, we provide a set of flags for each subject that indicates its member or non-member status in a ``clean'' sample of galaxies of a specific type. We select separate clean samples of smooth, featured, clumpy, edge-on, and spiral galaxies. These samples contain exemplars of each galaxy type with minimal contamination of the sample --- as a result, samples selected with the flags will be highly incomplete, but also highly pure. They are selected according to vote fraction and vote count thresholds given in Table \ref{table:clean}.
 
 We provide these flags for the convenience of the end user, but we additionally encourage those wishing to use Galaxy Zoo classifications to investigate whether a different set of thresholds would be optimal for their own science case.
 
+%\input{table-data-main.tex}
+\input{table_data_main_cols_all.tex}
 
 \begin{table}
  \begin{tabular}{@{}lllr}
@@ -664,8 +666,9 @@ The best-fit planes for each response to each task can be used to predict the wi
 
 In addition to the release of classification data described in Section \ref{sec:release} above, we additionally present these ``corrected'', weighted classifications for each of the 8,130 subjects with deep exposures but for which we do not also have separate wide-field depth classifications, as well as the measured wide-field depth classifications for the measured-correction subset, for a total of 10,648 morphological classifications of deep-field subjects corrected to the wide-field average depth.
 
-For these subjects, the wide-field depth classifications are given in a separate table in the data release and labelled in the data catalogs as described in Section \ref{sec:release}, except with an additional {\small \tt \_deepcorr} added to each relevant weighted-classification column. For example, the wide-field vote fraction for classifiers indicating an answer of `Features or Disk' to Task T00 is labelled {\small \tt t00\_smooth\_or\_featured\_a0\_smooth\_weighted\_frac\_deepcorr}, which is depth-corrected from the deep-exposure classification indicated in the {\small \tt t00\_smooth\_or\_featured\_a0\_smooth\_weighted\_frac} column. For those investigating science questions where it is advantageous to consider classifications from images of comparable depth across an entire sample, we recommend using the {\small \tt \_deepcorr} classifications for subjects in the ``deep'' fields.
+For these subjects, the wide-field depth classifications are given in Table \ref{table:data-depthcorr} and labelled in the data catalogs as described in Section \ref{sec:release}, except with an additional {\small \tt \_deepcorr} added to each relevant weighted-classification column. For example, the wide-field vote fraction for classifiers indicating an answer of `Features or Disk' to Task T00 is labelled {\small \tt t00\_smooth\_or\_featured\_a0\_smooth\_weighted\_frac\_deepcorr}, which is depth-corrected from the deep-exposure classification indicated in the {\small \tt t00\_smooth\_or\_featured\_a0\_smooth\_weighted\_frac} column. For those investigating science questions where it is advantageous to consider classifications from images of comparable depth across an entire sample, we recommend using the {\small \tt \_deepcorr} classifications for subjects in the ``deep'' fields.
 
+\input{table_data_deepcorr_cols_all.tex}
 
 
 
