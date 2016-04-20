@@ -813,11 +813,12 @@ In general the classifications agree very well along this and other morphologica
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%%%%% [FIGURE: BTot] %%%%%
+%%%%% [FIGURE: dM] %%%%%
 \begin{figure*}
 \includegraphics[scale=0.85]{dM_histogram_all_x10a.png}
 \caption{
-Distributions of bulge-to-total ratios for samples of galaxies that are unambiguously Smooth (red dashed histogram) and Featured (blue solid histogram). The majority of features measured by Galaxy Zoo CANDELS are associated with disk instabilities; thus it is perhaps not surprising that the Featured sample is generally disk-dominated. However, the Smooth galaxy sample has a relatively uniform distribution of bulge-to-total ratios, including a substantial population of disk-dominated galaxies at $1 \leq z \leq 3$ which have no evidence of significant features.
+\emph{Top row:} Distributions of luminosity function sampling for galaxy sub-samples selected by morphology and redshift. $M - M^*$ indicates where each galaxy lies on the rest-frame optical luminosity function for galaxies relative to $M^*$ at that redshift; values $>0$ indicate galaxies fainter than $M^*$. Panel (a) shows smooth (blue solid line) and featured (red dotted line) galaxies from Galaxy Zoo CANDELS at $1 \leq z \leq 3$ using rest-frame $V$-band absolute magnitudes and the luminosity function measured by \citet{marchesini12}. The featured sample is considerably smaller and brighter than the smooth sample (we show the featured distribution counts multiplied by $10$ for easier comparison). Panel (b) shows smooth and featured galaxies from Galaxy Zoo 2 \citep{willett13} using the rest-frame $g$-band absolute magnitudes and the luminosity function measured by \citet{blanton04}. All samples in panels (a) and (b) have substantially different luminosities and luminosity distributions; further comparison of the samples requires controlling for these differences.
+\emph{Bottom row:} Weighted distributions of $M - M^*$, with weights chosen so that all samples have statistically indistinguishable $M-M^*$ distributions. Weights are normalised separately in panels (a) and (b), which show smooth and featured distributions, respectively. The weights are normalised so that the maximum weight for any single galaxy is 1.0; this results in effective counts of 135 galaxies per smooth sample and 45 galaxies per featured sample (CANDELS and SDSS are shown as solid and dashed curves, respectively). The peak of the distribution is slightly fainter than $M^*$ at each redshift, and the full weighted distribution includes galaxies at luminosities $\pm 2$ magnitudes from $M^*$.
 }
 \label{fig:dM}
 \end{figure*}
@@ -841,6 +842,17 @@ In order to meaningfully compare disk fractions between samples of different mor
 
 We note that while panels (a) and (b) of Figure \ref{fig:dM} plot samples measured from within the same redshift ranges and data sets (CANDELS and SDSS, respectively),  panels (c) and (d) group samples by Galaxy Zoo morphology. The weighted histograms in each panel are normalised with respect to each other so that no galaxy has a weight greater than 1; the samples are divided in this way because the goal is to compare smooth galaxies at $z \sim 0$ with smooth galaxies at $1 \leq z \leq 3$, and likewise for featured galaxies. Given these weightings, there are effectively 135 galaxies in each of the smooth samples, and 45 galaxies in each of the featured samples.
 
+
+%%%%% [FIGURE: BTot] %%%%%
+\begin{figure*}
+\includegraphics[scale=0.85]{BTot_histogram_bymorph_Lmatched_TYPE.png}
+\caption{
+Distributions of bulge-to-total ratios for samples of galaxies observed by CANDELS (solid curves) and SDSS (dashed curves) that are unambiguously Smooth (red curves) and Featured (blue curves). The samples are weighted to control for differences in sampling of the luminosity functions at each redshift. The CANDELS galaxies span $1 \leq z \leq 3$; the SDSS galaxies are chosen to match the same range of physical resolutions in kpc given median seeing of $1^{\prime \prime}4$ ($0.0418 \leq z \leq 0.0436$). The featured samples are generally disk-dominated, which is expected given that majority of features measured by Galaxy Zoo 2 and Galaxy Zoo CANDELS are associated with disk instabilities. A K-S test between featured samples shows no statistically significant result. However, the Smooth galaxy samples have very different distributions between $1 \leq z \leq 3$ and $z \approx 0.04$. In particular, while the more local sample of smooth galaxies shows a high fraction of bulge-dominated galaxies, the distribution of higher-redshift ``smooth'' galaxies is relatively uniform and includes including a substantial population of disk-dominated galaxies at $1 \leq z \leq 3$ which have no evidence of ``features'' often associated with disks. The significance of this result depends somewhat on the specific choice of bulge-to-total ratio from each study that measures it (\citeauthor{haeussler13}, in preparation, for CANDELS; \citeauthor{lackner12} \citeyear{lackner12} for SDSS), but a K-S test between smooth samples returns $p < 0.05$ for all reasonable choices of bulge-to-total measurements. Smooth galaxies at $z \sim 0$ and $z \geq 1$ are most likely not drawn from the same underlying distribution of morphologies.
+}
+\label{fig:btot}
+\end{figure*}
+%%%%% END FIGURE %%%%%
+
 Figure \ref{fig:btot} shows the distribution of bulge-to-total luminosity ratios (flux-summed to obtain one measurement across all observed bands) in the smooth (left panel) and featured (right panel) samples for CANDELS and SDSS. As expected, featured galaxies are generally disk-dominated. The differences in the bulge-to-total distributions between featured samples at $z \sim 0$ and $1 \leq z \leq 3$ is not significantly different: a Kolmogorov-Smirnov (K-S) test indicates a significance of $1.8 \sigma$ ($p_{KS} = 0.073$). We cannot rule out the hypothesis that these two distributions are drawn from the same parent population, despite the very different epochs they probe. 
 
 However, the Smooth galaxies at $1 \leq z \leq 3$ have a considerably more uniform distribution of bulge-to-total ratios than smooth galaxies at $z \sim 0$. A K-S test indicates a high level of significance ($7.6 \sigma$). We note that some of this difference is likely due to the fact that the studies performing bulge-disk decompositions of galaxies in each sample use slightly different methods to do so. For example, \citet{haeussler13} fit an exponential disk and a bulge with a variable S\'ersic index $n$ for each bulge-disk decomposition, whereas \citet{lackner12} force bulge-disk decomposition fits to have $n=1$ or $n=4$. Additionally, where \citet{lackner12} have determined that a single-component exponential or deVaucouleur fit is best for a particular galaxy, we take B/Tot$=0$ and $1$, respectively; this option is not available for the CANDELS fits, which likely explains some of the differences in smooth galaxies on the high B/Tot end. We choose to show in Figure \ref{fig:btot} the published best fits to each galaxy from among the multiple fits performed for each galaxy in each sample, despite these differences, and note that were we to only draw from the 2-component fits of \citet{lackner12} for the SDSS fits (which in many cases substantially disagrees with the best-fit model), the distributions would remain significantly different ($p = 0.026$).
@@ -849,16 +861,6 @@ However, the Smooth galaxies at $1 \leq z \leq 3$ have a considerably more unifo
 This finding of a substantial population of completely smooth disk galaxies is consistent with the results of recent dynamical studies of galaxies at $z > 1$ \citep[e.g.][]{wisnioski15}. Moreover, because galaxies with smoother light distribution are also more likely to have very reliable bulge-disk decompositions in large-scale galaxy fitting studies, the combination of Galaxy Zoo morphological selection and selection of smooth disks via bulge-to-total ratios is a more powerful selector of relatively complete samples of $z > 1$ disks than either selection method alone.
 
 
-
-%%%%% [FIGURE: BTot] %%%%%
-\begin{figure*}
-\includegraphics[scale=0.85]{BTot_histogram_bymorph_Lmatched_TYPE.png}
-\caption{
-Distributions of bulge-to-total ratios for samples of galaxies that are unambiguously Smooth (red dashed histogram) and Featured (blue solid histogram). The majority of features measured by Galaxy Zoo CANDELS are associated with disk instabilities; thus it is perhaps not surprising that the Featured sample is generally disk-dominated. However, the Smooth galaxy sample has a relatively uniform distribution of bulge-to-total ratios, including a substantial population of disk-dominated galaxies at $1 \leq z \leq 3$ which have no evidence of significant features.
-}
-\label{fig:btot}
-\end{figure*}
-%%%%% END FIGURE %%%%%
 
 
 
