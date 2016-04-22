@@ -125,10 +125,11 @@ Avishai Dekel$^{RACAH}$
 N. A. Grogin$^{ST}$,
 {\builderUC Ruth Gr\"utzbauch$^{99}$,} 
 %Ray A. Lucas$^{13}$,
+Nimish P. Hathi$^LAM$,
 Elizabeth McGrath$^{CC}$,
 Bahram Mobasher$^{99}$,
 Mark Mozena$^{99}$,
-{\builderUC Michael Peth$^{99}$,}
+{\builderUC Michael Peth$^{JHU}$,}
 Janine Pforr$^{LAM}$,
 {\builderUC Mara Salvato$^{99}$,} 
 {\builderUC Tommy Wiklind$^{99}$,} 
@@ -152,7 +153,7 @@ $^{ETH}$Institute for Astronomy, ETH Z\"urich, Wolfgang-Pauli-Strasse 27, CH-809
 $^{NOTT}$School of Physics \& Astronomy, The University of Nottingham, University Park, Nottingham, NG7 2RD, UK\\
 $^{ST}$Space Telescope Science Institute, 3700 San Martin Drive, Baltimore, MD 21218\\
 $^{UKY}$Department of Physics and Astronomy, University of Kentucky, Lexington, KY 40506, USA\\
-$^{MOKC}$Department of Physics, University of Missouri-Kansas City, 5110 Rockhill Road, Kansas City, MO 64110, USA\\
+$^{MOKC}$Department of Physics \& Astronomy, University of Missouri-Kansas City, 5110 Rockhill Rd., Kansas City, MO 64110, USA\\
 $^{PITT}$Department of Physics and Astronomy \& PITT PACC, University of Pittsburgh, Pittsburgh, PA 15217, USA\\
 %$^{17}$UC Observatories/Lick Observatory and Department of Astronomy and Astrophysics, University of California, Santa Cruz, CA 95064, USA\\
 %$^{18}$Department of Astronomy, The University of Texas at Austin, Austin, TX 78712, USA\\
@@ -161,7 +162,7 @@ $^{INAF}$INAF-Osservatorio Astronomico di Roma, Via Frascati 33, I-00040, Monte 
 $^{HERTS}$Centre for Astrophysics Research, University of Hertfordshire, College Lane, Hatfield AL10 9AB, UK\\
 $^{WORC}$Worcester College, Oxford\\
 %$^{22}$Galaxy Zoo Volunteer\\
-%$^{23}$Department of Physics and Astronomy, The Johns Hopkins University, Baltimore, MD 21218, USA\\
+$^{JHU}$Department of Physics and Astronomy, The Johns Hopkins University, Baltimore, MD 21218, USA\\
 %$^{24}$Max-Planck-Institut f{\"u}r extraterrestrische Physik, Giessenbachstrasse 1, DÐ85748 Garching bei M{\"u}nchen, Germany\\
 %$^{25}$European Southern Observatory/Joint ALMA Observatory, 3107 Alonso de Cordova, Santiago, Chile\\
 $^{CC}$Department of Physics and Astronomy, Colby College, Waterville, ME 04901, USA\\
@@ -775,7 +776,7 @@ The featured vote fractions track each other well, with a clear and highly signi
 
 \subsection{Merging or Interacting Galaxies}
 
-The final classification task (T16) in the Galaxy Zoo decision tree asks whether the classifier sees evidence of a merger, or of tidal interaction, or both, or neither. The CANDELS team Interaction Class asks the classifier to decide whether the galaxy is a merger, or whether there is interaction within the segmentation map, or outside of it, with an additional option for a non-interacting companion. There is also a separate flag within the CANDELS team classification to indicate whether a galaxy has tidal arms. Because these selections between projects are similar but not exactly the same, we choose to compare the sum of all signs of interaction of any kind within both projects. Specifically, we consider the sum of vote fractions within the CANDELS team classifications for ``merger'', ``interaction within segmap'',  ``interaction beyond segmap'', and ``tidal arms'', while for Galaxy Zoo we consider the sum of vote fractions for ``merging'', ``tidal debris'', or ``both''. Given this selection, the maximum value for the combined CANDELS team vote is 2, whereas for Galaxy Zoo the maximum vote fraction is 1.
+The final classification task (T16) in the Galaxy Zoo decision tree asks whether the classifier sees evidence of a merger, or of tidal interaction, or both, or neither. The CANDELS team Interaction Class (K15) asks the classifier to decide between the following classes: merger, interaction (within segmap), interaction (outside segmap), non-interacting companion, and none. There is also a separate flag within the CANDELS team classification to indicate whether a galaxy has tidal arms. Because these selections between projects are similar but not exactly the same, we choose to compare the sum of all signs of interaction of any kind within both projects. Specifically, we consider the sum of vote fractions within the CANDELS team classifications for ``merger'', ``interaction within segmap'',  ``interaction beyond segmap'', and ``tidal arms'', while for Galaxy Zoo we consider the sum of vote fractions for ``merging'', ``tidal debris'', or ``both''. For Galaxy Zoo the maximum vote fraction is 1, whereas the maximum value for the combined CANDELS team vote is 2.
 
 Figure \ref{fig:candels_compare}b compares these fractions for each galaxy in the same way and using the same sample as Figure \ref{fig:candels_compare}a, with darker shaded bins representing a higher number of galaxies within that bin, and with red squares and blue circles indicating averages of one classification binned by the other, as described in Section \ref{sec:compare_featured} above. The striations seen in the hexagonal bins reflect the finite number of possible vote fractions within the CANDELS team votes; this structure was not seen in Figure \ref{fig:candels_compare}a due to the weighted combination of clumpy vote fractions. 
 
@@ -848,7 +849,7 @@ We note that while panels (a) and (b) of Figure \ref{fig:dM} plot samples measur
 \begin{figure*}
 \includegraphics[scale=0.85]{BTot_histogram_bymorph_Lmatched_TYPE.png}
 \caption{
-Distributions of bulge-to-total ratios for samples of galaxies observed by CANDELS (solid curves) and SDSS (dashed curves) that are unambiguously Smooth (red curves) and Featured (blue curves). The samples are weighted to control for differences in sampling of the luminosity functions at each redshift. The CANDELS galaxies span $1 \leq z \leq 3$; the SDSS galaxies are chosen to match the same range of physical resolutions in kpc given median seeing of $1^{\prime \prime}4$ ($0.0418 \leq z \leq 0.0436$). The featured samples are generally disk-dominated, which is expected given that majority of features measured by Galaxy Zoo 2 and Galaxy Zoo CANDELS are associated with disk instabilities. A K-S test between featured samples shows no statistically significant result. However, the Smooth galaxy samples have very different distributions between $1 \leq z \leq 3$ and $z \approx 0.04$. In particular, while the more local sample of smooth galaxies shows a high fraction of bulge-dominated galaxies, the distribution of higher-redshift ``smooth'' galaxies is relatively uniform and includes including a substantial population of disk-dominated galaxies at $1 \leq z \leq 3$ which have no evidence of ``features'' often associated with disks. The significance of this result depends somewhat on the specific choice of bulge-to-total ratio from each study that measures it (\citeauthor{haeussler13}, in preparation, for CANDELS; \citeauthor{lackner12} \citeyear{lackner12} for SDSS), but a K-S test between smooth samples returns $p < 0.05$ for all reasonable choices of bulge-to-total measurements. Smooth galaxies at $z \sim 0$ and $z \geq 1$ are most likely not drawn from the same underlying distribution of morphologies.
+Distributions of bulge-to-total ratios for samples of galaxies observed by CANDELS (solid curves) and SDSS (dashed curves) that are unambiguously Smooth (red curves) and Featured (blue curves). The samples are weighted to control for differences in sampling of the luminosity functions at each redshift. The CANDELS galaxies span $1 \leq z \leq 3$; the SDSS galaxies are chosen to match the same range of physical resolutions in kpc given median seeing of $1^{\prime \prime}.4$ ($0.0418 \leq z \leq 0.0436$). The featured samples are generally disk-dominated, which is expected given that majority of features measured by Galaxy Zoo 2 and Galaxy Zoo CANDELS are associated with disk instabilities. A K-S test between featured samples shows no statistically significant result. However, the Smooth galaxy samples have very different distributions between $1 \leq z \leq 3$ and $z \approx 0.04$. In particular, while the more local sample of smooth galaxies shows a high fraction of bulge-dominated galaxies, the distribution of higher-redshift ``smooth'' galaxies is relatively uniform and includes including a substantial population of disk-dominated galaxies at $1 \leq z \leq 3$ which have no evidence of ``features'' often associated with disks. The significance of this result depends somewhat on the specific choice of bulge-to-total ratio from each study that measures it (\citeauthor{haeussler13}, in preparation, for CANDELS; \citeauthor{lackner12} \citeyear{lackner12} for SDSS), but a K-S test between smooth samples returns $p < 0.05$ for all reasonable choices of bulge-to-total measurements. Smooth galaxies at $z \sim 0$ and $z \geq 1$ are most likely not drawn from the same underlying distribution of morphologies.
 }
 \label{fig:btot}
 \end{figure*}
