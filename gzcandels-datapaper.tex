@@ -84,7 +84,6 @@
 individually acknowledged at http://authors.galaxyzoo.org/ .} } 
 
 \author[Simmons et al.]{\parbox[t]{16cm}{B. D. Simmons$^{1,2,3}$\thanks{E-mail: bdsimmons@ucsd.edu}\footnote{Einstein Fellow}, 
-% Maybe list: Avishai Dekel (wants to be included but isn't a builder (?) and hasn't commented on paper yet), Marco Castellano (photometry builder? unclear)
 Chris Lintott$^{1}$, 
 Kyle W. Willett$^{UMN,UKY}$, 
 Karen L. Masters$^{ICG,SEPnet}$, 
@@ -92,9 +91,10 @@ Karen L. Masters$^{ICG,SEPnet}$,
 %Thomas Melvin$^{ICG}$, 
 Jeyhan S. Kartaltepe$^{RIT}$, 
 Boris H\"au\ss ler$^{1,HERTS,ESO}$,
+Sugata Kaviraj$^{HERTS, WORC}$,
 Coleman Krawczyk$^{ICG}$,
 Sandor Kruk$^{1}$,
-Daniel H. McIntosh$^{MOKS}$,
+Daniel H. McIntosh$^{MOKC}$,
 R. J. Smethurst$^{1}$, 
 Robert C. Nichol$^{ICG,SEPnet}$, 
 %Edmond Cheung$^{7}$, 
@@ -114,16 +114,16 @@ Jennifer Lotz$^{99}$,
 Alice Mortlock$^{NOTT}$, 
 {Jeffrey A. Newman$^{PITT}$,}
 Jamie Ownsworth$^{99}$, 
-Steven Bamford$^{NOTT}$,
+Steven P. Bamford$^{NOTT}$,
+Marco Castellano$^{INAF}$
 {\builderUC Tomas Dahlen$^{99}$,} 
+Avishai Dekel$^{RACAH}$
 {\builderUC Sandra M. Faber$^{99}$,}
 {\builderUC Steven L. Finkelstein$^{99}$,} 
 {\builderUC Adriano Fontana$^{99}$,}
 {\builderUC Audrey Galametz$^{99}$,}
 N. A. Grogin$^{ST}$,
 {\builderUC Ruth Gr\"utzbauch$^{99}$,} 
-% {\builderUC Yicheng Guo$^{99}$,} % Yicheng says he hasn't done enough on this paper so shouldn't be an author
-Sugata Kaviraj$^{HERTS, WORC}$,
 %Ray A. Lucas$^{13}$,
 Elizabeth McGrath$^{CC}$,
 Bahram Mobasher$^{99}$,
@@ -149,14 +149,14 @@ $^{ETH}$Institute for Astronomy, ETH Z\"urich, Wolfgang-Pauli-Strasse 27, CH-809
 %$^{9}$National Optical Astronomy Observatory, 950 N. Cherry Ave., Tucson, AZ, 85719, USA\\
 %$^{10}$Department of Astronomy, University of Michigan, Ann Arbor, MI 48104, USA\\
 %$^{11}$Institut de Cincies del Cosmos. Universitat de Barcelona (UB-IEEC), Mart i Franqus 1, E-08028 Barcelona, Spain\\
-$^{NOTT}$School of Physics \& Astronomy, University of Nottingham, Nottingham NG7 2RD\\
+$^{NOTT}$School of Physics \& Astronomy, The University of Nottingham, University Park, Nottingham, NG7 2RD, UK\\
 $^{ST}$Space Telescope Science Institute, 3700 San Martin Drive, Baltimore, MD 21218\\
 $^{UKY}$Department of Physics and Astronomy, University of Kentucky, Lexington, KY 40506, USA\\
 $^{MOKC}$Department of Physics, University of Missouri-Kansas City, 5110 Rockhill Road, Kansas City, MO 64110, USA\\
 $^{PITT}$Department of Physics and Astronomy \& PITT PACC, University of Pittsburgh, Pittsburgh, PA 15217, USA\\
 %$^{17}$UC Observatories/Lick Observatory and Department of Astronomy and Astrophysics, University of California, Santa Cruz, CA 95064, USA\\
 %$^{18}$Department of Astronomy, The University of Texas at Austin, Austin, TX 78712, USA\\
-%$^{19}$INAF-Osservatorio Astronomico di Roma, Via Frascati 33, I-00040, Monteporzio, Italy\\
+$^{INAF}$INAF-Osservatorio Astronomico di Roma, Via Frascati 33, I-00040, Monte Porzio Catone, Italy\\
 %$^{20}$Centre for Astronomy and Astrophysics, University of Lisbon, P-1349-018 Lisbon, Portugal\\
 $^{HERTS}$Centre for Astrophysics Research, University of Hertfordshire, College Lane, Hatfield AL10 9AB, UK\\
 $^{WORC}$Worcester College, Oxford\\
@@ -167,7 +167,8 @@ $^{WORC}$Worcester College, Oxford\\
 $^{CC}$Department of Physics and Astronomy, Colby College, Waterville, ME 04901, USA\\
 $^{ESO}$European Southern Observatory, Alonso de Cordova 3107, Vitacura, Casilla 19001, Santiago, Chile\\
 $^{BATH}$Department of Physics, University of Bath, Claverton Down, Bath BA2 7AY, UK \\
-$^{LAM}$Aix Marseille Universit\'e, CNRS, LAM (Laboratoire d'Astrophysique de Marseille) UMR 7326, F-13388 Marseille, France
+$^{LAM}$Aix Marseille Universit\'e, CNRS, LAM (Laboratoire d'Astrophysique de Marseille) UMR 7326, F-13388 Marseille, France\\
+$^{RACAH}$Center for Astrophysics and Planetary Science, Racah Institute of Physics, The Hebrew University, Jerusalem 91904, Israel
    }
 
 \maketitle
@@ -248,7 +249,7 @@ Each colour image is 424 pixels square. The angular size of the image varies bas
 
 Selection of galaxies to include in Galaxy Zoo CANDELS was based on preliminary photometry of the ACS and WFC3 images, computed using Source Extractor \citep{bertin96}. As described in Section \ref{sec:images}, the sample was selected using $H \leq 25.5$~mag. 
 
-Subsequent analysis has produced more refined photometry in each field (GOODS-S, \citeauthor{guo13} \citeyear{guo13}; UDS, \citeauthor{galametz13} \citeyear{galametz13}; COSMOS, M. Peth et al., in preparation). In particular, an adapted form of Source Extractor has been used to more cleanly determine backgrounds and provide improved flux measurements. As a result, many source magnitudes have been revised to fainter values: the average source magnitude in the sample is fainter by $0.35$ mag. The faintest detected source in the revised catalog has a magnitude of $H = 28.3$.
+Subsequent analysis has produced more refined photometry in each field (GOODS-S, \citeauthor{guo13} \citeyear{guo13}; UDS, \citeauthor{galametz13} \citeyear{galametz13}; COSMOS, H. Nayyeri et al., in preparation). In particular, an adapted form of Source Extractor has been used to more cleanly determine backgrounds and provide improved flux measurements. As a result, many source magnitudes have been revised to fainter values: the average source magnitude in the sample is fainter by $0.35$ mag. The faintest detected source in the revised catalog has a magnitude of $H = 28.3$.
 
 In general, the morphological quantities presented here do not rely on photometric information beyond initial identification of the sample. For example, we do not use colour, size, or redshift information to inform the raw or weighted morphologies. There is one exception: in Section \ref{sec:rawclass} we describe how an analysis of ongoing classifications led to a modification to the retirement limit of some subjects based on their classifiability as a function of surface brightness and magnitude. Thus for fainter, lower-surface brightness images the number of classifications may be lower than the average of $\sim40$ per subject. Otherwise, we only incorporated photometry into our analysis after the collection of classifications was complete. In particular, we use $H$-band {\sc auto} magnitude and 80-per-cent flux radius in Section \ref{sec:depth} when discussing depth corrections and classification biases below and photometric redshifts in the analysis of smooth disks in Section \ref{sec:result}. 
 
@@ -419,7 +420,7 @@ The values in Figure \ref{fig:classification_basic_info} are raw classification 
 
 Within the raw classifications, a small group of classifiers (86, or less than 0.1 per cent) classified at least 200 subjects \emph{and} gave the same answer to the question in the first task at least 98 per cent of the time. Within this group, 99.6 per cent of classifications were for ``star or artifact'' (from 84 classifiers) and 0.4 per cent were for ``smooth'' (from 2 classifiers). 
 
-Only a small number of unresolved sources or sources dominated by an unresolved element (i.e., stars and quasars) are included in the full Galaxy Zoo CANDELS subject sample. Examination of the CANDELS photometric catalogs \citep[][M. Peth et al., in preparation]{galametz13,guo13} shows that less than 12 per cent of subjects have $\stellarity > 0.25$ (a very inclusive cut; a more typical cut on stellarity estimates the number of unresolved sources at less than 3 per cent). If the subjects assigned to a classifier are drawn at random from the subject set, then for any classifier who submits a substantial number of classifications, the chances they will be shown a large fraction of stars is very small. 
+Only a small number of unresolved sources or sources dominated by an unresolved element (i.e., stars and quasars) are included in the full Galaxy Zoo CANDELS subject sample. Examination of the CANDELS photometric catalogs \citep[][H. Nayyeri et al., in preparation]{galametz13,guo13} shows that less than 12 per cent of subjects have $\stellarity > 0.25$ (a very inclusive cut; a more typical cut on stellarity estimates the number of unresolved sources at less than 3 per cent). If the subjects assigned to a classifier are drawn at random from the subject set, then for any classifier who submits a substantial number of classifications, the chances they will be shown a large fraction of stars is very small. 
 
 Even for more common answers to the first task, the chances of a classifier being randomly assigned a highly uniform set of $N$ subjects becomes very small as $N$ becomes large. For example, if the probability of being assigned a ``smooth'' galaxy is $p = 0.9$, the chance of being assigned a subject set of 98 per cent smooth galaxies out of $N > 200$ total is so small that it would likely happen approximately once per billion classifiers, \emph{i.e.}, it is highly unlikely in a project with $\sim 100,000$ classifiers.
 
@@ -678,7 +679,7 @@ In addition to variations in classification as a function of image depth discuss
 
 More specifically, the FWHM of the WFC3 PSF is equivalent to 0.92 kpc at $z = 0.5$; this increases to 1.22 kpc at $z = 1$ and  1.27 kpc at $z = 1.6$, the redshift at which physical resolution is at its worst. At the redshift where the central wavelength of the $F160W$ filter is approximately aligned with the rest-frame $B$ band, $z=2.7$, the FWHM of the WFC3 PSF in physical units is 1.19 kpc. The images used here therefore cannot resolve intrinsically distinct features smaller than $\sim 1-1.3$~kpc, so a galaxy with \emph{only} features smaller than this is likely to be classified as ``smooth'' in Galaxy Zoo CANDELS. There may be exceptions due to the fact that the ACS PSF is approximately half the size, and the colour images use ACS $F814W$ images in the blue channel. A galaxy with features of a size just below the detection limit in WFC3 \emph{but} which are also bright in $F814W$ (which is in the rest-frame UV for $z \gtrsim 1$) may show blue resolved features in the subject images.
 
-ACS and WFC3 on \emph{HST} provide the highest-resolution images currently available. These images may in the future be used in comparison with morphological studies using the \emph{James Webb Space Telescope}, although we note that telescope is not as well optimised for surveys as \emph{HST} so may be less likely to conduct large-area treasury surveys to study galaxy evolution. The classifications presented here will likely be of substantial use to large-scale morphological studies using the \emph{Euclid} mission \citep{refregier10}, which will cover more of the sky at approximately half the resolution of \emph{HST} at any wavelength. For now, however, we note going forward that the features reported by Galaxy Zoo CANDELS will in general be limited to those with a physical size of at least $\sim 1$ kpc.
+ACS and WFC3 on \emph{HST} provide the highest-resolution images currently available. These images may in the future be used in comparison with morphological studies using the \emph{James Webb Space Telescope}, although that telescope is not as well optimised for surveys as \emph{HST}. The classifications presented here will likely be of substantial use to large-scale morphological studies using the \emph{Euclid} mission \citep{refregier10}, which will cover more of the sky at approximately half the resolution of \emph{HST} at any wavelength. For now, however, we note going forward that the features reported by Galaxy Zoo CANDELS will in general be limited to those with a physical size of at least $\sim 1$ kpc.
 
 
 
