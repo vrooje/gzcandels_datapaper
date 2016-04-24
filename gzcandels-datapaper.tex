@@ -868,7 +868,7 @@ Assessing the exact significance value is made slightly more challenging due to 
 
 Despite these differences, we choose to show in Figure \ref{fig:btot} the published best fits from among the multiple fits performed for each galaxy in each sample; were we to instead only draw from the 2-component fits of \citet{lackner12} (which in many cases substantially disagree with the best-fit model), the distributions would remain significantly different ($p = 0.026$).
 
-This finding of a substantial population of completely smooth disk galaxies is consistent with the results of recent dynamical studies of galaxies at $z > 1$ \citep[e.g.][]{wisnioski15} showing that disk galaxies are on average dynamically warmer and thus less prone to instabilities such as bar and spiral modes. 
+This finding of a substantial population of completely smooth disk galaxies is consistent with the observed decline in disk bar fraction at $z \gtrsim 1$ \citep{melvin14,simmons14}, and also with the results of recent dynamical studies of galaxies at $z > 1$ \citep[e.g.][]{wisnioski15} showing that disk galaxies are on average dynamically warmer and thus less prone to instabilities such as bar and spiral modes. 
 
 Since galaxies with smoother light distribution are also more likely to have very reliable bulge-disk decompositions in large-scale galaxy fitting studies, the combination of Galaxy Zoo morphological selection and selection of smooth disks via bulge-to-total ratios is a more powerful selector of relatively complete samples of $z > 1$ disks than either selection method alone. The subset of 1,096 ``smooth'' galaxies at $1 \leq z \leq 3$ with $IJH$ B/Tot$<0.5$ is shown in Table \ref{table:smooth_disks} and is available as part of the Galaxy Zoo CANDELS data release. 
 
@@ -878,7 +878,7 @@ Since galaxies with smoother light distribution are also more likely to have ver
  \hline
 \multicolumn{1}{l}{ID} &
 \multicolumn{1}{c}{$f_{\rm smooth}$} &
-\multicolumn{1}{c}{\musb} 
+\multicolumn{1}{c}{\musb ~[mag~arcsec$^{-2}$]} 
 \\ 
 \hline
 \hline
@@ -910,7 +910,11 @@ $\ldots$    \\
 
 The Galaxy Zoo project has collected typically 40 or more independent visual classifications to date from colour images of three CANDELS fields: GOODS-South, COSMOS, and the UDS. Here we present the public release of these classifications, both in raw form and after applying an iterative consensus-based classifier weighting scheme that has been successfully applied to multiple previous Galaxy Zoo projects, as well as additional weighting techniques making use of the stellarity parameter from automated measurements. We provide an analysis of changes in classifications with imaging depth and offer advice and caveats for usage of these morphological measurements for different science goals. 
 
-Comparison of the Galaxy Zoo morphologies with existing visual morphologies of a subset of the sample are in remarkably good agreement across a wide range of morphological features. We also combine Galaxy Zoo morphologies with multi-wavelength bulge-disk decompositions to show that a substantial fraction of galaxies lacking significant morphological signatures of disk features have disk-dominated light profiles.
+Approximately 12 per cent of the full catalog is comprised of galaxies where at least 30 per cent of weighted classifiers indicated the galaxy was ``featured''. These galaxies include clumpy galaxies, edge-on galaxies, galaxies with spiral arms and with bulges at a range of strengths. Each of these morphological parameters is reported for every galaxy in the sample. 
+
+Comparison of the Galaxy Zoo morphologies with existing visual morphologies from other studies are in remarkably good agreement across a wide range of morphological features. We also combine Galaxy Zoo morphologies with multi-wavelength bulge-disk decompositions to show that, while the presence of features is a reliable indicator of a disk, the \emph{absence} of such features does not imply an absence of a significant disk. A substantial fraction of galaxies lacking significant morphological signatures of disk features have disk-dominated light profiles; this fraction is significantly higher at $z > 1$ than for luminosity- and resolution-matched samples of smooth galaxies at $z \sim 0$. We present a table of smooth disks at $1 \leq z \leq 3$ as part of this Galaxy Zoo CANDELS data release.
+
+This data release includes 3 of the 5 legacy fields imaged by the CANDELS project. Future work in the collaboration between Galaxy Zoo and CANDELS includes the classification of the other 2 fields (EGS and GOODS-North). Other future studies of this rich dataset may include a more detailed study of clumpy structures in $z > 1$ galaxies and examination of mergers at these epochs, for comparison to local samples with similar selection methods \citep{darg10b,darg10a}. 
 
 The public catalog of Galaxy Zoo CANDELS morphologies may be obtained from {\tt data.galaxyzoo.org}.
   
