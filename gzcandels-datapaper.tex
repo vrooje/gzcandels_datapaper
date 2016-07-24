@@ -828,14 +828,19 @@ While it may thus be the case that the purity of a sample of disks selected via 
 
 %%%%% [FIGURE: dM] %%%%%
 \begin{figure*}
-\includegraphics[scale=0.85]{dM_histogram_all_x10a.png}
+\includegraphics[scale=0.85]{dM_histogram_unweighted_x10a_Simard.png}
 \caption{
-\emph{Top row:} Distributions of luminosity function sampling for galaxy sub-samples selected by morphology and redshift. $M - M^*$ indicates where each galaxy lies on the rest-frame optical luminosity function for galaxies relative to $M^*$ at that redshift; values $>0$ indicate galaxies fainter than $M^*$. Panel (a) shows smooth (blue solid line) and featured (red dotted line) galaxies from Galaxy Zoo CANDELS at $1 \leq z \leq 3$ using rest-frame $V$-band absolute magnitudes and the luminosity function measured by \citet{marchesini12}. The featured sample is considerably smaller and brighter than the smooth sample (we show the featured distribution counts multiplied by $10$ for easier comparison). Panel (b) shows smooth and featured galaxies from Galaxy Zoo 2 \citep{willett13} using the rest-frame $g$-band absolute magnitudes and the luminosity function measured by \citet{blanton01}. All samples in panels (a) and (b) have substantially different luminosities and luminosity distributions; further comparison of the samples requires controlling for these differences.
-\emph{Bottom row:} Weighted distributions of $M - M^*$, with weights chosen so that all samples have statistically indistinguishable $M-M^*$ distributions. Weights are normalised separately in panels (a) and (b), which show smooth and featured distributions, respectively. The weights are normalised so that the maximum weight for any single galaxy is 1.0; this results in effective counts of 135 galaxies per smooth sample and 45 galaxies per featured sample (CANDELS and SDSS are shown as solid and dashed curves, respectively). The peak of the distribution is slightly fainter than $M^*$ at each redshift, and the full weighted distribution includes galaxies at luminosities $\pm 2$ magnitudes from $M^*$.
-}
+Distributions of luminosity function sampling for galaxy sub-samples selected by morphology and redshift. $M - M^*$ indicates where each galaxy lies on the rest-frame optical luminosity function for galaxies relative to $M^*$ at that redshift; values $>0$ indicate galaxies fainter than $M^*$. Panel (a) shows smooth (blue solid line) and featured (red dotted line) galaxies from Galaxy Zoo CANDELS at $1 \leq z \leq 3$ using rest-frame $V$-band absolute magnitudes and the luminosity function measured by \citet{marchesini12}. The featured sample is considerably smaller and brighter than the smooth sample (we show the featured distribution counts multiplied by $10$ for easier comparison). Panel (b) shows smooth and featured galaxies from Galaxy Zoo 2 \citep{willett13} using the rest-frame $g$-band absolute magnitudes and the luminosity function measured by \citet{blanton01}. Each sample has substantially different luminosities and luminosity distributions; further comparison of the samples requires controlling for these differences.}
 \label{fig:dM}
 \end{figure*}
 %%%%% END FIGURE %%%%%
+
+%%%%%%%%% [FIGURE: dM2] %%%%%%%%%
+\begin{figure*}
+\includegraphics[scale=0.85]{dm_histogram_weighted_x10a_Simard.png}
+\caption{
+Weighted distributions of $M - M^*$ for the samples shown in figure \ref{fig:dM}, with weights chosen so that all samples have statistically indistinguishable $M-M^*$ distributions. Weights are normalised separately for smooth and featured distributions and chosen so that the maximum weight for any single galaxy is 1.0; this results in effective counts of 135 galaxies per smooth sample and 45 galaxies per featured sample (CANDELS and SDSS are shown as solid and dashed curves, respectively). The peak of the distribution is slightly fainter than $M^*$ at each redshift, and the full weighted distribution includes galaxies at luminosities $\pm 2$ magnitudes from $M^*$.
+}
 
 
 
