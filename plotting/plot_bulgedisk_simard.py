@@ -404,7 +404,7 @@ gzmm['RE_GALFIT_BAND_D_J'] = [q[2] for q in gzmm['RE_GALFIT_BAND_D']]
 gzmm['RE_GALFIT_BAND_D_H'] = [q[3] for q in gzmm['RE_GALFIT_BAND_D']]
 
 if gzbt == 'BTot_rest_g':
-    # well, crap, we asked to use this and we haven't yet created it
+    # well, crap, we were asked to use this and we haven't yet created it
     # so do that
 
     central_wavelength = 4770. # sloan g-band

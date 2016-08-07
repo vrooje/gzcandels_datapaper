@@ -11,11 +11,6 @@ from scipy.stats import gaussian_kde
 
 
 
-def get_cplot(counts, xbins, ybins):
-    ct = counts.transpose()
-    extent=[xbins.min(),xbins.max(),ybins.min(),ybins.max()]
-    return ct, extent
-
 
 infile = 'candels_restframe_phot_weighted_classifications.fits'
 fsmooth   = 't00_smooth_or_featured_a0_smooth_weighted_frac'
@@ -26,11 +21,9 @@ print("Reading file %s ...\n" % infile)
 gz_all = Table.read(infile)
 print("    ... done.")
 
-col_min = -1.1
-col_max = 3.35
-
 threshold = 0.02 # 1 - threshold is the %ile to plot a contour at
 threshold_all = 0.02 # We will plot the outer <--- fraction of points
+threshold_col = 0.01 # We will plot the outer <--- fraction of points
 bins = 60
 bins_all = 60
 
@@ -38,10 +31,9 @@ okdata = np.invert(np.isnan(gz_all['z_best'])) & np.invert(np.isnan(gz_all['UX_r
 
 gz = gz_all[okdata]
 
+
 not_artifact = gz[ffeatured] < 0.5
 Vzlims = (gz['z_best'] > 0.0) & (gz['z_best'] < 4.1) & (gz['V_rest'] > -25.5) & (gz['V_rest'] < -9.5) & not_artifact
-UVJlims = (gz['UX_rest'] - gz['V_rest'] > col_min) & (gz['UX_rest'] - gz['V_rest'] < col_max) & (gz['V_rest'] - gz['J_rest'] > col_min) & (gz['V_rest'] - gz['J_rest'] < col_max) & not_artifact
-
 
 
 # so that we can plot points without overplotting duplicates
@@ -58,12 +50,6 @@ smooth06a = (gz[fsmooth] >= 0.6)
 smooth07a = (gz[fsmooth] >= 0.7)
 smooth08a = smooth08
 
-sbin04 = max(int(sum(smooth04a)*binfactor), binmin)
-sbin05 = max(int(sum(smooth05a)*binfactor), binmin)
-sbin06 = max(int(sum(smooth06a)*binfactor), binmin)
-sbin07 = max(int(sum(smooth07a)*binfactor), binmin)
-sbin08 = max(int(sum(smooth08a)*binfactor), binmin)
-
 featured04 = (gz[ffeatured] >= 0.4) & (gz[ffeatured] < 0.5)
 featured05 = (gz[ffeatured] >= 0.5) & (gz[ffeatured] < 0.6)
 featured06 = (gz[ffeatured] >= 0.6) & (gz[ffeatured] < 0.7)
@@ -79,12 +65,14 @@ featured07a = featured07
 # get contours from KDE kernels
 # all data
 all_pts = np.vstack([np.array(gz['z_best'][Vzlims]), np.array(gz['V_rest'][Vzlims])])
+kde_all = gaussian_kde(all_pts)
 kde_all = gaussian_kde(all_pts, bw_method=kde_all.scotts_factor()/2.)
 z_all = kde_all(all_pts)
 x = np.ma.masked_where(z_all > threshold_all, np.array(gz['z_best'][Vzlims]))
 y = np.ma.masked_where(z_all > threshold_all, np.array(gz['V_rest'][Vzlims]))
 
-#smooth
+
+#smooth - Vz
 smooth_pts04 = np.vstack([np.array(gz['z_best'][smooth04a]), np.array(gz['V_rest'][smooth04a])])
 smooth_pts05 = np.vstack([np.array(gz['z_best'][smooth05a]), np.array(gz['V_rest'][smooth05a])])
 smooth_pts06 = np.vstack([np.array(gz['z_best'][smooth06a]), np.array(gz['V_rest'][smooth06a])])
@@ -112,7 +100,8 @@ y_s07 = np.ma.masked_where(z_s07 > threshold, np.array(gz['V_rest'][smooth07a]))
 x_s08 = np.ma.masked_where(z_s08 > threshold, np.array(gz['z_best'][smooth08a]))
 y_s08 = np.ma.masked_where(z_s08 > threshold, np.array(gz['V_rest'][smooth08a]))
 
-# featured
+
+# featured - Vz
 featured_ptf04 = np.vstack([np.array(gz['z_best'][featured04a]), np.array(gz['V_rest'][featured04a])])
 featured_ptf05 = np.vstack([np.array(gz['z_best'][featured05a]), np.array(gz['V_rest'][featured05a])])
 featured_ptf06 = np.vstack([np.array(gz['z_best'][featured06a]), np.array(gz['V_rest'][featured06a])])
@@ -134,7 +123,6 @@ x_f06 = np.ma.masked_where(z_f06 > threshold, np.array(gz['z_best'][featured06a]
 y_f06 = np.ma.masked_where(z_f06 > threshold, np.array(gz['V_rest'][featured06a]))
 x_f07 = np.ma.masked_where(z_f07 > threshold, np.array(gz['z_best'][featured07a]))
 y_f07 = np.ma.masked_where(z_f07 > threshold, np.array(gz['V_rest'][featured07a]))
-
 
 
 
@@ -301,39 +289,4 @@ plt.clf()
 #####################################################
 #####################################################
 #####################################################
-
-
-def plot_UVJ(gz):
-
-    fig = plt.figure(figsize=(5.5, 4))
-
-    UVlim = (col_min, col_max)
-    VJlim = (col_min, col_max)
-
-    plt.xlim(VJlim)
-    plt.ylim(UVlim)
-
-    plt.hexbin(gz['UX_rest'][UVJlims]-gz['V_rest'][UVJlims], gz['V_rest'][UVJlims]-gz['J_rest'][UVJlims], gridsize=25, bins='log', cmap='Greys', label='_nolegend_')
-
-    plt.plot(gz['UX_rest'][gz['clean_smooth']]-gz['V_rest'][gz['clean_smooth']], gz['V_rest'][gz['clean_smooth']]-gz['J_rest'][gz['clean_smooth']], marker='o',  color=col04, ms=7., linestyle='None', mfc='None', label = '${\\rm Smooth}$')
-    plt.plot(gz['UX_rest'][gz['clean_spiral']]-gz['V_rest'][gz['clean_spiral']], gz['V_rest'][gz['clean_spiral']]-gz['J_rest'][gz['clean_spiral']], marker='o',  color=col07, ms=7., linestyle='None', mfc='None', label = '${\\rm Spiral}$')
-
-
-    plt.xlabel('${\\rm Rest-frame\\ } (V-J)$')
-    plt.ylabel('${\\rm Rest-frame\\ } (U-V)$')
-
-    cb3 = plt.colorbar()
-    cb3.set_label("log(N)")
-
-    plt.legend(loc='upper left', frameon=True)
-
-    plt.tight_layout()
-
-    fout = 'UVJ_smooth_spiral'
-    plt.savefig('%s.png' % fout, facecolor='None', edgecolor='None')
-    plt.savefig('%s.eps' % fout, facecolor='None', edgecolor='None')
-    plt.close()
-    plt.cla()
-    plt.clf()
-
 #booya
