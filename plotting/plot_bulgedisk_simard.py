@@ -6,6 +6,11 @@ import numpy as np
 import astropy
 from astropy.table import Table
 from scipy import stats, interpolate, special
+from astropy.cosmology import FlatLambdaCDM
+import astropy.units as u
+
+# being explicit about units as recommended
+cosmo = FlatLambdaCDM(H0=70 * u.km / u.s / u.Mpc, Om0=0.3)
 
 
 infile_CANDELS = '/Users/vrooje/Documents/Astro/Zooniverse/gz_reduction_sandbox/data/gz_and_megamorph_cosmos_withrestframeV.fits'
@@ -33,7 +38,13 @@ gzbt = 'BTot_rest_g'
 ###########################################################
 
 
-
+def get_pcoeff(q):
+    if q < 0.5:
+        return 0.69
+    elif q < 1.0:
+        return 0.59
+    else:
+        return 0.49
 
 
 def get_dMg(q):
@@ -41,6 +52,43 @@ def get_dMg(q):
         return float(q) - Mstar_g
     except:
         return -99.
+
+
+
+def weighted_quantile(values, quantiles, sample_weight=None, values_sorted=False, old_style=False):
+    """ Very close to numpy.percentile, but supports weights.
+    NOTE: quantiles should be in [0, 1]!
+    :param values: numpy.array with data
+    :param quantiles: array-like with many quantiles needed
+    :param sample_weight: array-like of the same length as `array`
+    :param values_sorted: bool, if True, then will avoid sorting of initial array
+    :param old_style: if True, will correct output to be consistent with numpy.percentile.
+    :return: numpy.array with computed quantiles.
+    """
+    values = np.array(values)
+    quantiles = np.array(quantiles)
+    if sample_weight is None:
+        sample_weight = np.ones(len(values))
+    sample_weight = np.array(sample_weight)
+    assert np.all(quantiles >= 0) and np.all(quantiles <= 1), 'quantiles should be in [0, 1]'
+
+    if not values_sorted:
+        sorter = np.argsort(values)
+        values = values[sorter]
+        sample_weight = sample_weight[sorter]
+
+    weighted_quantiles = np.cumsum(sample_weight) - 0.5 * sample_weight
+    if old_style:
+        # To be convenient with np.percentile
+        weighted_quantiles -= weighted_quantiles[0]
+        weighted_quantiles /= weighted_quantiles[-1]
+    else:
+        weighted_quantiles /= np.sum(sample_weight)
+    return np.interp(quantiles, weighted_quantiles, values)
+
+
+
+
 
 
 
@@ -350,10 +398,549 @@ def plot_btot_hist_bymorph(whichsdss='Simard'):
 
 
 
+###########################################
+# B/Tot plots, smooth only, separated by passive/actively-SFing
+
+def plot_btot_hist_smooth_quiescent_UmV(whichsdss='Simard'):
+    sdss_col = btot
+    pval_s = p_smooth
+    pval_f = p_featured
+    filelabel = 'Simard'
+    hists_featured = gzmm_featured_hist[0] + sdss_featured_hist[0]
+    hists_smooth   = gzmm_smooth_hist[0]   + sdss_smooth_hist[0]
+    ylim_shi = 19.5
+
+    # if you only have one color, you'd do a cut on that instead of UVJ
+    # this value is, if you ignore dust, what separates SFing from quiescent pops
+    # at all redshifts in the CANDELS sample (Williams et al. 2009)
+    redder = gzmm['UmV'] > 1.3
+    redder_VmJ = gzmm['VmJ'] > 1 # this one is kinda just estimated
+
+
+
+    # first initialise the WHOLE figure
+    fig2 = plt.figure(figsize=(8, 4))
+
+    xlimits = (-0.1, 1.1)
+    #ylimits = (0.0, 0.275)
+    ylimits_s = (0., ylim_shi)
+    sbins_smooth   = np.arange(-0.15, 1.15, 0.1)
+    sbins_featured = np.arange(-0.15, 1.15, 0.1)
+
+    plabel_height = 0.71
+
+
+    axx = fig2.add_subplot(1,2,1)
+
+    axx.hist(gzmm[gzbt][smooth_select & redder],   weights=gzmm['Mweight_smooth'][smooth_select & redder],   bins=sbins_smooth,   histtype='step', color='#B22222', linestyle='dashed', label='Smooth, $U-V\ >\  1.3$')
+    axx.hist(gzmm[gzbt][smooth_select & np.invert(redder)],   weights=gzmm['Mweight_smooth'][smooth_select & np.invert(redder)],   bins=sbins_smooth,   histtype='step', color='#008B8B', label='Smooth, $U-V\ \leq \ 1.3$')
+
+    # to use V-J instead
+
+    #axx.hist(gzmm[gzbt][smooth_select & redder_VmJ],   weights=gzmm['Mweight_smooth'][smooth_select & redder_VmJ],   bins=sbins_smooth,   histtype='step', color='#B22222', linestyle='dashed', label='Smooth, $V-J\ >\  1$')
+    #axx.hist(gzmm[gzbt][smooth_select & np.invert(redder_VmJ)],   weights=gzmm['Mweight_smooth'][smooth_select & np.invert(redder_VmJ)],   bins=sbins_smooth,   histtype='step', color='#008B8B', label='Smooth, $V-J\ \leq \ 1$')
+
+
+    axx.set_xlim(xlimits)
+    axx.set_ylim(ylimits_s)
+    axx.set_xlabel("B/Tot")
+    axx.legend(loc='upper left', frameon=False) #loc=2
+
+
+    axq = fig2.add_subplot(1,2,2)
+
+    axq.hist(gzmm[gzbt][smooth_select & passive],   weights=gzmm['Mweight_smooth'][smooth_select & passive],   bins=sbins_smooth,   histtype='step', color='#008000', linestyle='dashed', label='Smooth, quiescent')
+    axq.hist(gzmm[gzbt][smooth_select & np.invert(passive)],   weights=gzmm['Mweight_smooth'][smooth_select & np.invert(passive)],   bins=sbins_smooth,   histtype='step', color='#800080', label='Smooth, star-forming')
+
+    axq.set_xlim(xlimits)
+    axq.set_ylim(ylimits_s)
+    axq.set_xlabel("B/Tot")
+    axq.legend(loc='upper left', frameon=False) #loc=2
+
+
+
+    plt.tight_layout()
+
+    plt.savefig('BTot_histogram_smooth_quiescent_UmV.png', facecolor='None', edgecolor='None')
+    plt.savefig('BTot_histogram_smooth_quiescent_UmV.eps', facecolor='None', edgecolor='None')
+
+    plt.clf()
+    plt.cla()
+    plt.close('All')
+    plt.close()
+    plt.close()
+    plt.close()
+
+
+
+###########################################
+# B/Tot plots, smooth only, separated by passive/actively-SFing
+
+def plot_btot_hist_smooth_quiescent(whichsdss='Simard'):
+    sdss_col = btot
+    pval_s = p_smooth
+    pval_f = p_featured
+    filelabel = 'Simard'
+    hists_featured = gzmm_featured_hist[0] + sdss_featured_hist[0]
+    hists_smooth   = gzmm_smooth_hist[0]   + sdss_smooth_hist[0]
+    ylim_shi = 19.5
+
+
+
+    # first initialise the WHOLE figure
+    fig2 = plt.figure(figsize=(4, 4))
+
+    xlimits = (-0.1, 1.1)
+    #ylimits = (0.0, 0.275)
+    ylimits_s = (0., ylim_shi)
+    sbins_smooth   = np.arange(-0.15, 1.15, 0.1)
+    sbins_featured = np.arange(-0.15, 1.15, 0.1)
+
+    plabel_height = 0.71
+
+
+    axq = fig2.add_subplot(1,1,1)
+
+    axq.hist(gzmm[gzbt][smooth_select & passive],   weights=gzmm['Mweight_smooth'][smooth_select & passive],   bins=sbins_smooth,   histtype='step', color='#008000', linestyle='dashed', label='Smooth, quiescent')
+    axq.hist(gzmm[gzbt][smooth_select & np.invert(passive)],   weights=gzmm['Mweight_smooth'][smooth_select & np.invert(passive)],   bins=sbins_smooth,   histtype='step', color='#800080', label='Smooth, star-forming')
+
+    axq.set_xlim(xlimits)
+    axq.set_ylim(ylimits_s)
+    axq.set_xlabel("B/Tot")
+    axq.legend(loc='upper left', frameon=False) #loc=2
+
+
+
+    plt.tight_layout()
+
+    plt.savefig('BTot_histogram_smooth_quiescent.png', facecolor='None', edgecolor='None')
+    plt.savefig('BTot_histogram_smooth_quiescent.eps', facecolor='None', edgecolor='None')
+
+    plt.clf()
+    plt.cla()
+    plt.close('All')
+    plt.close()
+    plt.close()
+    plt.close()
+
+
+
+'''
+
+In [36]: sum(gzmm['Mweight_smooth'][smooth_select & passive & (gzmm[gzbt] < 0.5)])
+Out[36]: 16.189785443809875
+
+In [37]: sum(gzmm['Mweight_smooth'][smooth_select & passive & (gzmm[gzbt] >= 0.5)])
+Out[37]: 28.907872987786476
+
+In [38]: sum(gzmm['Mweight_smooth'][smooth_select & passive])
+Out[38]: 45.097658431596273
+
+In [39]: sum(gzmm['Mweight_smooth'][smooth_select & np.invert(passive) & (gzmm[gzbt] < 0.5)])
+Out[39]: 54.987894370676976
+
+In [40]: sum(gzmm['Mweight_smooth'][smooth_select & np.invert(passive) & (gzmm[gzbt] >= 0.5)])
+Out[40]: 31.914447197726503
+
+In [41]: sum(gzmm['Mweight_smooth'][smooth_select & np.invert(passive)])
+Out[41]: 86.90234156840387
+
+In [42]: sum(gzmm['Mweight_smooth'][smooth_select])
+Out[42]: 132.00000000000097
+
+So, of the 132 smooth galaxies in CANDELS (weighted counts):
+
+71.2 are disky (54%)
+
+16.2 are passive disks
+28.9 are passive spheroids
+55.0 are star-forming disks
+31.9 are star-forming spheroids
+
+So if you're trying to select smooth disks and you select smooth star-forming as a proxy, you will get 55 out of 71.2 that you do want (77% complete), but also get 31.9 that you don't want, out of your 86.9 total (63% pure).
+
+If you're trying to select smooth spheroids and you select smooth quiescent as a proxy, you will get 28.9 out of 60.8 that you do want (47.5% complete), but also get 16.2 that you don't want, out of the 45.1 that you do select (64% pure).
+
+
+That was with the weighted counts, though. With the unweighted (which we could perhaps use instead if we don't care about comparing to SDSS):
+
+In [44]: len(gzmm[smooth_select & passive & (gzmm[gzbt] < 0.5)])
+Out[44]: 100
+
+In [45]: len(gzmm[smooth_select & passive & (gzmm[gzbt] >= 0.5)])
+Out[45]: 128
+
+In [46]: len(gzmm[smooth_select & passive])
+Out[46]: 228
+
+In [47]: len(gzmm[smooth_select & np.invert(passive) & (gzmm[gzbt] < 0.5)])
+Out[47]: 1049
+
+In [48]: len(gzmm[smooth_select & np.invert(passive) & (gzmm[gzbt] >= 0.5)])
+Out[48]: 673
+
+In [49]: len(gzmm[smooth_select & np.invert(passive)])
+Out[49]: 1722
+
+So in the UNWEIGHTED counts of 1950 smooth galaxies in CANDELS:
+
+100 are passive disks
+128 are passive spheroids
+1049 are star-forming disks
+673 are star-forming spheroids
+
+i.e. selecting star-forming smooth as a proxy for smooth disks you're 91% complete but 61% pure; selecting quiescent smooth as a proxy for smooth spheroids you're 16% complete and 56% pure.
+
+I interpret this difference as being dominated by the really faint smooth stuff that got removed by the weighting, and which is probably way too small in physical size for us to resolve features within those, so they look smooth but actually this is a resolution effect.
+
+'''
 
 
 
 
+
+
+
+
+
+###########################################
+# size plots for things with B/Tot < some threshold, smooth vs featured
+
+def plot_size_hist_disky(whichsdss='Simard'):
+    sdss_col = btot
+    pval_s = p_smooth
+    pval_f = p_featured
+    filelabel = 'Simard'
+    hists_featured = gzmm_featured_hist[0] + sdss_featured_hist[0]
+    hists_smooth   = gzmm_smooth_hist[0]   + sdss_smooth_hist[0]
+    sizecol = 'r80_kpc'
+    #sizecol = 'r50_kpc'
+
+    diskthresh = 0.5
+
+    disky = (gzmm[gzbt] < diskthresh)
+
+    disky03 = (gzmm[gzbt] < 0.3)
+
+    #In [252]: weighted_quantile(gzmm['r80_kpc'][featured_select & disky], 0.5, sample_weight=gzmm['Mweight_feat'][featured_select & disky], values_sorted=False)
+    #Out[252]: 7.517197372800844
+
+    #In [253]: weighted_quantile(gzmm['r80_kpc'][smooth_select & disky], 0.5, sample_weight=gzmm['Mweight_smooth'][smooth_select & disky], values_sorted=False)
+    #Out[253]: 4.976836114138525
+
+    #In [255]: weighted_quantile(gzmm['r80_kpc'][featured_select & disky03], 0.5, sample_weight=gzmm['Mweight_feat'][featured_select & disky03], values_sorted=False)
+    #Out[255]: 7.517197372800844
+
+    #In [256]: weighted_quantile(gzmm['r80_kpc'][smooth_select & disky03], 0.5, sample_weight=gzmm['Mweight_smooth'][smooth_select & disky03], values_sorted=False)
+    #Out[256]: 5.323082138451943
+
+    # So basically, the smooth disk-dominated weighted sample has a median 80% flux radius of 5 kpc, whereas the featured disk-dominated weighted sample has a median radius of 7.5 kpc, and this isn't particularly sensitive to the B/Tot threshold.
+
+
+    if sizecol == 'r80_kpc':
+        xlim_hi = 16.
+        ylim_hi = 24.5
+        thexlabel = '$r_{80}$ [kpc]'
+    else:
+        xlim_hi = 10.
+        ylim_hi = 43.5
+        thexlabel = '$r_{50}$ [kpc]'
+
+
+    if diskthresh < 0.4:
+        ylim_hi = 14.
+
+    # first initialise the WHOLE figure
+    fig2 = plt.figure(figsize=(8, 4))
+
+    xlimits = (-0.1, xlim_hi)
+    #ylimits = (0.0, 0.275)
+    ylimits_s = (0., ylim_hi)
+    sbins_smooth   = np.arange(-0.15, 50.15, 1.0)
+    sbins_featured = np.arange(-0.15, 50.15, 1.0)
+
+    plabel_height = 0.71
+
+
+    axq = fig2.add_subplot(1,2,1)
+
+    axq.hist(gzmm[sizecol][smooth_select & disky],   weights=gzmm['Mweight_smooth'][smooth_select & disky],   bins=sbins_smooth,   histtype='step', color='red', linestyle='dashed', label='Smooth, B/Tot < %.1f' % diskthresh)
+    #axq.hist(gzmm[sizecol][smooth_select & np.invert(disky)],   weights=gzmm['Mweight_smooth'][smooth_select & np.invert(disky)],   bins=sbins_smooth,   histtype='step', color='#FF8C00', linestyle='dotted', label='Smooth, B/Tot $\geq$ 0.5')
+    axq.hist(gzmm[sizecol][featured_select & disky],   weights=gzmm['Mweight_feat'][featured_select & disky],   bins=sbins_featured,   histtype='step', color='blue', label='Featured, B/Tot < %.1f' % diskthresh)
+
+    axq.set_xlim(xlimits)
+    axq.set_ylim(ylimits_s)
+    axq.set_xlabel(thexlabel)
+    axq.legend(loc='upper left', frameon=False) #loc=2
+
+
+
+    axr = fig2.add_subplot(1,2,2)
+    axr.hist(gzmm['VmJ'][smooth_select & disky],   weights=gzmm['Mweight_smooth'][smooth_select & disky],   bins=np.arange(-.625,2.5,.25),   histtype='step', color='red', linestyle='dashed', label='Smooth, B/Tot < %.1f' % diskthresh)
+    axr.hist(gzmm['VmJ'][featured_select & disky],   weights=gzmm['Mweight_feat'][featured_select & disky],   bins=np.arange(-.625,2.5,.25),   histtype='step', color='blue', label='Featured, B/Tot < %.1f' % diskthresh)
+    axr.set_xlim((-.625,2.5))
+    axr.set_ylim(ylimits_s)
+    axr.set_xlabel('Rest-frame $V-J$')
+
+
+
+
+    plt.tight_layout()
+
+    plt.savefig('size_histogram_smooth_featured_disks_%s_BT%.1f.png' % (sizecol, diskthresh), facecolor='None', edgecolor='None')
+    plt.savefig('size_histogram_smooth_featured_disks_%s_BT%.1f.eps' % (sizecol, diskthresh), facecolor='None', edgecolor='None')
+
+    plt.clf()
+    plt.cla()
+    plt.close('All')
+    plt.close()
+    plt.close()
+    plt.close()
+
+
+
+
+
+
+
+###########################################
+# size vs color plots for things with B/Tot < some threshold, smooth vs featured
+
+def plot_size_UmV_VmJ_disky():
+    sdss_col = btot
+    pval_s = p_smooth
+    pval_f = p_featured
+    filelabel = 'Simard'
+    hists_featured = gzmm_featured_hist[0] + sdss_featured_hist[0]
+    hists_smooth   = gzmm_smooth_hist[0]   + sdss_smooth_hist[0]
+    sizecol = 'r80_kpc'
+    #sizecol = 'r50_kpc'
+
+    diskthresh = 0.3
+
+    disky = (gzmm[gzbt] < diskthresh)
+
+    if sizecol == 'r80_kpc':
+        xlimits = (0., 17.)
+        ylimits = (-.25, 3.)
+        thexlabel = '$r_{80}$ [kpc]'
+    else:
+        xlimits = (0., 10.)
+        ylimits = (-.25, 3.)
+        thexlabel = '$r_{50}$ [kpc]'
+
+    theylabel = 'Rest-Frame $U - V$'
+
+    lowz = (gzmm['z_best'] >= 1.0) & (gzmm['z_best'] < 2.0)
+    hiz  = (gzmm['z_best'] >= 2.0) & (gzmm['z_best'] <= 3.0)
+
+    # first initialise the WHOLE figure
+    fig2 = plt.figure(figsize=(8, 8))
+
+    axq = fig2.add_subplot(2,2,1)
+    axr = fig2.add_subplot(2,2,2)
+    axs = fig2.add_subplot(2,2,3)
+    axt = fig2.add_subplot(2,2,4)
+
+    # matplotlib can't take an array of alphas so we have to do a for loop and plot each point individually and FFS that's annoying
+
+    has_smooth_weight   = gzmm['Mweight_smooth'] > 0.000
+    has_featured_weight = gzmm['Mweight_feat'] > 0.000
+
+    i = 0
+    for x, y, z, a in zip(gzmm[sizecol][smooth_select & disky & has_smooth_weight & lowz], gzmm['UmV'][smooth_select & disky & has_smooth_weight & lowz], gzmm['VmJ'][smooth_select & disky & has_smooth_weight & lowz], gzmm['Mweight_smooth'][smooth_select & disky & has_smooth_weight & lowz]):
+        if i == 0:
+            thelabel = 'Smooth, B/Tot < %.1f' % diskthresh
+        else:
+            thelabel = '_nolegend_'
+        axq.plot(x, y, alpha=a**1.5, marker='o', markersize=7., color='red', label=thelabel, linestyle='None', markeredgewidth=0.0)
+        axr.plot(x, z, alpha=a**1.5, marker='o', markersize=7., color='red', label=thelabel, linestyle='None', markeredgewidth=0.0)
+        i += 1
+
+    i = 0
+    for x, y, z, a in zip(gzmm[sizecol][featured_select & disky & has_featured_weight & lowz], gzmm['UmV'][featured_select & disky & has_featured_weight & lowz], gzmm['VmJ'][featured_select & disky & has_featured_weight & lowz], gzmm['Mweight_feat'][featured_select & disky & has_featured_weight & lowz]):
+        if i == 0:
+            thelabel = 'Featured, B/Tot < %.1f' % diskthresh
+        else:
+            thelabel = '_nolegend_'
+
+        axq.plot(x, y, alpha=a**1.0, marker='s', markersize=7., color='blue', label=thelabel, linestyle='None')
+        axr.plot(x, z, alpha=a**1.0, marker='s', markersize=7., color='blue', label=thelabel, linestyle='None')
+        i += 1
+
+
+    i = 0
+    for x, y, z, a in zip(gzmm[sizecol][smooth_select & disky & has_smooth_weight & hiz], gzmm['UmV'][smooth_select & disky & has_smooth_weight & hiz], gzmm['VmJ'][smooth_select & disky & has_smooth_weight & hiz], gzmm['Mweight_smooth'][smooth_select & disky & has_smooth_weight & hiz]):
+        if i == 0:
+            thelabel = 'Smooth, B/Tot < %.1f' % diskthresh
+        else:
+            thelabel = '_nolegend_'
+        axs.plot(x, y, alpha=a**1.5, marker='o', markersize=7., color='red', label=thelabel, linestyle='None', markeredgewidth=0.0)
+        axt.plot(x, z, alpha=a**1.5, marker='o', markersize=7., color='red', label=thelabel, linestyle='None', markeredgewidth=0.0)
+        i += 1
+
+    i = 0
+    for x, y, z, a in zip(gzmm[sizecol][featured_select & disky & has_featured_weight & hiz], gzmm['UmV'][featured_select & disky & has_featured_weight & hiz], gzmm['VmJ'][featured_select & disky & has_featured_weight & hiz], gzmm['Mweight_feat'][featured_select & disky & has_featured_weight & hiz]):
+        if i == 0:
+            thelabel = 'Featured, B/Tot < %.1f' % diskthresh
+        else:
+            thelabel = '_nolegend_'
+
+        axs.plot(x, y, alpha=a**1.0, marker='s', markersize=7., color='blue', label=thelabel, linestyle='None')
+        axt.plot(x, z, alpha=a**1.0, marker='s', markersize=7., color='blue', label=thelabel, linestyle='None')
+        i += 1
+
+
+    axq.set_xlim(xlimits)
+    axq.set_ylim(ylimits)
+    axq.set_xlabel(thexlabel)
+    axq.set_ylabel(theylabel)
+    axq.legend(loc='upper left', frameon=False) #loc=2
+
+    axr.set_xlim(xlimits)
+    axr.set_ylim(ylimits)
+    axr.set_xlabel(thexlabel)
+    axr.set_ylabel('Rest-Frame $V-J$')
+
+    axs.set_xlim(xlimits)
+    axs.set_ylim(ylimits)
+    axs.set_xlabel(thexlabel)
+    axs.set_ylabel(theylabel)
+
+    axt.set_xlim(xlimits)
+    axt.set_ylim(ylimits)
+    axt.set_xlabel(thexlabel)
+    axt.set_ylabel('Rest-Frame $V-J$')
+
+
+    plt.tight_layout()
+
+    plt.savefig('size_UmV_VmJ_smooth_featured_disks_%s_BT%.1f.png' % (sizecol, diskthresh), facecolor='None', edgecolor='None')
+    plt.savefig('size_UmV_VmJ_smooth_featured_disks_%s_BT%.1f.eps' % (sizecol, diskthresh), facecolor='None', edgecolor='None')
+
+    plt.clf()
+    plt.cla()
+    plt.close('All')
+    plt.close()
+    plt.close()
+    plt.close()
+
+
+
+
+
+
+
+
+
+
+###########################################
+# verify that the luminosity distributions of the disky smooth and disky featured samples are still consistent with being drawn from the same parent distribution
+
+def plot_dM_disky_smoothfeat(whichsdss='Simard'):
+    sdss_col = btot
+    pval_s = p_smooth
+    pval_f = p_featured
+    filelabel = 'Simard'
+    hists_featured = gzmm_featured_hist[0] + sdss_featured_hist[0]
+    hists_smooth   = gzmm_smooth_hist[0]   + sdss_smooth_hist[0]
+    sizecol = 'r80_kpc'
+    #sizecol = 'r50_kpc'
+
+    diskthresh = 0.5
+
+    disky = (gzmm[gzbt] < diskthresh)
+
+    #xlim_hi = 16.
+    ylim_hi = 16.
+    thexlabel = '$M_V - M_V^*$'
+
+
+    # first initialise the WHOLE figure
+    fig2 = plt.figure(figsize=(4, 4))
+
+    xlimits = (-2.5, 2.5)
+    #ylimits = (0.0, 0.275)
+    ylimits_s = (0., ylim_hi)
+
+    plabel_height = 0.71
+
+
+    # weighted K-S on the new mag distributions, just to make sure they're
+    # still consistent with being the same distribution
+    # this is a pain. First, make weighed histograms
+    smooth_disk_hist   = np.histogram(gzmm['dM_V'][smooth_select & disky],   weights=gzmm['Mweight_smooth'][smooth_select & disky],   bins=np.arange(-2.5,2.5,0.25))
+    featured_disk_hist = np.histogram(gzmm['dM_V'][featured_select & disky],   weights=gzmm['Mweight_feat'][featured_select & disky],   bins=np.arange(-2.5,2.5,0.25))
+    # then, normalize them so that the cumulative histogram will sum to 1
+    smoothdisk_norm    = smooth_disk_hist[0]/float(sum(smooth_disk_hist[0]))
+    featureddisk_norm  = featured_disk_hist[0]/float(sum(featured_disk_hist[0]))
+    # initialize
+    smoothdisk_cnorm    = smoothdisk_norm*0.0
+    featureddisk_cnorm  = featureddisk_norm*0.0
+    # populate cumulative histograms
+    # we've used the same binning for each so we don't need 2 for loops
+    for i, bin in enumerate(smoothdisk_norm):
+        try:
+            smoothdisk_cnorm[i]    = sum(smoothdisk_norm[0:i+1])
+            featureddisk_cnorm[i]  = sum(featureddisk_norm[0:i+1])
+            #sdss_sh_cnorm_nb[i] = sum(sdss_sh_norm_nb[0:i+1])
+        except IndexError:
+            pass # why is it trying to go from i=0 to i=len(arr) here,
+            # instead of i=len(arr)-1? It's not single-indexed! +1 issue, ugh
+
+    # get the K-S distance
+    dist_smoothfeatdisk   = max(np.abs(smoothdisk_cnorm - featureddisk_cnorm))
+    # there's more details on what each of these are in the K-S stuff below
+    # but they're terms in the computation
+    num_smoothdisk   = sum(smooth_disk_hist[0])
+    num_featureddisk = sum(featured_disk_hist[0])
+
+    #d_crit(alpha) = c(alpha)*sqrt((n1+n2)/(n1*n2))
+    # I'm calling all but c(alpha) above crit_term
+    crit_term   = np.sqrt((num_smoothdisk+num_featureddisk)/(num_smoothdisk*num_featureddisk))
+
+    cval_smoothfeatdisk    = dist_smoothfeatdisk/crit_term
+
+    p_smoothfeatdisk    = special.kolmogorov(cval_smoothfeatdisk)
+
+    sigma_smoothfeatdisk    = special.erfcinv(p_smoothfeatdisk)*np.sqrt(2.)
+
+
+    c_2sig = 1.36
+    dcrit_smoothfeatdisk_2sig   = c_2sig*crit_term
+
+    c_3sig = 1.63
+    dcrit_smoothfeatdisk_3sig   = c_3sig*crit_term
+
+
+    print("%.2f effective Smooth objects, %.2f effective Featured objects" % (num_smoothdisk, num_featureddisk) )
+    print("K-S distance: %.3f" % (dist_smoothfeatdisk))
+    print("  D critical, 2-sigma: %.3f, 3-sigma: %.3f" % (dcrit_smoothfeatdisk_2sig, dcrit_smoothfeatdisk_3sig))
+    print(" ... p-value: %.3e (%.1f sigma)\n" % (p_smoothfeatdisk, sigma_smoothfeatdisk))
+
+
+
+    axr = fig2.add_subplot(1,1,1)
+    axr.hist(gzmm['dM_V'][smooth_select & disky],   weights=gzmm['Mweight_smooth'][smooth_select & disky],   bins=np.arange(-2.5,2.5,0.25),   histtype='step', color='red', linestyle='dashed', label='Smooth, B/Tot < %.1f' % diskthresh)
+    axr.hist(gzmm['dM_V'][featured_select & disky],   weights=gzmm['Mweight_feat'][featured_select & disky],   bins=np.arange(-2.5,2.5,0.25),   histtype='step', color='blue', label='Featured, B/Tot < %.1f' % diskthresh)
+    axr.set_xlim((-2.5,2.5))
+    axr.set_xlabel(thexlabel)
+    axr.set_ylim(ylimits_s)
+
+    axr.legend(loc='upper left', frameon=False) #loc=2
+
+
+    plt.tight_layout()
+
+    plt.savefig('dM_histogram_smooth_featured_disks_%s_%s_BT%.1f.png' % (filelabel, sizecol, diskthresh), facecolor='None', edgecolor='None')
+    plt.savefig('dM_histogram_smooth_featured_disks_%s_%s_BT%.1f.eps' % (filelabel, sizecol, diskthresh), facecolor='None', edgecolor='None')
+
+    plt.clf()
+    plt.cla()
+    plt.close('All')
+    plt.close()
+    plt.close()
+    plt.close()
 
 
 
@@ -376,6 +963,15 @@ sdss_all = Table.read(infile_SDSS)
 
 # get rid of nan values
 sdss = sdss_all[np.invert(np.isnan(sdss_all[btot]))]
+
+gzmm['UmV'] = gzmm['UX_rest'] - gzmm['V_rest']
+gzmm['VmJ'] = gzmm['V_rest'] - gzmm['J_rest']
+gzmm['D_A'] = cosmo.angular_diameter_distance(gzmm['z_best'])
+
+gzmm['r50_arcsec'] = gzmm['FLUX_RADIUS_50']*0.06*u.arcsec
+gzmm['r50_kpc'] = np.tan(gzmm['r50_arcsec'].to(u.rad))*gzmm['D_A'].to(u.kpc)
+gzmm['r80_arcsec'] = gzmm['FLUX_RADIUS_80']*0.06*u.arcsec
+gzmm['r80_kpc'] = np.tan(gzmm['r80_arcsec'].to(u.rad))*gzmm['D_A'].to(u.kpc)
 
 #there is probably a better way to do this with transposes or something?
 gzmm['N_GALFIT_BAND_V'] = [q[0] for q in gzmm['N_GALFIT_BAND']]
@@ -482,10 +1078,46 @@ Mstar_g = -20.04
 gzmm['dM_V'] = gzmm['V_rest'] - gzmm['Mstar_V']
 
 sdss['dM_g'] = [get_dMg(q) for q in sdss[gMag]]
+sdss['gmr']  = sdss['ggMag'] - sdss['rgMag']
+blue = sdss['gmr'] < 0.65
 
 sdss_z_use    = (sdss[redshift] >= 0.0418) & (sdss[redshift] <= 0.04355)
 sdss_smooth   = sdss_z_use & (sdss['t01_smooth_or_features_a01_smooth_flag'] == 1)
 sdss_featured = sdss_z_use & (sdss['t01_smooth_or_features_a02_features_or_disk_flag'] == 1)
+
+
+
+''' Separating passive vs actively SFing galaxies:
+From Williams et al. (2009), ApJ 691, 1879, https://ui.adsabs.harvard.edu/#abs/2009ApJ...691.1879W/abstract :
+
+Diagonal criteria are:
+(U−V) > 0.88*(V−J)+0.69 for z < 0.5
+(U−V) > 0.88*(V−J)+0.59 for 0.5 < z < 1
+(U−V) > 0.88*(V−J)+0.49 for 1 < z < 2
+
+And these are cut off by a horizontal line at (U-V) = 1.3 and
+a vertical line at (V-J)=1.6 at all redshifts. These together with their
+plot limits make the selection box with the corner cut off. To quote them:
+
+"Additional criteria of U − V > 1.3 and V − J < 1.6 are applied to the quiescent galaxies at all redshifts to prevent contamination from unobscured and dusty star-forming galaxies, respectively. The samples of star-forming galaxies are then defined by everything falling outside this box (but within the color range plotted in Figure 9, such that the very small number of extreme color outliers are not included in either sample)."
+
+
+I will flag galaxies as quiescent if they are in the box defined as above (from Williams et al. 2009, equation 4).
+
+In practice that's going to mean, for a given galaxy at a given redshift:
+
+passive = (UmV > 1.3) & (VmJ < 1.6) & (UmV > 0.88*VmJ + pcoeff)
+
+where pcoeff is 0.69, 0.59, 0.49 depending on the redshift.
+
+'''
+
+gzmm['pcoeff'] = [get_pcoeff(q) for q in gzmm['z_best']]
+passive = (gzmm['UmV'] > 1.3) & (gzmm['VmJ'] < 1.6) & (gzmm['UmV'] > 0.88*gzmm['VmJ'] + gzmm['pcoeff'])
+
+
+
+
 
 sdss_smooth_wt   = np.ones_like(np.array(sdss[redshift][sdss_smooth]))/float(len(sdss[redshift][sdss_smooth]))
 sdss_featured_wt = np.ones_like(np.array(sdss[redshift][sdss_featured]))/float(len(sdss[redshift][sdss_featured]))
@@ -596,6 +1228,9 @@ sdss_smooth_hist = np.histogram(sdss[btot][sdss_smooth],   weights=sdss['Mweight
 gzmm_featured_hist = np.histogram(gzmm[gzbt][featured_select],   weights=gzmm['Mweight_feat'][featured_select],   bins=sbins_featured)
 sdss_featured_hist = np.histogram(sdss[btot][sdss_featured & np.invert(np.isnan(sdss[btot]))],   weights=sdss['Mweight_feat'][sdss_featured & np.invert(np.isnan(sdss[btot]))],     bins=sbins_featured)
 #sdss_featured_hist_nb = np.histogram(sdss['BULGE_TO_TOT_NB_SUM'][sdss_featured],   weights=sdss['Mweight_feat'][sdss_featured],     bins=sbins_featured)
+
+
+
 
 # but K-S needs a cumulative normalised histogram
 
@@ -720,6 +1355,7 @@ print(" ... p-value: %.3e (%.1f sigma)\n" % (p_featured, sigma_featured))
 
 plot_btot_hist_bymorph_cumul('Simard')
 plot_btot_hist_bymorph('Simard')
+plot_btot_hist_smooth_quiescent('Simard')
 plot_dM_bymorph()
 
 plt.clf()
